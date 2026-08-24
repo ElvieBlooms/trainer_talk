@@ -21,7 +21,22 @@ Two full voices are included: **Kris** (cause she's the best) and **Jessie**, ev
 
 Everything above is live and fully voiced, including the personalized moment when you beat a Gym Leader or Elite Four member, they give you their own congratulations. Champion is complete too, on both ends of the fight.
 
-Gen 2 (Gold) is still catching up on that specific piece — see Installation below for the details on what does and doesn't carry over yet.
+Gen 2 (Gold & Silver) is still catching up on that specific piece — see Installation below for the details on what does and doesn't carry over yet.
+
+## Voices
+ 
+| Character | Status |
+|---|---|
+| Kris | Live |
+| Jessie | Live |
+| James | Live |
+| Rocket Trio (James, Jessie & Meowth combined) | Live |
+| Dawn | Live, under review |
+| Leaf | Live, under review |
+ 
+More on the way: Rocket Grunt (Male), Rocket Grunt (Female), Giovanni, Blue, Ash, Red, Misty, May, and more to come after that.
+ 
+*"Under review" means the lines were assigned to events based on transcription and tone analysis rather than a full listening pass yet. Still playable, just expect the occasional rough edge until that review is finished.*
 
 ## Settings
 
