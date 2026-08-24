@@ -1,7 +1,7 @@
 {
   "id": "trainer_talk",
   "name": "Trainer Talk",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "api": 2,
   "entry": "main.lua",
   "games": ["gen1", "gen2"],
