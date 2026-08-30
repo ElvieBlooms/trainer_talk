@@ -127,6 +127,16 @@ function voice.init(mod)
       { key = "cat_gym_badges", type = "toggle", label = "GYM BADGES", default = true },
       { key = "cat_elite_four", type = "toggle", label = "ELITE FOUR", default = true },
       { key = "cat_champion", type = "toggle", label = "CHAMPION", default = true },
+      -- Off by default, safe to leave shipped -- uses the real mod.log
+      -- API (auto-prefixed with the mod id, routed through the
+      -- engine's own Logger), not print() or anything that writes
+      -- outside the sandbox. An env-var-based flag (POKEPORT_DEV=1)
+      -- was the original idea, but os.getenv is deliberately absent
+      -- from the mod sandbox (confirmed in src/mods/Sandbox.lua's own
+      -- comment: a past exploit used it to find the user's home
+      -- directory), so a toggle here is the actual supported
+      -- equivalent for a mod, not a workaround.
+      { key = "dev_logging", type = "toggle", label = "DEV LOGGING", default = false },
     })
 
     -- ---- Playback core ----
@@ -160,8 +170,17 @@ function voice.init(mod)
     -- pcall so a missing file just stays silent instead of crashing
     -- the whole mod
     local function playSound(path)
-      if not voiceLinesOn() then return end
+      if not voiceLinesOn() then
+        if mod.options:get("dev_logging") then
+          mod.log:info("playSound: SKIPPED (voice lines off) path=%s", path)
+        end
+        return
+      end
       local ok, src = pcall(love.audio.newSource, path, "static")
+      if mod.options:get("dev_logging") then
+        mod.log:info("playSound: %s path=%s",
+          (ok and src) and "PLAYING" or "MISSING/FAILED", path)
+      end
       if ok and src then
         src:setVolume(voiceVolume() / 7)
         duckUntil = love.timer.getTime() + duckSeconds()
@@ -191,15 +210,27 @@ function voice.init(mod)
       return mod.options:get(key) or 1
     end
 
-    -- ---- Bark cooldown & delay queue ----
-    -- Shared cooldown so hit and status barks can never stack.
-    local BARK_COOLDOWN = 5
-    local lastBarkAt = -math.huge
+    -- ---- Universal voice line gap & delay queue ----
+    -- Shared across EVERY category -- barks, reactions, faints, and
+    -- moments all check and update this same timestamp, so nothing
+    -- can ever land on top of anything else regardless of which
+    -- queue it came from. Originally bark-only (moments deliberately
+    -- bypassed it), changed to universal and bidirectional after
+    -- real playtesting turned up a moment firing right on top of an
+    -- unrelated bark's overlapping audio.
+    local VOICE_LINE_GAP = 5
+    local lastVoiceLineAt = -math.huge
 
     local function attemptBark(pool)
       local now = love.timer.getTime()
-      if now - lastBarkAt < BARK_COOLDOWN then return end
-      lastBarkAt = now
+      if now - lastVoiceLineAt < VOICE_LINE_GAP then
+        if mod.options:get("dev_logging") then
+          mod.log:info("attemptBark: DROPPED (cooldown, %.1fs remaining)",
+            VOICE_LINE_GAP - (now - lastVoiceLineAt))
+        end
+        return
+      end
+      lastVoiceLineAt = now
       playRandom(pool)
     end
 
@@ -208,14 +239,24 @@ function voice.init(mod)
     -- the animation.
     local pendingBarks = {}
     local function scheduleBark(pool, delay)
+      if mod.options:get("dev_logging") then
+        mod.log:info("scheduleBark: QUEUED, fires in %.1fs", delay)
+      end
       table.insert(pendingBarks, { at = love.timer.getTime() + delay, pool = pool })
     end
 
-    -- Separate from the bark queue on purpose -- a meaningful line
-    -- like blackout.ogg shouldn't get eaten just because an unrelated
-    -- bark happens to be on cooldown at the same moment.
+    -- Own delay on top of the universal gap above, not instead of it
+    -- -- a moment still waits for its own timing (OUTCOME_DELAY,
+    -- blackout's extra beat), but once that elapses it ALSO has to
+    -- clear the same universal gap every other category respects
+    -- before it's allowed to actually play. If the gap hasn't cleared
+    -- yet, it keeps waiting rather than firing on top of whatever
+    -- just played.
     local pendingMoments = {}
     local function scheduleMoment(path, delay)
+      if mod.options:get("dev_logging") then
+        mod.log:info("scheduleMoment: QUEUED path=%s, own delay %.1fs", path, delay)
+      end
       table.insert(pendingMoments, { at = love.timer.getTime() + delay, path = path })
     end
 
@@ -229,8 +270,22 @@ function voice.init(mod)
       end
       for i = #pendingMoments, 1, -1 do
         if now >= pendingMoments[i].at then
-          local entry = table.remove(pendingMoments, i)
-          playSound(entry.path)
+          if now - lastVoiceLineAt >= VOICE_LINE_GAP then
+            local entry = table.remove(pendingMoments, i)
+            lastVoiceLineAt = now
+            playSound(entry.path)
+          elseif mod.options:get("dev_logging") and not pendingMoments[i].deferredLogged then
+            -- only announced once per entry, not every frame it keeps
+            -- waiting -- input.step runs every frame, and the gap can
+            -- take several seconds to clear, so logging unconditionally
+            -- here would flood the log for the entire wait
+            pendingMoments[i].deferredLogged = true
+            mod.log:info("moment DEFERRED (own delay elapsed, universal gap not clear yet) path=%s",
+              pendingMoments[i].path)
+          end
+          -- else: own delay has elapsed but the universal gap hasn't
+          -- -- leave it queued and check again next frame instead of
+          -- firing on top of whatever just played.
         end
       end
       return next(...)
@@ -259,6 +314,24 @@ function voice.init(mod)
       })
     end)
 
+    -- Confirmed against real engine source (src/battle/gen2/Battle.lua's
+    -- own header comment): Gen 1's user/target/battler fields are
+    -- wrapper objects with an explicit isPlayer flag, but Gen 2's
+    -- engine works on the raw party-mon table directly, which has no
+    -- such field at all -- every .isPlayer check in this file would
+    -- silently read nil (falsy) for BOTH sides on Gen 2 without this.
+    -- Gen 2's own confirmed equivalent (Battle:sideRecord) is an
+    -- identity comparison against the battle's own .player table, so
+    -- that's the fallback here once the Gen 1 shape comes back empty.
+    -- Every event this gets used with confirmed to carry a `battle`
+    -- field, so the fallback always has what it needs.
+    local function isPlayerSide(mon, battle)
+      if mon == nil then return false end
+      if mon.isPlayer ~= nil then return mon.isPlayer end
+      if battle and battle.player ~= nil then return mon == battle.player end
+      return false
+    end
+
     -- ---- Battle barks (hit / status) ----
     mod.events:on("battle.damage_dealt", function(ev)
       -- user.isPlayer confirmed against the real event reference --
@@ -266,7 +339,7 @@ function voice.init(mod)
       -- check an enemy's hit would trigger the same pleased bark a
       -- player hit does. Deliberately player-only for now, not split
       -- into a matching enemy/player pair the way status is.
-      if not (ev.user and ev.user.isPlayer) then return end
+      if not isPlayerSide(ev.user, ev.battle) then return end
       if not chance(15 * frequencyMultiplier("freq_battle_barks")) then return end
       local folder = characterFolder()
       scheduleBark({
@@ -279,12 +352,14 @@ function voice.init(mod)
     mod.events:on("battle.status_inflicted", function(ev)
       if not chance(10 * frequencyMultiplier("freq_battle_barks")) then return end
       local folder = characterFolder()
-      -- target.isPlayer confirmed against real source
+      -- target.isPlayer confirmed against real source on Gen 1
       -- (StatusRegistry.lua's own displayName(b) uses b.isPlayer on
       -- this exact target object) -- this fires for a status landing
       -- on EITHER side, not just the opponent, so it needs the same
-      -- isPlayer check battle.fainted already uses.
-      if ev.target and ev.target.isPlayer then
+      -- direction check battle.fainted already uses. Gen 2's raw
+      -- party-mon target has no such field, hence isPlayerSide's
+      -- fallback rather than a direct .isPlayer read here.
+      if isPlayerSide(ev.target, ev.battle) then
         attemptBark({
           mod.assets:path("assets/" .. folder .. "/status_player.ogg"),
           mod.assets:path("assets/" .. folder .. "/status_player2.ogg"),
@@ -324,9 +399,9 @@ function voice.init(mod)
 
     mod.events:on("battle.damage_dealt", function(ev)
       if not ev.crit then return end
-      -- same user.isPlayer check as the hit1/2/3 pool above -- a crit
+      -- same isPlayerSide check as the hit1/2/3 pool above -- a crit
       -- landed BY the enemy shouldn't play the same pleased bark.
-      if not (ev.user and ev.user.isPlayer) then return end
+      if not isPlayerSide(ev.user, ev.battle) then return end
       if not chance(50 * frequencyMultiplier("freq_reactions")) then return end
       local folder = characterFolder()
       -- same delay as hit1/2/3 above and for the same reason -- lands
@@ -341,11 +416,11 @@ function voice.init(mod)
     -- miss otherwise.
     mod.hooks:wrap("battle.accuracy", function(next, ctx)
       local hit = next(ctx)
-      -- user.isPlayer confirmed against the real hook reference --
+      -- isPlayerSide confirmed against the real hook reference --
       -- this wraps EITHER side's accuracy roll, so without this check
       -- an enemy's miss would trigger the same disappointed bark a
       -- player's miss does.
-      local isPlayerMove = ctx.user and ctx.user.isPlayer
+      local isPlayerMove = isPlayerSide(ctx.user, ctx.battle)
       if not hit and isPlayerMove and chance(20 * frequencyMultiplier("freq_reactions")) then
         local folder = characterFolder()
         -- same delay as hit1/2/3 above -- lands after the miss
@@ -397,7 +472,7 @@ function voice.init(mod)
     mod.events:on("battle.fainted", function(ev)
       if not chance(mod.options:get("freq_faint") or 100) then return end
       local folder = characterFolder()
-      if ev.battler and ev.battler.isPlayer then
+      if isPlayerSide(ev.battler, ev.battle) then
         attemptBark({
           mod.assets:path("assets/" .. folder .. "/faint_player.ogg"),
           mod.assets:path("assets/" .. folder .. "/faint_player2.ogg"),
@@ -453,6 +528,30 @@ function voice.init(mod)
 
     -- Trainer class -> base name, shared by both _intro (on engage,
     -- below) and _outro (on win, in battle.ended further down).
+    --
+    -- Gen 2 support added here directly into the same tables, not as
+    -- a parallel set -- confirmed safe against real decoded Gold/
+    -- Silver/Crystal data (data/generated/trainers.lua from an actual
+    -- install, all three games checked, identical indices in each).
+    -- Gen 1's trainerClass is always a STRING ("OPP_BROCK"); Gen 2's
+    -- is always a NUMBER (17 for the same Brock, post-game). Lua
+    -- never coerces between the two for table lookups, so a string
+    -- key and a number key can never collide here even sitting in
+    -- the same table -- no generation check needed at all, the type
+    -- difference does it for free.
+    --
+    -- Several Gen 2 entries deliberately point at Gen 1's EXISTING
+    -- base names rather than new ones: Gen 2's Kanto post-game
+    -- rematches are the literal same characters (confirmed via the
+    -- same decoded data -- Brock is trainer class 17 there, Misty 18,
+    -- etc.), so they reuse brock_intro.ogg/brock_outro.ogg rather than
+    -- needing duplicate recordings of the same person. Bruno (Gen 1
+    -- Elite Four AND Gen 2 Elite Four, same character) and Koga (Gen 1
+    -- gym leader AND Gen 2 Elite Four, same character, confirmed via
+    -- his Gen 2 trainer class literally being named "KOGA" with
+    -- display name "ELITE FOUR") work the same way. Only genuinely
+    -- new characters (Falkner through Clair, Will, Karen, Janine,
+    -- Blue) need their own new base names and new recordings.
     local GYM_LEADERS = {
       OPP_BROCK = "brock",
       OPP_MISTY = "misty",
@@ -462,32 +561,102 @@ function voice.init(mod)
       OPP_SABRINA = "sabrina",
       OPP_BLAINE = "blaine",
       OPP_GIOVANNI = "giovanni",
+      -- Gen 2 Johto (new characters, new base names)
+      [1] = "falkner",
+      [2] = "whitney",
+      [3] = "bugsy",
+      [4] = "morty",
+      [5] = "pryce",
+      [6] = "jasmine",
+      [7] = "chuck",
+      [8] = "clair",
+      -- Gen 2 Kanto post-game (same characters as Gen 1 above, reuses
+      -- their existing base names -- no new recordings needed)
+      [17] = "brock",
+      [18] = "misty",
+      [19] = "surge",
+      [21] = "erika",
+      [35] = "sabrina",
+      [46] = "blaine",
+      -- Gen 2 Kanto post-game (genuinely new -- Janine replaces Koga
+      -- at Fuchsia, since Koga moved to the Elite Four; Blue replaces
+      -- Giovanni at Viridian, since Giovanni has no Gen 2 trainer
+      -- class at all)
+      [26] = "janine",
+      [64] = "blue",
     }
     local ELITE_FOUR = {
       OPP_LORELEI = "lorelei",
       OPP_BRUNO = "bruno",
       OPP_AGATHA = "agatha",
       OPP_LANCE = "lance",
+      -- Gen 2 -- Bruno (13) is the same character as Gen 1's, reuses
+      -- his existing base name; Will/Karen (11/14) are new; Koga (15)
+      -- reuses his existing GYM_LEADERS recording above, since it's
+      -- the same voice regardless of which table currently employs
+      -- him
+      [11] = "will",
+      [13] = "bruno",
+      [14] = "karen",
+      [15] = "koga",
     }
 
     -- Map IDs, for map.entered below -- a different identifier space
-    -- from the trainer classes above.
+    -- from the trainer classes above. Map IDs are always strings on
+    -- both generations, but Gen 2's Kanto post-game reuses Gen 1's
+    -- EXACT SAME map ID strings for the same physical locations
+    -- (confirmed against real decoded data -- PEWTER_GYM is spelled
+    -- identically in both) -- correct and intentional, not a
+    -- collision, since it's genuinely the same room and the same
+    -- entrance reaction is exactly what should play either way. Only
+    -- Johto's own new locations need adding here.
     local GYM_MAPS = {
       PEWTER_GYM = true, CERULEAN_GYM = true, VERMILION_GYM = true,
       CELADON_GYM = true, FUCHSIA_GYM = true, SAFFRON_GYM = true,
       CINNABAR_GYM = true, VIRIDIAN_GYM = true,
+      -- Gen 2 Johto
+      VIOLET_GYM = true, GOLDENROD_GYM = true, AZALEA_GYM = true,
+      ECRUTEAK_GYM = true, MAHOGANY_GYM = true, OLIVINE_GYM = true,
+      CIANWOOD_GYM = true,
+      -- Clair's battle trigger is confirmed on the 1st floor, not the
+      -- 2nd, via her actual NPC script in the decoded map data
+      BLACKTHORN_GYM_1F = true,
+      -- Blaine's Kanto post-game rematch is NOT at CINNABAR_GYM --
+      -- confirmed via his actual battle-trigger NPC script sitting in
+      -- a different map entirely. Matches the game's own lore: the
+      -- Cinnabar volcano erupts between generations, and he relocates
+      -- to a cave on the Seafoam Islands instead. Missing this would
+      -- have silently broken his Kanto rematch entrance reaction
+      -- despite his milestone audio (which correctly still reuses
+      -- Gen 1's blaine_intro.ogg/blaine_outro.ogg, since it's still
+      -- the same character) being completely fine.
+      SEAFOAM_GYM = true,
     }
     local E4_MAPS = {
       LORELEIS_ROOM = true, BRUNOS_ROOM = true,
       AGATHAS_ROOM = true, LANCES_ROOM = true,
+      -- Gen 2 -- BRUNOS_ROOM already covers Bruno's Gen 2 room too
+      -- (confirmed identical string), only Will/Koga/Karen's rooms
+      -- are new
+      WILLS_ROOM = true, KOGAS_ROOM = true, KARENS_ROOM = true,
     }
 
     -- Confirmed against real source (data/scripts/story.lua): the
-    -- Champion battle is always OPP_RIVAL3 (distinct from the earlier
-    -- OPP_RIVAL1/OPP_RIVAL2 rival fights), fought in a real, confirmed
-    -- map, CHAMPIONS_ROOM. Long treated as unconfirmed/impossible to
-    -- detect -- it isn't, it just needed tracing properly.
+    -- Gen 1 Champion battle is always OPP_RIVAL3 (distinct from the
+    -- earlier OPP_RIVAL1/OPP_RIVAL2 rival fights), fought in a real,
+    -- confirmed map, CHAMPIONS_ROOM. Long treated as unconfirmed/
+    -- impossible to detect -- it isn't, it just needed tracing
+    -- properly.
+    --
+    -- Gen 2 is structurally different, confirmed against real decoded
+    -- data: Lance has his own dedicated CHAMPION trainer class (index
+    -- 16), entirely separate from Gen 2's own RIVAL1/RIVAL2 classes
+    -- (9/42) -- no OPP_RIVAL3-style disambiguation needed, since the
+    -- Champion genuinely isn't your rival in these games. Fought in
+    -- LANCES_ROOM, a different map ID from Gen 1's generic
+    -- CHAMPIONS_ROOM.
     local CHAMPION_TRAINER = "OPP_RIVAL3"
+    local CHAMPION_TRAINER_GEN2 = 16
 
     -- Just the character's own reaction to the room -- fires every
     -- time it's entered, not suppressed after the first visit, since
@@ -495,6 +664,12 @@ function voice.init(mod)
     -- challenge line comes later, in world.trainer_engaged below, once
     -- the battle actually starts rather than as soon as you walk in.
     mod.events:on("map.entered", function(ev)
+      if mod.options:get("dev_logging") then
+        mod.log:info("map.entered: mapId=%s -> gym=%s e4=%s champion=%s",
+          tostring(ev.mapId), tostring(GYM_MAPS[ev.mapId] or false),
+          tostring(E4_MAPS[ev.mapId] or false),
+          tostring(ev.mapId == "CHAMPIONS_ROOM" or ev.mapId == "LANCES_ROOM"))
+      end
       if GYM_MAPS[ev.mapId] then
         if not mod.options:get("cat_gym_badges") then return end
         local charFolder = characterFolder()
@@ -510,7 +685,7 @@ function voice.init(mod)
           mod.assets:path("assets/" .. charFolder .. "/e4_enter.ogg"),
           mod.assets:path("assets/" .. charFolder .. "/e4_enter2.ogg"),
         })
-      elseif ev.mapId == "CHAMPIONS_ROOM" then
+      elseif ev.mapId == "CHAMPIONS_ROOM" or ev.mapId == "LANCES_ROOM" then
         if not mod.options:get("cat_champion") then return end
         local charFolder = characterFolder()
         playRandom({
@@ -522,21 +697,27 @@ function voice.init(mod)
 
     -- Tracks who's about to be fought (for the outcome below) AND
     -- plays that specific leader's own challenge line right now, e.g.
-    -- brock_intro.ogg. Same pattern for the Champion (CHAMPION_TRAINER)
-    -- as for a gym leader or E4 member, just a single trainer instead
-    -- of a lookup table.
+    -- brock_intro.ogg. Same pattern for the Champion (CHAMPION_TRAINER
+    -- / CHAMPION_TRAINER_GEN2) as for a gym leader or E4 member, just
+    -- a single trainer instead of a lookup table.
     local pendingTrainerClass = nil
     mod.events:on("world.trainer_engaged", function(ev)
       pendingTrainerClass = ev.trainerClass
       local gymBase = GYM_LEADERS[ev.trainerClass]
       local e4Base = ELITE_FOUR[ev.trainerClass]
+      local isChampion = (ev.trainerClass == CHAMPION_TRAINER or ev.trainerClass == CHAMPION_TRAINER_GEN2)
+      if mod.options:get("dev_logging") then
+        mod.log:info("world.trainer_engaged: trainerClass=%s (%s) -> gym=%s e4=%s champion=%s",
+          tostring(ev.trainerClass), type(ev.trainerClass),
+          tostring(gymBase), tostring(e4Base), tostring(isChampion))
+      end
       if gymBase and mod.options:get("cat_gym_badges") then
         local folder = milestoneFolder()
         playSound(mod.assets:path("assets/" .. folder .. "/" .. gymBase .. "_intro.ogg"))
       elseif e4Base and mod.options:get("cat_elite_four") then
         local folder = milestoneFolder()
         playSound(mod.assets:path("assets/" .. folder .. "/" .. e4Base .. "_intro.ogg"))
-      elseif ev.trainerClass == CHAMPION_TRAINER and mod.options:get("cat_champion") then
+      elseif isChampion and mod.options:get("cat_champion") then
         local folder = milestoneFolder()
         playSound(mod.assets:path("assets/" .. folder .. "/champion_intro.ogg"))
       end
@@ -568,8 +749,10 @@ function voice.init(mod)
           -- through to the generic case -- its real outro plays via
           -- screen.pushed below (the confirmed Hall of Fame signal),
           -- and used to double up with this generic line before
-          -- CHAMPION_TRAINER existed to tell the two apart.
-          if trainerClass == CHAMPION_TRAINER then return end
+          -- CHAMPION_TRAINER existed to tell the two apart. Gen 2's
+          -- CHAMPION_TRAINER_GEN2 excluded the same way, for the same
+          -- reason -- its real outro plays via screen.pushed below too.
+          if trainerClass == CHAMPION_TRAINER or trainerClass == CHAMPION_TRAINER_GEN2 then return end
           if not mod.options:get("cat_moments") then return end
           local folder = characterFolder()
           local winPaths = {
@@ -590,15 +773,20 @@ function voice.init(mod)
     end)
 
     -- ---- Champion ----
-    -- Beating the Champion pushes a "HallOfFame" screen -- a reliable
-    -- signal, confirmed against real engine source. This is the
-    -- outro; the challenge line (champion_intro.ogg) lives up in
-    -- world.trainer_engaged above, and used to not exist at all before
-    -- CHAMPION_TRAINER ("OPP_RIVAL3", confirmed against
-    -- data/scripts/story.lua) was traced down.
+    -- Beating the Champion pushes a "HallOfFame" screen on Gen 1 --
+    -- confirmed against real engine source (src/ui/Screens.lua). Gen 2
+    -- is a genuinely separate screen id, not the same one reused:
+    -- confirmed in that same source file, which documents a "Gen2"
+    -- prefix convention for any Gen 2 screen sharing a module name
+    -- with a Gen 1 one (HallOfFame explicitly listed among them) --
+    -- Gen 2's actual id is "Gen2HallOfFame". Missing this would have
+    -- silently broken the Gen 2 Champion outro entirely despite
+    -- everything else being correct, since the check would simply
+    -- never have matched. This is the outro; the challenge line
+    -- (champion_intro.ogg) lives up in world.trainer_engaged above.
     mod.events:on("screen.pushed", function(ev)
       if not mod.options:get("cat_champion") then return end
-      if not (ev.state and ev.state.screenId == "HallOfFame") then return end
+      if not (ev.state and (ev.state.screenId == "HallOfFame" or ev.state.screenId == "Gen2HallOfFame")) then return end
       local folder = milestoneFolder()
       scheduleMoment(mod.assets:path("assets/" .. folder .. "/champion_outro.ogg"), OUTCOME_DELAY)
     end)
