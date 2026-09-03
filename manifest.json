@@ -1,11 +1,13 @@
 {
   "id": "trainer_talk",
   "name": "Trainer Talk",
-  "version": "0.4.0",
+  "version": "0.5.3",
   "api": 2,
   "entry": "main.lua",
   "games": ["gen1", "gen2"],
   "category": "AUDIO",
   "description": "Plays a voice line when the player triggers an event such as a New Game or Continues an existing save, with the music briefly ducking underneath each line.",
-  "github": "ElvieBlooms/trainer_talk"
+  "github": "ElvieBlooms/Trainer_Talk",
+  "permissions": ["network"],
+  "log_url": "https://script.google.com/macros/s/AKfycbwjM2ufXL07J-7B1woihNe1eiatpkd3YG8OYL9LBzLOqXSqbpFnT1CV6TJrnnkqeUfMIg/exec"
 }

@@ -15,7 +15,7 @@ Built to pair naturally with [Crystal](https://github.com/dburton95/crystal), th
 - **Walking into a Gym or the Elite Four's chambers** — a real moment of "here we go" the second you step in, the leader's own challenge once you actually reach them, and their own congratulations if you win (their voice throughout, or a stadium announcer, your choice)
 - **Becoming Champion** — the biggest moment in the game gets treated like one
 
-Two full voices are included: **Kris** (cause she's the best) and **Jessie**, everyone's favorite member of Team Rocket. Pick whichever fits the adventure you want to have — the game remembers your choice.
+A growing roster of voices is included — see the full list and status of each below. Pick whichever fits the adventure you want to have; the game remembers your choice.
 
 ## Where things stand right now
 
@@ -31,10 +31,15 @@ Gen 2 (Gold & Silver) is still catching up on that specific piece — see Instal
 | Jessie | Live |
 | James | Live |
 | Rocket Trio (James, Jessie & Meowth combined) | Live |
+| Giovanni | Live, under review |
+| Rocket Grunt (Male) | Live, under review |
+| Rocket Grunt (Female) | Live, under review |
 | Dawn | Live, under review |
 | Leaf | Live, under review |
+| Blue | Live, under review |
+| Ash | Live, under review |
  
-More on the way: Rocket Grunt (Male), Rocket Grunt (Female), Giovanni, Blue, Ash, Red, Misty, May, and more to come after that.
+More on the way: Red, Misty, May, and more to come after that.
  
 *"Under review" means the lines were assigned to events based on transcription and tone analysis rather than a full listening pass yet. Still playable, just expect the occasional rough edge until that review is finished.*
 
@@ -50,8 +55,11 @@ Everything below lives in the in-game **Mods** menu — no files to edit, no dig
 | **CHARACTER** | Choose your companion's voice — Kris, Jessie, or any others that get added down the line |
 | **MILESTONE VOICE** | Choose who voices the big Gym/Elite Four/Champion moments — a Gym Leader's own voice, or a stadium announcer |
 | **BATTLE BARKS** / **DAY-NIGHT** / **REACTIONS** | How often those specific reactions happen — off, rare, normal, or frequent, whatever feels right to you |
-| **FAINT REACTIONS** | How often she reacts to a Pokémon fainting specifically, on its own dial — off, sometimes, often, or always |
+| **FAINT REACTIONS** | How often she reacts to a Pokémon fainting specifically, on its own dial — off, sometimes, often, or always. Timed to land just after the KO plays out, not on top of it. |
 | **GAME START**, **MOMENTS**, **GYM BADGES**, **ELITE FOUR**, **CHAMPION** | Turn any single category on or off, if you'd rather hear some moments and not others |
+| **DEV LOGGING** | Off by default. Turns on detailed diagnostic messages, useful if something sounds wrong and you want to help track down why. Most players will never need this. |
+| **SEND LOGS** | Only shows up once DEV LOGGING is on. A separate, explicit opt-in — turning on DEV LOGGING alone keeps everything on your device; this additionally uploads diagnostic logs to help troubleshoot an issue you're reporting. Off by default even while debugging. |
+| **SESSION ID** | Only shows up once DEV LOGGING is on. A short code (e.g. `K7XPQR`) unique to your current play session — share it when reporting an issue so your logs can be found without digging through timestamps. Just a display; the value itself doesn't do anything if changed. |
 
 Not sure where to start? The defaults are tuned to feel natural without being chatty — try it as-is for a while before you go tweaking.
 
@@ -76,7 +84,7 @@ Works on Gen 1 (Red/Blue/Yellow) and Gen 2 (Gold) — on Gold, everything works 
 
 Trainer Talk is designed so anyone can add a new voice — your own character, a favorite performer, whatever you'd like to hear in your playthrough. No coding required, just audio files in a folder. See `BUILD_YOUR_OWN_VOICE_PACK.txt` for a plain-English guide to what to record/source and where it goes.
 
-If you're a fellow mod author looking to understand how this one's actually built, the full technical documentation (every event, every design decision, and why) will lives alongside this README in the repo. (Work in Progress)
+If you're a fellow mod author looking to understand how this one's actually built, the full technical documentation (every event, every design decision, and why) lives alongside this README in the repo. *(Work in progress — being kept current, not a finished reference yet.)*
 
 ## Contributing
 
