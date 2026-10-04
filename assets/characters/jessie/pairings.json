@@ -1,0 +1,303 @@
+{
+  "generator": "Trainer Talk Packager",
+  "created": "2026-10-03T12:22:31.700Z",
+  "pack_type": "trainer",
+  "label": "JESSIE",
+  "sources": [
+    {
+      "label": "Jessie (English)",
+      "zip_md5": "d1a719f87c3cd17d4d15e70eec62bbeb"
+    }
+  ],
+  "slots": {
+    "new_game": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0000_en.ogg",
+      "crc32": "59a1e907",
+      "state": "confident"
+    },
+    "continue1": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0074_en.ogg",
+      "crc32": "c801ff38",
+      "state": "confident"
+    },
+    "continue2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0073_en.ogg",
+      "crc32": "b540e0ec",
+      "state": "confident"
+    },
+    "continue3": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0063_en.ogg",
+      "crc32": "897e4efa",
+      "state": "confident"
+    },
+    "continue4": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0006_en.ogg",
+      "crc32": "8be3c7bd",
+      "state": "confident"
+    },
+    "continue5": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0011_en.ogg",
+      "crc32": "d368eda6",
+      "state": "confident"
+    },
+    "hit1": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0027_en.ogg",
+      "crc32": "f4ed2c22",
+      "state": "confident"
+    },
+    "hit2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0014_en.ogg",
+      "crc32": "fbee7a5d",
+      "state": "confident"
+    },
+    "hit3": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0015_en.ogg",
+      "crc32": "3738ed1a",
+      "state": "confident"
+    },
+    "status_enemy": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0069_en.ogg",
+      "crc32": "ed9db99e",
+      "state": "confident"
+    },
+    "status_enemy2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0038_en.ogg",
+      "crc32": "5a035736",
+      "state": "confident"
+    },
+    "status_player": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0025_en.ogg",
+      "crc32": "90c37604",
+      "state": "confident"
+    },
+    "status_player2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0052_en.ogg",
+      "crc32": "62b0fa5b",
+      "state": "confident"
+    },
+    "hit_crit": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0068_en.ogg",
+      "crc32": "5454a055",
+      "state": "confident"
+    },
+    "hit_crit2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0043_en.ogg",
+      "crc32": "b398118b",
+      "state": "confident"
+    },
+    "move_miss": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0047_en.ogg",
+      "crc32": "7d973e35",
+      "state": "confident"
+    },
+    "move_miss2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0041_en.ogg",
+      "crc32": "e1080e11",
+      "state": "confident"
+    },
+    "catch_fail": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0064_en.ogg",
+      "crc32": "1fd58877",
+      "state": "confident"
+    },
+    "catch_fail2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0037_en.ogg",
+      "crc32": "fcd0a240",
+      "state": "confident"
+    },
+    "run_success": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0070_en.ogg",
+      "crc32": "c215950e",
+      "state": "confident"
+    },
+    "run_success2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0026_en.ogg",
+      "crc32": "66e6fb40",
+      "state": "confident"
+    },
+    "run_fail": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0017_en.ogg",
+      "crc32": "d9530290",
+      "state": "confident"
+    },
+    "run_fail2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0058_en.ogg",
+      "crc32": "d18f5965",
+      "state": "confident"
+    },
+    "faint_enemy": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0066_en.ogg",
+      "crc32": "d61dd304",
+      "state": "confident"
+    },
+    "faint_enemy2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0012_en.ogg",
+      "crc32": "2254d697",
+      "state": "confident"
+    },
+    "faint_player": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0055_en.ogg",
+      "crc32": "da1e6932",
+      "state": "confident"
+    },
+    "faint_player2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0024_en.ogg",
+      "crc32": "a15628ec",
+      "state": "confident"
+    },
+    "evolved": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0008_en.ogg",
+      "crc32": "4c36591b",
+      "state": "confident"
+    },
+    "new_catch": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0009_en.ogg",
+      "crc32": "82b83f14",
+      "state": "confident"
+    },
+    "new_catch2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0044_en.ogg",
+      "crc32": "dec2fdc0",
+      "state": "confident"
+    },
+    "blackout": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0022_en.ogg",
+      "crc32": "8c5b1c78",
+      "state": "confident"
+    },
+    "blackout2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0028_en.ogg",
+      "crc32": "86d9570f",
+      "state": "confident"
+    },
+    "battle_win": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0021_en.ogg",
+      "crc32": "bc58b559",
+      "state": "confident"
+    },
+    "battle_win2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0039_en.ogg",
+      "crc32": "7d3421d3",
+      "state": "confident"
+    },
+    "battle_loss": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0051_en.ogg",
+      "crc32": "cff42849",
+      "state": "confident"
+    },
+    "battle_loss2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0019_en.ogg",
+      "crc32": "6b4a7628",
+      "state": "confident"
+    },
+    "gym_enter": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0072_en.ogg",
+      "crc32": "36266eab",
+      "state": "confident"
+    },
+    "gym_enter2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0013_en.ogg",
+      "crc32": "60a92913",
+      "state": "confident"
+    },
+    "gym_enter3": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0020_en.ogg",
+      "crc32": "09f97090",
+      "state": "confident"
+    },
+    "e4_enter": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_1002_en.ogg",
+      "crc32": "a328a3fd",
+      "state": "confident"
+    },
+    "e4_enter2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_1003_en.ogg",
+      "crc32": "bbbf4ee9",
+      "state": "confident"
+    },
+    "champion_enter": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0010_en.ogg",
+      "crc32": "4f428b7b",
+      "state": "confident"
+    },
+    "champion_enter2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_1005_en.ogg",
+      "crc32": "9edc6d95",
+      "state": "confident"
+    },
+    "night1": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0031_en.ogg",
+      "crc32": "5ad01d5a",
+      "state": "confident"
+    },
+    "night2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0033_en.ogg",
+      "crc32": "3cd3fdeb",
+      "state": "confident"
+    },
+    "night3": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0034_en.ogg",
+      "crc32": "e7c2f23b",
+      "state": "confident"
+    },
+    "morning1": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0032_en.ogg",
+      "crc32": "9e025d05",
+      "state": "confident"
+    },
+    "morning2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0029_en.ogg",
+      "crc32": "70bf7bd6",
+      "state": "confident"
+    }
+  },
+  "confirmed_empty": []
+}

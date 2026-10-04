@@ -1,0 +1,289 @@
+{
+  "generator": "Trainer Talk Packager",
+  "created": "2026-10-03T01:06:26.995Z",
+  "pack_type": "trainer",
+  "label": "ASH",
+  "sources": [
+    {
+      "label": "Ash (English)",
+      "zip_md5": "57158cba19203d698cd4cf4dce4ea0b0"
+    }
+  ],
+  "slots": {
+    "new_game": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0000_en.ogg",
+      "crc32": "be8acc03",
+      "state": "confident"
+    },
+    "continue1": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0002_en.ogg",
+      "crc32": "61162bfd",
+      "state": "confident"
+    },
+    "continue2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0036_en.ogg",
+      "crc32": "c44e2fbd",
+      "state": "confident"
+    },
+    "continue3": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0016_en.ogg",
+      "crc32": "26b37665",
+      "state": "confident"
+    },
+    "continue4": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0060_en.ogg",
+      "crc32": "80c2a4b1",
+      "state": "confident"
+    },
+    "continue5": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0011_en.ogg",
+      "crc32": "278f3976",
+      "state": "confident"
+    },
+    "hit1": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0023_en.ogg",
+      "crc32": "a35fbf45",
+      "state": "confident"
+    },
+    "hit2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0073_en.ogg",
+      "crc32": "9908e335",
+      "state": "confident"
+    },
+    "hit3": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0015_en.ogg",
+      "crc32": "6dad8cc1",
+      "state": "confident"
+    },
+    "status_enemy": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0018_en.ogg",
+      "crc32": "1aa09c31",
+      "state": "confident"
+    },
+    "status_enemy2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0039_en.ogg",
+      "crc32": "3e8014f4",
+      "state": "confident"
+    },
+    "status_player": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0048_en.ogg",
+      "crc32": "5d065a00",
+      "state": "confident"
+    },
+    "status_player2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0056_en.ogg",
+      "crc32": "e2433afd",
+      "state": "confident"
+    },
+    "hit_crit": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0043_en.ogg",
+      "crc32": "8d9dd028",
+      "state": "confident"
+    },
+    "hit_crit2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0068_en.ogg",
+      "crc32": "c3fbf95f",
+      "state": "confident"
+    },
+    "move_miss": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0041_en.ogg",
+      "crc32": "99bab8fd",
+      "state": "confident"
+    },
+    "move_miss2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0028_en.ogg",
+      "crc32": "b21a8334",
+      "state": "confident"
+    },
+    "catch_fail": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0062_en.ogg",
+      "crc32": "54eba6b0",
+      "state": "confident"
+    },
+    "catch_fail2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0042_en.ogg",
+      "crc32": "95fb8b0f",
+      "state": "confident"
+    },
+    "run_success": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0070_en.ogg",
+      "crc32": "5ba8b2aa",
+      "state": "confident"
+    },
+    "run_success2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0014_en.ogg",
+      "crc32": "875bba0b",
+      "state": "confident"
+    },
+    "run_fail": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0054_en.ogg",
+      "crc32": "858a23b8",
+      "state": "confident"
+    },
+    "run_fail2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0057_en.ogg",
+      "crc32": "6da7bf4a",
+      "state": "confident"
+    },
+    "faint_enemy": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0044_en.ogg",
+      "crc32": "87d25f2b",
+      "state": "confident"
+    },
+    "faint_enemy2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0063_en.ogg",
+      "crc32": "41c2e426",
+      "state": "confident"
+    },
+    "faint_player": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0052_en.ogg",
+      "crc32": "788b8e15",
+      "state": "confident"
+    },
+    "faint_player2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0051_en.ogg",
+      "crc32": "7ec7f47e",
+      "state": "confident"
+    },
+    "evolved": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0009_en.ogg",
+      "crc32": "3e5f94d9",
+      "state": "confident"
+    },
+    "new_catch": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0074_en.ogg",
+      "crc32": "3d2bbce9",
+      "state": "confident"
+    },
+    "new_catch2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0045_en.ogg",
+      "crc32": "c00647b9",
+      "state": "confident"
+    },
+    "blackout": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0055_en.ogg",
+      "crc32": "8197fb7a",
+      "state": "confident"
+    },
+    "blackout2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0064_en.ogg",
+      "crc32": "8b3ba816",
+      "state": "confident"
+    },
+    "battle_win": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0021_en.ogg",
+      "crc32": "7af1bed9",
+      "state": "confident"
+    },
+    "battle_win2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0006_en.ogg",
+      "crc32": "4fd9b0da",
+      "state": "confident"
+    },
+    "battle_loss": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0022_en.ogg",
+      "crc32": "631b6fc3",
+      "state": "confident"
+    },
+    "battle_loss2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0050_en.ogg",
+      "crc32": "82541a59",
+      "state": "confident"
+    },
+    "gym_enter": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0019_en.ogg",
+      "crc32": "bddd51ab",
+      "state": "confident"
+    },
+    "gym_enter2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0013_en.ogg",
+      "crc32": "0aeb8fec",
+      "state": "confident"
+    },
+    "gym_enter3": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0007_en.ogg",
+      "crc32": "19d00d78",
+      "state": "confident"
+    },
+    "e4_enter": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0077_en.ogg",
+      "crc32": "27eb8390",
+      "state": "confident"
+    },
+    "e4_enter2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0046_en.ogg",
+      "crc32": "1cceb622",
+      "state": "confident"
+    },
+    "champion_enter": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0072_en.ogg",
+      "crc32": "8120532c",
+      "state": "confident"
+    },
+    "champion_enter2": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0027_en.ogg",
+      "crc32": "8e26e433",
+      "state": "confident"
+    },
+    "night1": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0031_en.ogg",
+      "crc32": "0978060a",
+      "state": "confident"
+    },
+    "morning1": {
+      "source": "Ash (English)",
+      "file": "ch0264_00_satoshi_0029_en.ogg",
+      "crc32": "df3f8dbc",
+      "state": "confident"
+    }
+  },
+  "confirmed_empty": [
+    "night2",
+    "night3",
+    "morning2"
+  ]
+}
