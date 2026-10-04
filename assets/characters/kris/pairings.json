@@ -1,0 +1,307 @@
+{
+  "generator": "Trainer Talk Packager",
+  "created": "2026-10-03T00:30:28.139Z",
+  "pack_type": "trainer",
+  "label": "KRIS",
+  "sources": [
+    {
+      "label": "Kris (Sygna Suit) (English)",
+      "zip_md5": "506bcced7d2676f85a2473577d596352"
+    },
+    {
+      "label": "Kris (English)",
+      "zip_md5": "7a0534266366133d045371df16a1b7d7"
+    }
+  ],
+  "slots": {
+    "new_game": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0000_en.ogg",
+      "crc32": "eb23ae29",
+      "state": "confident"
+    },
+    "continue1": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0030_en.ogg",
+      "crc32": "d1ca0d09",
+      "state": "confident"
+    },
+    "continue2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0011_en.ogg",
+      "crc32": "dd42be03",
+      "state": "confident"
+    },
+    "continue3": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0071_en.ogg",
+      "crc32": "1638c973",
+      "state": "confident"
+    },
+    "continue4": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0010_en.ogg",
+      "crc32": "03f77f06",
+      "state": "confident"
+    },
+    "continue5": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0072_en.ogg",
+      "crc32": "369ebd07",
+      "state": "confident"
+    },
+    "hit1": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0015_en.ogg",
+      "crc32": "3d6a8ba1",
+      "state": "confident"
+    },
+    "hit2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0023_en.ogg",
+      "crc32": "bd6afc86",
+      "state": "confident"
+    },
+    "hit3": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0072_en.ogg",
+      "crc32": "369ebd07",
+      "state": "confident"
+    },
+    "status_enemy": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0068_en.ogg",
+      "crc32": "999b4d5a",
+      "state": "confident"
+    },
+    "status_enemy2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0018_en.ogg",
+      "crc32": "e6877ba2",
+      "state": "confident"
+    },
+    "status_player": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0057_en.ogg",
+      "crc32": "ba08ff9d",
+      "state": "confident"
+    },
+    "status_player2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0057_en.ogg",
+      "crc32": "c1a0c17c",
+      "state": "confident"
+    },
+    "hit_crit": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0018_en.ogg",
+      "crc32": "3cfb041e",
+      "state": "confident"
+    },
+    "hit_crit2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0043_en.ogg",
+      "crc32": "90f40383",
+      "state": "confident"
+    },
+    "move_miss": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0058_en.ogg",
+      "crc32": "94bcf979",
+      "state": "confident"
+    },
+    "move_miss2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0058_en.ogg",
+      "crc32": "86b6ed8f",
+      "state": "confident"
+    },
+    "catch_fail": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0064_en.ogg",
+      "crc32": "f8862705",
+      "state": "confident"
+    },
+    "catch_fail2": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0049_en.ogg",
+      "crc32": "f42b64e6",
+      "state": "confident"
+    },
+    "run_success": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0070_en.ogg",
+      "crc32": "60f1fd4a",
+      "state": "confident"
+    },
+    "run_success2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0070_en.ogg",
+      "crc32": "690d199e",
+      "state": "confident"
+    },
+    "run_fail": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0048_en.ogg",
+      "crc32": "4260f5d2",
+      "state": "confident"
+    },
+    "run_fail2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0055_en.ogg",
+      "crc32": "d8601880",
+      "state": "confident"
+    },
+    "faint_enemy": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0044_en.ogg",
+      "crc32": "730b1df6",
+      "state": "confident"
+    },
+    "faint_enemy2": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0043_en.ogg",
+      "crc32": "f7b8b56d",
+      "state": "confident"
+    },
+    "faint_player": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0052_en.ogg",
+      "crc32": "cc7c94f0",
+      "state": "confident"
+    },
+    "faint_player2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0049_en.ogg",
+      "crc32": "48d3bc38",
+      "state": "confident"
+    },
+    "evolved": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0012_en.ogg",
+      "crc32": "4589be24",
+      "state": "confident"
+    },
+    "new_catch": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0020_en.ogg",
+      "crc32": "3da38963",
+      "state": "confident"
+    },
+    "new_catch2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0009_en.ogg",
+      "crc32": "9bfd35c8",
+      "state": "confident"
+    },
+    "blackout": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0051_en.ogg",
+      "crc32": "4d0c2a69",
+      "state": "confident"
+    },
+    "blackout2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0052_en.ogg",
+      "crc32": "9ff343c6",
+      "state": "confident"
+    },
+    "battle_win": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0006_en.ogg",
+      "crc32": "bdfa41ce",
+      "state": "confident"
+    },
+    "battle_win2": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0021_en.ogg",
+      "crc32": "f0c8ce09",
+      "state": "confident"
+    },
+    "battle_loss": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0022_en.ogg",
+      "crc32": "c4bb8b34",
+      "state": "confident"
+    },
+    "battle_loss2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0028_en.ogg",
+      "crc32": "95bf846f",
+      "state": "confident"
+    },
+    "gym_enter": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0071_en.ogg",
+      "crc32": "9f12dd4a",
+      "state": "confident"
+    },
+    "gym_enter2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0006_en.ogg",
+      "crc32": "80944b26",
+      "state": "confident"
+    },
+    "gym_enter3": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0046_en.ogg",
+      "crc32": "fa5caf67",
+      "state": "confident"
+    },
+    "e4_enter": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0013_en.ogg",
+      "crc32": "d82cf184",
+      "state": "confident"
+    },
+    "e4_enter2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0012_en.ogg",
+      "crc32": "02864e7e",
+      "state": "confident"
+    },
+    "champion_enter": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0077_en.ogg",
+      "crc32": "ab926131",
+      "state": "confident"
+    },
+    "champion_enter2": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0017_en.ogg",
+      "crc32": "ce9aa780",
+      "state": "confident"
+    },
+    "night1": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0031_en.ogg",
+      "crc32": "c9890874",
+      "state": "confident"
+    },
+    "night2": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0034_en.ogg",
+      "crc32": "0f8fb520",
+      "state": "confident"
+    },
+    "night3": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0031_en.ogg",
+      "crc32": "b1857029",
+      "state": "confident"
+    },
+    "morning1": {
+      "source": "Kris (English)",
+      "file": "ch0018_00_chris_0032_en.ogg",
+      "crc32": "d6d3adcd",
+      "state": "confident"
+    },
+    "morning2": {
+      "source": "Kris (Sygna Suit) (English)",
+      "file": "ch0018_10_chris_0002_en.ogg",
+      "crc32": "a7b9970d",
+      "state": "confident"
+    }
+  },
+  "confirmed_empty": []
+}

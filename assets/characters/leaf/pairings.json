@@ -1,0 +1,311 @@
+{
+  "generator": "Trainer Talk Packager",
+  "created": "2026-10-03T12:03:07.521Z",
+  "pack_type": "trainer",
+  "label": "LEAF",
+  "sources": [
+    {
+      "label": "Leaf (English)",
+      "zip_md5": "7958bda2710a04f68ed75b3e53051040"
+    },
+    {
+      "label": "Leaf (Neo Champion) (English)",
+      "zip_md5": "a7900a0948ae42f8f2f64c209aa346a4"
+    },
+    {
+      "label": "Leaf (Sygna Suit) (English)",
+      "zip_md5": "967c53c6a6e936af1625091ec1bcf312"
+    }
+  ],
+  "slots": {
+    "new_game": {
+      "source": "Leaf (Neo Champion) (English)",
+      "file": "ch0017_90_leaf_0000_en.ogg",
+      "crc32": "5b0ffc21",
+      "state": "confident"
+    },
+    "continue1": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0011_en.ogg",
+      "crc32": "83e4a117",
+      "state": "confident"
+    },
+    "continue2": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0011_en.ogg",
+      "crc32": "954fa531",
+      "state": "confident"
+    },
+    "continue3": {
+      "source": "Leaf (Neo Champion) (English)",
+      "file": "ch0017_90_leaf_0007_en.ogg",
+      "crc32": "6653c456",
+      "state": "confident"
+    },
+    "continue4": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0073_en.ogg",
+      "crc32": "7e648dbb",
+      "state": "confident"
+    },
+    "continue5": {
+      "source": "Leaf (Neo Champion) (English)",
+      "file": "ch0017_90_leaf_0013_en.ogg",
+      "crc32": "595f347b",
+      "state": "confident"
+    },
+    "hit1": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0015_en.ogg",
+      "crc32": "1b28b1a8",
+      "state": "confident"
+    },
+    "hit2": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0072_en.ogg",
+      "crc32": "8b2a7664",
+      "state": "confident"
+    },
+    "hit3": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0013_en.ogg",
+      "crc32": "6c1a55a2",
+      "state": "confident"
+    },
+    "status_enemy": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0012_en.ogg",
+      "crc32": "fe4f697b",
+      "state": "confident"
+    },
+    "status_enemy2": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0018_en.ogg",
+      "crc32": "f100955e",
+      "state": "confident"
+    },
+    "status_player": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0057_en.ogg",
+      "crc32": "368b8560",
+      "state": "confident"
+    },
+    "status_player2": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0055_en.ogg",
+      "crc32": "cf5b94d5",
+      "state": "confident"
+    },
+    "hit_crit": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0007_en.ogg",
+      "crc32": "c8d0f7fc",
+      "state": "confident"
+    },
+    "hit_crit2": {
+      "source": "Leaf (Neo Champion) (English)",
+      "file": "ch0017_90_leaf_0016_en.ogg",
+      "crc32": "13cec0fc",
+      "state": "confident"
+    },
+    "move_miss": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0022_en.ogg",
+      "crc32": "0f329392",
+      "state": "confident"
+    },
+    "move_miss2": {
+      "source": "Leaf (Neo Champion) (English)",
+      "file": "ch0017_90_leaf_0052_en.ogg",
+      "crc32": "de89cf9b",
+      "state": "confident"
+    },
+    "catch_fail": {
+      "source": "Leaf (Neo Champion) (English)",
+      "file": "ch0017_90_leaf_0022_en.ogg",
+      "crc32": "34dbaec2",
+      "state": "confident"
+    },
+    "catch_fail2": {
+      "source": "Leaf (Neo Champion) (English)",
+      "file": "ch0017_90_leaf_0042_en.ogg",
+      "crc32": "9509faa4",
+      "state": "confident"
+    },
+    "run_success": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0016_en.ogg",
+      "crc32": "af9911e3",
+      "state": "confident"
+    },
+    "run_success2": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0026_en.ogg",
+      "crc32": "2582163e",
+      "state": "confident"
+    },
+    "run_fail": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0072_en.ogg",
+      "crc32": "25909263",
+      "state": "confident"
+    },
+    "run_fail2": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0050_en.ogg",
+      "crc32": "b1b3c4f7",
+      "state": "confident"
+    },
+    "faint_enemy": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0021_en.ogg",
+      "crc32": "11fa1165",
+      "state": "confident"
+    },
+    "faint_enemy2": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0008_en.ogg",
+      "crc32": "be5c2339",
+      "state": "confident"
+    },
+    "faint_player": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0022_en.ogg",
+      "crc32": "a1663b2f",
+      "state": "confident"
+    },
+    "faint_player2": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0062_en.ogg",
+      "crc32": "986ed27b",
+      "state": "confident"
+    },
+    "evolved": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0009_en.ogg",
+      "crc32": "bba41657",
+      "state": "confident"
+    },
+    "new_catch": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0043_en.ogg",
+      "crc32": "fbe64f7c",
+      "state": "confident"
+    },
+    "new_catch2": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0027_en.ogg",
+      "crc32": "9479be74",
+      "state": "confident"
+    },
+    "blackout": {
+      "source": "Leaf (Neo Champion) (English)",
+      "file": "ch0017_90_leaf_0062_en.ogg",
+      "crc32": "026b392c",
+      "state": "confident"
+    },
+    "blackout2": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0062_en.ogg",
+      "crc32": "00a3dad7",
+      "state": "confident"
+    },
+    "battle_win": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0008_en.ogg",
+      "crc32": "dc74474c",
+      "state": "confident"
+    },
+    "battle_win2": {
+      "source": "Leaf (Neo Champion) (English)",
+      "file": "ch0017_90_leaf_0044_en.ogg",
+      "crc32": "e1876ff3",
+      "state": "confident"
+    },
+    "battle_loss": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0028_en.ogg",
+      "crc32": "e2891a11",
+      "state": "confident"
+    },
+    "battle_loss2": {
+      "source": "Leaf (Neo Champion) (English)",
+      "file": "ch0017_90_leaf_0057_en.ogg",
+      "crc32": "f7de2f07",
+      "state": "confident"
+    },
+    "gym_enter": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0023_en.ogg",
+      "crc32": "f1746f77",
+      "state": "confident"
+    },
+    "gym_enter2": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0027_en.ogg",
+      "crc32": "1bf7bc16",
+      "state": "confident"
+    },
+    "gym_enter3": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0046_en.ogg",
+      "crc32": "56d63b4a",
+      "state": "confident"
+    },
+    "e4_enter": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0010_en.ogg",
+      "crc32": "e148934e",
+      "state": "confident"
+    },
+    "e4_enter2": {
+      "source": "Leaf (Neo Champion) (English)",
+      "file": "ch0017_90_leaf_0071_en.ogg",
+      "crc32": "e31b63f1",
+      "state": "confident"
+    },
+    "champion_enter": {
+      "source": "Leaf (Neo Champion) (English)",
+      "file": "ch0017_90_leaf_0073_en.ogg",
+      "crc32": "b553d28d",
+      "state": "confident"
+    },
+    "champion_enter2": {
+      "source": "Leaf (Neo Champion) (English)",
+      "file": "ch0017_90_leaf_0077_en.ogg",
+      "crc32": "c9775cec",
+      "state": "confident"
+    },
+    "night1": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0034_en.ogg",
+      "crc32": "804cc876",
+      "state": "confident"
+    },
+    "night2": {
+      "source": "Leaf (English)",
+      "file": "ch0017_00_leaf_0034_en.ogg",
+      "crc32": "ba1c5faa",
+      "state": "confident"
+    },
+    "night3": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0031_en.ogg",
+      "crc32": "9fc0efe3",
+      "state": "confident"
+    },
+    "morning1": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0029_en.ogg",
+      "crc32": "440f7c6d",
+      "state": "confident"
+    },
+    "morning2": {
+      "source": "Leaf (Sygna Suit) (English)",
+      "file": "ch0017_10_leaf_0032_en.ogg",
+      "crc32": "c79b2707",
+      "state": "confident"
+    }
+  },
+  "confirmed_empty": []
+}
