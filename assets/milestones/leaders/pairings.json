@@ -1,0 +1,495 @@
+{
+  "generator": "Trainer Talk Packager",
+  "created": "2026-10-03T19:42:44.960Z",
+  "pack_type": "milestone",
+  "label": "LEADERS",
+  "sources": [
+    {
+      "label": "Agatha (English)",
+      "zip_md5": "c95d1ce3396eb03906b0e848cf72db0b"
+    },
+    {
+      "label": "Blaine (English)",
+      "zip_md5": "e1f57377f96979c1b1e52d9ff94b1efc"
+    },
+    {
+      "label": "Blue (Arc Suit)",
+      "zip_md5": "6314afdf4793b51dc3229abdf2b53f7f"
+    },
+    {
+      "label": "Blue (English)",
+      "zip_md5": "678880341b47289700894627d5496de3"
+    },
+    {
+      "label": "Blue (Neo Champion) (English)",
+      "zip_md5": "7cb9bd1db021c8d773357a8d97c788d5"
+    },
+    {
+      "label": "Blue (Sygna Suit) (English)",
+      "zip_md5": "fbaa4f69f6eb05e72a94aac1808d1640"
+    },
+    {
+      "label": "Brock (Arc suit) (English)",
+      "zip_md5": "7df782bda2226296e37802a94b147667"
+    },
+    {
+      "label": "Brock (English)",
+      "zip_md5": "a97f0ef4a29e4f36bbaeebe4801a090b"
+    },
+    {
+      "label": "Brock (Sygna Suit) (English)",
+      "zip_md5": "5bf5c85759c1aa99f31ee5ee140c800d"
+    },
+    {
+      "label": "Bruno (English)",
+      "zip_md5": "7e8cc88a82bd53781e844044d9c7f6da"
+    },
+    {
+      "label": "Erika (English)",
+      "zip_md5": "a074bf75f121bf7fd936ad3efeafa42b"
+    },
+    {
+      "label": "Erika (Palentine) (English)",
+      "zip_md5": "eff6d3dca670bc1bfad9beae58f47912"
+    },
+    {
+      "label": "Erika (Sygna Suit) (English)",
+      "zip_md5": "84fc441186b5c3bdf121c6f5a1dcab7d"
+    },
+    {
+      "label": "Giovanni (English)",
+      "zip_md5": "2f75a4eb27f6ae900a1092168d9d1e5d"
+    },
+    {
+      "label": "Giovanni (Sygna Suit Alt) (English)",
+      "zip_md5": "a363cb219da59c0376e4be4517b6ed4a"
+    },
+    {
+      "label": "Giovanni (Sygna Suit) (English)",
+      "zip_md5": "f983cdc5d2a87205616ad581fe835b69"
+    },
+    {
+      "label": "Koga (English)",
+      "zip_md5": "3c1d5ef2fd6a25f802c866c2b93b318d"
+    },
+    {
+      "label": "Lance (Arc Suit)",
+      "zip_md5": "6ab9a0e19349b4957a7e92502b2b38cc"
+    },
+    {
+      "label": "Lance (English)",
+      "zip_md5": "a3c88956d0fae0fb05c57503c3d8e9a1"
+    },
+    {
+      "label": "Lance (New Year) (English)",
+      "zip_md5": "dfd1508dd9b794a28e01d852f9aedaad"
+    },
+    {
+      "label": "Lorelei (English)",
+      "zip_md5": "e7368a224a68861b2abf43369e163b05"
+    },
+    {
+      "label": "Lt. Surge (English)",
+      "zip_md5": "51caa3656f5b2c7f30afa9715edd9298"
+    },
+    {
+      "label": "Misty (Arc suit) (English)",
+      "zip_md5": "27c36aa388280113f8bb7a59833a117f"
+    },
+    {
+      "label": "Misty (English)",
+      "zip_md5": "322c543eeda03d1360d5fb6ad400fd66"
+    },
+    {
+      "label": "Misty (Sygna Suit) (English)",
+      "zip_md5": "ca8538d55aa390a295308d4614d5ffca"
+    },
+    {
+      "label": "Sabrina (Arc suit) (English)",
+      "zip_md5": "d96e18adb9eec871bd1a8eba11104dfd"
+    },
+    {
+      "label": "Sabrina (English)",
+      "zip_md5": "0f86d6cd89c7fff05504c265e04adc9b"
+    },
+    {
+      "label": "Sabrina (New Year) (English)",
+      "zip_md5": "4a9ceb1d53e1c79c36cea5d1d4ab24e8"
+    },
+    {
+      "label": "Bugsy (English)",
+      "zip_md5": "07bdd00ea3167138c4abadc7b8de56d5"
+    },
+    {
+      "label": "Bugsy (Winter) (English)",
+      "zip_md5": "96b68feee476193547f4d6584e8f899d"
+    },
+    {
+      "label": "Chuck (English)",
+      "zip_md5": "1c124ab5757bfd6ed60020043238730f"
+    },
+    {
+      "label": "Clair (New Year) (English)",
+      "zip_md5": "e60c126055abc2eba4c1306b3f944e37"
+    },
+    {
+      "label": "Clair (English)",
+      "zip_md5": "13b841062f820bc1cd417506aa74bd88"
+    },
+    {
+      "label": "Jasmine (English)",
+      "zip_md5": "cba05982b1fe2070e10fdfbab127acb5"
+    },
+    {
+      "label": "Falkner (English)",
+      "zip_md5": "487054cb1c57fd40b2d59dd0ac3f6831"
+    },
+    {
+      "label": "Jasmine (Winter) (English)",
+      "zip_md5": "a9c990ae085384ce73b8fecad4d31dd1"
+    },
+    {
+      "label": "Morty (English)",
+      "zip_md5": "39ca8379faebf6fbe8e9cee826e23a0a"
+    },
+    {
+      "label": "Morty (Fall) (English)",
+      "zip_md5": "44fb71d0575ca731f7b96c1f6c36d143"
+    },
+    {
+      "label": "Morty (Sygna Suit) (English)",
+      "zip_md5": "3e6ee0f5feb5a3644446200cbaa99520"
+    },
+    {
+      "label": "Pryce (English)",
+      "zip_md5": "4f2a3830fcc8653e8a3f7c2adc9020d1"
+    },
+    {
+      "label": "Whitney (English)",
+      "zip_md5": "ea3d453151948e259a1732ccc3a7f4f9"
+    },
+    {
+      "label": "Whitney (Winter) (English)",
+      "zip_md5": "13d0fa2ced75dd8054f061b5575ba8ed"
+    },
+    {
+      "label": "Will (English)",
+      "zip_md5": "ddc7fd6782f0eac64382f69bd5ea18b7"
+    },
+    {
+      "label": "Karen (English)",
+      "zip_md5": "de0b958b6736253eebf21642bf1a2a39"
+    },
+    {
+      "label": "Janine (English)",
+      "zip_md5": "c3d9b4de7c1e5c238aaea4520268158c"
+    },
+    {
+      "label": "Red (English)",
+      "zip_md5": "b40edb2e3e5ed1fc8e84a4c8fd80a935"
+    }
+  ],
+  "slots": {
+    "brock_intro": {
+      "source": "Brock (English)",
+      "file": "ch0015_00_takeshi_0000_en.ogg",
+      "crc32": "6322f03c",
+      "state": "confident"
+    },
+    "brock_outro": {
+      "source": "Brock (English)",
+      "file": "ch0015_00_takeshi_0045_en.ogg",
+      "crc32": "2c5be257",
+      "state": "confident"
+    },
+    "misty_intro": {
+      "source": "Misty (English)",
+      "file": "ch0110_01_kasumi_0000_en.ogg",
+      "crc32": "db042595",
+      "state": "confident"
+    },
+    "misty_outro": {
+      "source": "Misty (English)",
+      "file": "ch0110_01_kasumi_0009_en.ogg",
+      "crc32": "2ec2951d",
+      "state": "confident"
+    },
+    "surge_intro": {
+      "source": "Lt. Surge (English)",
+      "file": "ch0035_00_matthies_0000_en.ogg",
+      "crc32": "ead91273",
+      "state": "confident"
+    },
+    "surge_outro": {
+      "source": "Lt. Surge (English)",
+      "file": "ch0035_00_matthies_0045_en.ogg",
+      "crc32": "1815252d",
+      "state": "confident"
+    },
+    "erika_intro": {
+      "source": "Erika (English)",
+      "file": "ch0008_00_erika_0000_en.ogg",
+      "crc32": "376fef79",
+      "state": "confident"
+    },
+    "erika_outro": {
+      "source": "Erika (Palentine) (English)",
+      "file": "ch0008_41_erika_0043_en.ogg",
+      "crc32": "a7e6320a",
+      "state": "confident"
+    },
+    "koga_intro": {
+      "source": "Koga (English)",
+      "file": "ch0054_00_kyo_0074_en.ogg",
+      "crc32": "3b178f6f",
+      "state": "confident"
+    },
+    "koga_outro": {
+      "source": "Koga (English)",
+      "file": "ch0054_00_kyo_0045_en.ogg",
+      "crc32": "1c2130d2",
+      "state": "confident"
+    },
+    "sabrina_intro": {
+      "source": "Sabrina (English)",
+      "file": "ch0114_00_natsume_0000_en.ogg",
+      "crc32": "77a4bcb8",
+      "state": "confident"
+    },
+    "sabrina_outro": {
+      "source": "Sabrina (English)",
+      "file": "ch0114_00_natsume_0022_en.ogg",
+      "crc32": "c9a9f95d",
+      "state": "confident"
+    },
+    "blaine_intro": {
+      "source": "Blaine (English)",
+      "file": "ch0059_00_katsura_0000_en.ogg",
+      "crc32": "332e4076",
+      "state": "confident"
+    },
+    "blaine_outro": {
+      "source": "Blaine (English)",
+      "file": "ch0059_00_katsura_0022_en.ogg",
+      "crc32": "4eefa17e",
+      "state": "confident"
+    },
+    "giovanni_intro": {
+      "source": "Giovanni (Sygna Suit) (English)",
+      "file": "ch0140_10_sakaki_0000_en.ogg",
+      "crc32": "68cc02a8",
+      "state": "confident"
+    },
+    "giovanni_outro": {
+      "source": "Giovanni (English)",
+      "file": "ch0140_00_sakaki_0021_en.ogg",
+      "crc32": "dc0d6760",
+      "state": "confident"
+    },
+    "lorelei_intro": {
+      "source": "Lorelei (English)",
+      "file": "ch0005_00_kanna_0000_en.ogg",
+      "crc32": "1cd54390",
+      "state": "confident"
+    },
+    "lorelei_outro": {
+      "source": "Lorelei (English)",
+      "file": "ch0005_00_kanna_0043_en.ogg",
+      "crc32": "a63d88b8",
+      "state": "confident"
+    },
+    "bruno_intro": {
+      "source": "Bruno (English)",
+      "file": "ch0057_00_shiba_0000_en.ogg",
+      "crc32": "318cf782",
+      "state": "confident"
+    },
+    "bruno_outro": {
+      "source": "Bruno (English)",
+      "file": "ch0057_00_shiba_0045_en.ogg",
+      "crc32": "1727b8d3",
+      "state": "confident"
+    },
+    "agatha_intro": {
+      "source": "Agatha (English)",
+      "file": "ch0061_00_kikuko_0000_en.ogg",
+      "crc32": "c8c9233b",
+      "state": "confident"
+    },
+    "agatha_outro": {
+      "source": "Agatha (English)",
+      "file": "ch0061_00_kikuko_0022_en.ogg",
+      "crc32": "ffdc4464",
+      "state": "confident"
+    },
+    "lance_intro": {
+      "source": "Lance (Arc Suit)",
+      "file": "ch0111_90_wataru_0000_en.ogg",
+      "crc32": "c9b92c9d",
+      "state": "confident"
+    },
+    "lance_outro": {
+      "source": "Lance (Arc Suit)",
+      "file": "ch0111_90_wataru_0020_en.ogg",
+      "crc32": "6e7b145c",
+      "state": "confident"
+    },
+    "champion_intro": {
+      "source": "Blue (Neo Champion) (English)",
+      "file": "ch0021_90_green_0010_en.ogg",
+      "crc32": "4e512a4e",
+      "state": "confident"
+    },
+    "champion_outro": {
+      "source": "Blue (Arc Suit)",
+      "file": "ch0021_91_green_0044_en.ogg",
+      "crc32": "dc935902",
+      "state": "confident"
+    },
+    "falkner_intro": {
+      "source": "Falkner (English)",
+      "file": "ch0150_00_hayato_0000_en.ogg",
+      "crc32": "b41882fc",
+      "state": "confident"
+    },
+    "falkner_outro": {
+      "source": "Falkner (English)",
+      "file": "ch0150_00_hayato_0028_en.ogg",
+      "crc32": "e675d83c",
+      "state": "confident"
+    },
+    "bugsy_intro": {
+      "source": "Bugsy (Winter) (English)",
+      "file": "ch0045_40_tsukushi_0000_en.ogg",
+      "crc32": "ace720aa",
+      "state": "confident"
+    },
+    "bugsy_outro": {
+      "source": "Bugsy (English)",
+      "file": "ch0045_00_tsukushi_0022_en.ogg",
+      "crc32": "78b58a93",
+      "state": "confident"
+    },
+    "whitney_intro": {
+      "source": "Whitney (English)",
+      "file": "ch0026_00_akane_0000_en.ogg",
+      "crc32": "3a9d3e92",
+      "state": "confident"
+    },
+    "whitney_outro": {
+      "source": "Whitney (English)",
+      "file": "ch0026_00_akane_0045_en.ogg",
+      "crc32": "f1671dad",
+      "state": "confident"
+    },
+    "morty_intro": {
+      "source": "Morty (English)",
+      "file": "ch0148_00_matsuba_0000_en.ogg",
+      "crc32": "9bbdfdd5",
+      "state": "confident"
+    },
+    "morty_outro": {
+      "source": "Morty (Fall) (English)",
+      "file": "ch0148_40_matsuba_0009_en.ogg",
+      "crc32": "289cc681",
+      "state": "confident"
+    },
+    "chuck_intro": {
+      "source": "Chuck (English)",
+      "file": "ch0171_00_shijima_0000_en.ogg",
+      "crc32": "2a5f4958",
+      "state": "confident"
+    },
+    "chuck_outro": {
+      "source": "Chuck (English)",
+      "file": "ch0171_00_shijima_0021_en.ogg",
+      "crc32": "007bd592",
+      "state": "confident"
+    },
+    "jasmine_intro": {
+      "source": "Jasmine (English)",
+      "file": "ch0113_00_mikan_0000_en.ogg",
+      "crc32": "72521f2a",
+      "state": "confident"
+    },
+    "jasmine_outro": {
+      "source": "Jasmine (English)",
+      "file": "ch0113_00_mikan_0028_en.ogg",
+      "crc32": "b728f700",
+      "state": "confident"
+    },
+    "pryce_intro": {
+      "source": "Pryce (English)",
+      "file": "ch0032_00_yanagi_0000_en.ogg",
+      "crc32": "ef1a2cbd",
+      "state": "confident"
+    },
+    "pryce_outro": {
+      "source": "Pryce (English)",
+      "file": "ch0032_00_yanagi_0022_en.ogg",
+      "crc32": "04d1ca0e",
+      "state": "confident"
+    },
+    "clair_intro": {
+      "source": "Clair (New Year) (English)",
+      "file": "ch0028_40_ibuki_0000_en.ogg",
+      "crc32": "737225ad",
+      "state": "confident"
+    },
+    "clair_outro": {
+      "source": "Clair (New Year) (English)",
+      "file": "ch0028_40_ibuki_0045_en.ogg",
+      "crc32": "e47459a6",
+      "state": "confident"
+    },
+    "will_intro": {
+      "source": "Will (English)",
+      "file": "ch0047_00_itsuki_0010_en.ogg",
+      "crc32": "410222aa",
+      "state": "confident"
+    },
+    "will_outro": {
+      "source": "Will (English)",
+      "file": "ch0047_00_itsuki_0045_en.ogg",
+      "crc32": "0d787f91",
+      "state": "confident"
+    },
+    "karen_intro": {
+      "source": "Karen (English)",
+      "file": "ch0062_00_karin_0000_en.ogg",
+      "crc32": "a3f698ae",
+      "state": "confident"
+    },
+    "karen_outro": {
+      "source": "Karen (English)",
+      "file": "ch0062_00_karin_0006_en.ogg",
+      "crc32": "1fccd3fd",
+      "state": "confident"
+    },
+    "janine_intro": {
+      "source": "Janine (English)",
+      "file": "ch0060_00_anzu_0000_en.ogg",
+      "crc32": "68350f72",
+      "state": "confident"
+    },
+    "janine_outro": {
+      "source": "Janine (English)",
+      "file": "ch0060_00_anzu_0022_en.ogg",
+      "crc32": "d97f36e5",
+      "state": "confident"
+    },
+    "blue_intro": {
+      "source": "Blue (Neo Champion) (English)",
+      "file": "ch0021_90_green_0000_en.ogg",
+      "crc32": "1eacde06",
+      "state": "confident"
+    },
+    "blue_outro": {
+      "source": "Blue (Arc Suit)",
+      "file": "ch0021_91_green_0045_en.ogg",
+      "crc32": "e0fc3d00",
+      "state": "confident"
+    }
+  },
+  "confirmed_empty": []
+}
