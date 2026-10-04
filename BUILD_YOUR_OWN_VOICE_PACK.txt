@@ -3,6 +3,30 @@ TRAINER TALK -- BUILD YOUR OWN VOICE PACK
 A plain-English guide to what each sound file is for, so you can record
 or source your own lines and drop them in -- no code editing required.
 
+THE EASY ROUTE: THE PACKAGER
+---------------------------------
+Everything below can be done by hand, but there's a faster way: the
+Trainer Talk Packager (https://github.com/ElvieBlooms/trainer_talk_packager)
+takes a zip of audio clips, transcribes them, and helps you match each
+one to an event -- then exports a pack folder shaped exactly like the
+ones this guide describes, ready to drop into assets/characters/ or
+assets/milestones/. It reads this mod's own schema.json for the
+current event list, so it won't drift out of date the way a
+hand-typed guide can. See that repo's NEEDED_ZIPS.md for which zip(s)
+a given recipe expects.
+
+WHERE TO GET AUDIO
+-----------------------
+Starting with the Hoenn release, this mod ships without bundled voice
+packs -- the packager is the intended way to build one from your own
+source audio. https://sounds.spriters-resource.com/ is a long-running,
+community-run archive of ripped game audio that's a common starting
+point for this kind of thing. This project has no affiliation with
+that site, doesn't control what it hosts, and can't promise any
+specific page stays up -- it's mentioned here as a pointer, not an
+endorsement, and it's on you to check what you're allowed to do with
+anything you download from anywhere.
+
 HOW THIS WORKS
 ------------------
 Every voice line lives in a folder under assets/characters/ -- kris/
@@ -96,19 +120,35 @@ Losing an ordinary trainer battle                  battle_loss.ogg
                                                   battle_loss2.ogg
 
 
-GYM & ELITE FOUR CHALLENGE LINES
+GYM, ELITE FOUR & CHAMPION -- WALKING IN
 =====================================
-A gym leader or Elite Four member challenges you -- this is the
-"here we go" reaction line, not the win/congratulations line (see
-below for why).
+Your own character's reaction to walking into the room -- the "here
+we go" line, not the win/congratulations line (see below for why).
 
 Event (plain English)                          File(s)
 ---------------------------------------------------------------------
-A gym leader challenges you                       gym_intro.ogg
-                                                  gym_intro2.ogg
-                                                  gym_intro3.ogg
-An Elite Four member challenges you                e4_intro.ogg
-                                                  e4_intro2.ogg
+Walking into a Gym                                gym_enter.ogg
+                                                  gym_enter2.ogg
+                                                  gym_enter3.ogg
+Walking into an Elite Four room                   e4_enter.ogg
+                                                  e4_enter2.ogg
+Walking into the Champion's room                  champion_enter.ogg
+                                                  champion_enter2.ogg
+
+
+DAY & NIGHT
+===============
+Quiet, ambient lines -- nothing's happening in battle, it's just a
+moment of time passing while you play. Gen 1 games have no real
+day/night clock, so these mostly only come up on a Gen 2 save.
+
+Event (plain English)                          File(s)
+---------------------------------------------------------------------
+Night falls                                       night1.ogg
+                                                  night2.ogg
+                                                  night3.ogg
+Morning arrives                                   morning1.ogg
+                                                  morning2.ogg
 
 
 NOT PART OF A CHARACTER PACK -- THE MILESTONES FOLDER

@@ -1,0 +1,441 @@
+{
+  "schema_version": 1,
+  "mod_id": "trainer_talk",
+  "pack_types": {
+    "trainer": {
+      "root": "assets/characters",
+      "slots": [
+        {
+          "id": "new_game",
+          "group": "Game start",
+          "moment": "A brand-new save begins: an introduction",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 2
+        },
+        {
+          "id": "continue1",
+          "group": "Game start",
+          "moment": "Picking up an existing save: a short greeting",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 1
+        },
+        {
+          "id": "continue2",
+          "group": "Game start",
+          "moment": "Picking up an existing save: a short greeting",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 1
+        },
+        {
+          "id": "continue3",
+          "group": "Game start",
+          "moment": "Picking up an existing save: a short greeting",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 1
+        },
+        {
+          "id": "continue4",
+          "group": "Game start",
+          "moment": "Picking up an existing save: a short greeting",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 1
+        },
+        {
+          "id": "continue5",
+          "group": "Game start",
+          "moment": "Picking up an existing save: a short greeting",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 1
+        },
+        {
+          "id": "hit1",
+          "group": "Battle",
+          "moment": "Your Pokémon attacks: a command or battle cry",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 1
+        },
+        {
+          "id": "hit2",
+          "group": "Battle",
+          "moment": "Your Pokémon attacks: a command or battle cry",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 1
+        },
+        {
+          "id": "hit3",
+          "group": "Battle",
+          "moment": "Your Pokémon attacks: a command or battle cry",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 1
+        },
+        {
+          "id": "status_enemy",
+          "group": "Battle",
+          "moment": "Your side inflicts a status condition on the opponent",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 2
+        },
+        {
+          "id": "status_enemy2",
+          "group": "Battle",
+          "moment": "Your side inflicts a status condition on the opponent",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 2
+        },
+        {
+          "id": "status_player",
+          "group": "Battle",
+          "moment": "Your Pokémon is hit by a status condition",
+          "direction": "to_you",
+          "tone": "negative",
+          "intensity": 2
+        },
+        {
+          "id": "status_player2",
+          "group": "Battle",
+          "moment": "Your Pokémon is hit by a status condition",
+          "direction": "to_you",
+          "tone": "negative",
+          "intensity": 2
+        },
+        {
+          "id": "hit_crit",
+          "group": "Reactions",
+          "moment": "Your Pokémon lands a critical hit",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 3
+        },
+        {
+          "id": "hit_crit2",
+          "group": "Reactions",
+          "moment": "Your Pokémon lands a critical hit",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 3
+        },
+        {
+          "id": "move_miss",
+          "group": "Reactions",
+          "moment": "Your Pokémon's move misses",
+          "direction": "by_you",
+          "tone": "negative",
+          "intensity": 2
+        },
+        {
+          "id": "move_miss2",
+          "group": "Reactions",
+          "moment": "Your Pokémon's move misses",
+          "direction": "by_you",
+          "tone": "negative",
+          "intensity": 2
+        },
+        {
+          "id": "catch_fail",
+          "group": "Reactions",
+          "moment": "A Poké Ball fails to catch",
+          "direction": "by_you",
+          "tone": "negative",
+          "intensity": 2
+        },
+        {
+          "id": "catch_fail2",
+          "group": "Reactions",
+          "moment": "A Poké Ball fails to catch",
+          "direction": "by_you",
+          "tone": "negative",
+          "intensity": 2
+        },
+        {
+          "id": "run_success",
+          "group": "Reactions",
+          "moment": "You escape a wild battle",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 1
+        },
+        {
+          "id": "run_success2",
+          "group": "Reactions",
+          "moment": "You escape a wild battle",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 1
+        },
+        {
+          "id": "run_fail",
+          "group": "Reactions",
+          "moment": "You fail to escape a wild battle",
+          "direction": "to_you",
+          "tone": "negative",
+          "intensity": 2
+        },
+        {
+          "id": "run_fail2",
+          "group": "Reactions",
+          "moment": "You fail to escape a wild battle",
+          "direction": "to_you",
+          "tone": "negative",
+          "intensity": 2
+        },
+        {
+          "id": "faint_enemy",
+          "group": "Faints",
+          "moment": "The opponent's Pokémon faints",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 3
+        },
+        {
+          "id": "faint_enemy2",
+          "group": "Faints",
+          "moment": "The opponent's Pokémon faints",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 3
+        },
+        {
+          "id": "faint_player",
+          "group": "Faints",
+          "moment": "Your Pokémon faints",
+          "direction": "to_you",
+          "tone": "negative",
+          "intensity": 4
+        },
+        {
+          "id": "faint_player2",
+          "group": "Faints",
+          "moment": "Your Pokémon faints",
+          "direction": "to_you",
+          "tone": "negative",
+          "intensity": 4
+        },
+        {
+          "id": "evolved",
+          "group": "Moments",
+          "moment": "One of your Pokémon evolves",
+          "direction": "to_you",
+          "tone": "positive",
+          "intensity": 3
+        },
+        {
+          "id": "new_catch",
+          "group": "Moments",
+          "moment": "You catch a species you didn't have",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 3
+        },
+        {
+          "id": "new_catch2",
+          "group": "Moments",
+          "moment": "You catch a species you didn't have",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 3
+        },
+        {
+          "id": "blackout",
+          "group": "Moments",
+          "moment": "You black out and wake at a Pokémon Center",
+          "direction": "to_you",
+          "tone": "negative",
+          "intensity": 5
+        },
+        {
+          "id": "blackout2",
+          "group": "Moments",
+          "moment": "You black out and wake at a Pokémon Center",
+          "direction": "to_you",
+          "tone": "negative",
+          "intensity": 5
+        },
+        {
+          "id": "battle_win",
+          "group": "Moments",
+          "moment": "You win an ordinary trainer battle",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 3
+        },
+        {
+          "id": "battle_win2",
+          "group": "Moments",
+          "moment": "You win an ordinary trainer battle",
+          "direction": "by_you",
+          "tone": "positive",
+          "intensity": 3
+        },
+        {
+          "id": "battle_loss",
+          "group": "Moments",
+          "moment": "You lose a battle",
+          "direction": "to_you",
+          "tone": "negative",
+          "intensity": 4
+        },
+        {
+          "id": "battle_loss2",
+          "group": "Moments",
+          "moment": "You lose a battle",
+          "direction": "to_you",
+          "tone": "negative",
+          "intensity": 4
+        },
+        {
+          "id": "gym_enter",
+          "group": "Gyms and Elite Four",
+          "moment": "Walking into a Gym",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 2
+        },
+        {
+          "id": "gym_enter2",
+          "group": "Gyms and Elite Four",
+          "moment": "Walking into a Gym",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 2
+        },
+        {
+          "id": "gym_enter3",
+          "group": "Gyms and Elite Four",
+          "moment": "Walking into a Gym",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 2
+        },
+        {
+          "id": "e4_enter",
+          "group": "Gyms and Elite Four",
+          "moment": "Walking into an Elite Four room",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 3
+        },
+        {
+          "id": "e4_enter2",
+          "group": "Gyms and Elite Four",
+          "moment": "Walking into an Elite Four room",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 3
+        },
+        {
+          "id": "champion_enter",
+          "group": "Gyms and Elite Four",
+          "moment": "Walking into the Champion's room",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 4
+        },
+        {
+          "id": "champion_enter2",
+          "group": "Gyms and Elite Four",
+          "moment": "Walking into the Champion's room",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 4
+        },
+        {
+          "id": "night1",
+          "group": "Day and night",
+          "moment": "Night falls",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 1
+        },
+        {
+          "id": "night2",
+          "group": "Day and night",
+          "moment": "Night falls",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 1
+        },
+        {
+          "id": "night3",
+          "group": "Day and night",
+          "moment": "Night falls",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 1
+        },
+        {
+          "id": "morning1",
+          "group": "Day and night",
+          "moment": "Morning arrives",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 1
+        },
+        {
+          "id": "morning2",
+          "group": "Day and night",
+          "moment": "Morning arrives",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 1
+        }
+      ]
+    },
+    "milestone": {
+      "root": "assets/milestones",
+      "speakers": [
+        "brock",
+        "misty",
+        "surge",
+        "erika",
+        "koga",
+        "sabrina",
+        "blaine",
+        "giovanni",
+        "lorelei",
+        "bruno",
+        "agatha",
+        "lance",
+        "champion",
+        "falkner",
+        "bugsy",
+        "whitney",
+        "morty",
+        "chuck",
+        "jasmine",
+        "pryce",
+        "clair",
+        "will",
+        "karen",
+        "janine",
+        "blue"
+      ],
+      "parts": [
+        {
+          "id": "intro",
+          "moment": "The leader's challenge line as the battle starts",
+          "direction": "none",
+          "tone": "neutral",
+          "intensity": 3
+        },
+        {
+          "id": "outro",
+          "moment": "The leader congratulates the player after losing",
+          "direction": "to_you",
+          "tone": "positive",
+          "intensity": 3
+        }
+      ]
+    }
+  }
+}

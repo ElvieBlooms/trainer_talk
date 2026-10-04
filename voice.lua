@@ -1,16 +1,5 @@
 local voice = {}
 
---- Wires up every voice-line trigger, options row, and dev-logging
--- hook for the mod. Called once by the engine per boot (see
--- main.lua), never invoked directly by anything in this file.
--- Purpose: single entry point the loader calls into; everything else
---   in this file is a local defined inside its closure so it can
---   close over `mod` without passing it to every helper explicitly.
--- Inputs:
---   mod (table) -- the sandboxed mod handle the engine hands every
---     mod's entry chunk (assets, options, events, hooks, log,
---     fetch/postLog under the declared permissions, etc).
--- Outputs: none.
 function voice.init(mod)
     math.randomseed(os.time())
 
@@ -18,18 +7,10 @@ function voice.init(mod)
     -- One per boot, not persisted -- generated fresh here every time
     -- voice.init runs, so it rotates on its own each session as long
     -- as nothing overrides it (see the SESSION ID options row below).
+    -- Unambiguous charset: no 0/O, 1/I/L -- meant to be read aloud or
+    -- typed into a bug report without a "was that a zero or an oh?"
+    -- back-and-forth.
     local SESSION_ID_CHARS = "23456789ABCDEFGHJKMNPQRSTUVWXYZ"
-
-    --- Builds a short, human-shareable session identifier.
-    -- Purpose: lets a tester read one string off-screen (options
-    --   menu) and match it against the same string tagging every
-    --   uploaded log line, so one session's logs can be picked out
-    --   of a shared Drive file without cross-referencing timestamps.
-    -- Inputs: none.
-    -- Outputs:
-    --   string -- 6 characters from an unambiguous charset (no
-    --     0/O, 1/I/L, so it reads cleanly when relayed verbally or
-    --     typed into a bug report).
     local function generateSessionId()
       local chars = {}
       for i = 1, 6 do
@@ -53,17 +34,6 @@ function voice.init(mod)
     -- ({ "label": "..." }) and it just shows up, no code changes.
     local Json = require("src.link.Json")
 
-    --- Reads a voice pack's optional meta.json for its display label.
-    -- Purpose: lets a dropped-in pack folder carry a human-readable
-    --   name (e.g. "KRIS") instead of showing its raw folder key in
-    --   the CHARACTER/MILESTONE VOICE options rows.
-    -- Inputs:
-    --   dir (string) -- "assets/characters" or "assets/milestones".
-    --   key (string) -- the pack's folder name under dir.
-    -- Outputs:
-    --   table -- decoded meta.json contents, or {} if the file is
-    --     missing or fails to parse (a pack with no meta is not an
-    --     error, just unlabeled).
     local function readPackMeta(dir, key)
       local metaPath = dir .. "/" .. key .. "/meta.json"
       local ok1, info = pcall(function() return mod.assets:info(metaPath) end)
@@ -74,24 +44,8 @@ function voice.init(mod)
       return {}
     end
 
-    --- Scans a voice-pack directory and builds an options-row choice
-    -- list from whatever subfolders actually exist -- same trick
-    -- Crystal's kris.lua uses for its sprite picker. Drop a folder in
-    -- with an optional meta.json and it shows up with no code changes.
-    -- Purpose: keeps CHARACTER/MILESTONE VOICE in sync with installed
-    --   asset packs instead of a hardcoded choice list that drifts.
-    -- Inputs:
-    --   dir (string) -- directory to scan, e.g. "assets/characters".
-    --   preferredDefault (string) -- pack key to default to if present.
-    --   fallbackLabel (string) -- label to show if the scan finds
-    --     nothing at all (a settings row should never end up with
-    --     zero options).
-    -- Outputs:
-    --   choicePairs (table) -- array of { label, key } pairs, sorted
-    --     alphabetically by label, ready to hand to a "choice" options
-    --     row's `choices` field.
-    --   defaultKey (string) -- preferredDefault if it was found among
-    --     the scanned packs, otherwise whichever pack sorted first.
+    -- Falls back to one hardcoded choice if the scan finds nothing --
+    -- a settings row should never end up with zero options.
     local function discoverPacks(dir, preferredDefault, fallbackLabel)
       local found = {}
       local ok, list = pcall(function() return mod.assets:list(dir) end)
@@ -231,20 +185,13 @@ function voice.init(mod)
     local logBuffer = {}
     local lastLogFlushAt = -math.huge
 
-    --- Logs a formatted dev-diagnostic line, and buffers it for
-    -- upload if the player has separately opted into that.
-    -- Every prior "if dev_logging then mod.log:info(...) end" call
-    -- site in this file goes through here instead, so the lines shown
-    -- on-screen (mod manager log view) and the lines uploaded are
-    -- always identical -- one source of truth, not two paths that
-    -- can drift apart.
-    -- Purpose: centralizes dev logging so DEV LOGGING alone stays
-    --   local/free (on-screen only) while SEND LOGS is a separate,
-    --   explicit opt-in for anything that leaves the device.
-    -- Inputs:
-    --   fmt (string) -- a string.format pattern.
-    --   ... -- values to fill fmt's placeholders.
-    -- Outputs: none.
+    -- Every existing "if dev_logging then mod.log:info(...) end" call
+    -- site now goes through here instead, so the same lines that show
+    -- up in the mod manager's log view are also what gets uploaded --
+    -- one source of truth, not two logging paths that can drift apart.
+    -- Buffering (and therefore uploading) needs dev_log_upload too --
+    -- DEV LOGGING alone still logs to the on-screen mod manager, same
+    -- as always, and never leaves the device.
     local function devLog(fmt, ...)
       if not mod.options:get("dev_logging") then return end
       local line = string.format("[%s] " .. fmt, SESSION_ID, ...)
@@ -254,17 +201,15 @@ function voice.init(mod)
       end
     end
 
-    --- Sends whatever's currently buffered to the engine's own
-    -- mod:postLog (not a custom transport -- see manifest.json's
-    -- log_url). Fire-and-forget: the response body is never handed
-    -- back, so a failed upload is only ever detected here if
-    -- mod:postLog itself rejects the call up front (missing
-    -- permission/log_url, empty body, body over the engine's 512 KiB
-    -- ceiling, or too many uploads already in flight).
-    -- Purpose: batches devLog output into periodic uploads instead of
-    --   one network call per line (see LOG_FLUSH_INTERVAL below).
-    -- Inputs: none (reads the closed-over logBuffer).
-    -- Outputs: none.
+    -- Flushes whatever's buffered via the engine's OWN mod:postLog --
+    -- not something we wrote. It posts to the https URL declared in
+    -- this mod's manifest.json (log_url), gated on the "network"
+    -- permission, reviewed at load rather than aimed per-call from
+    -- Lua. Fire-and-forget: the response body is never handed back,
+    -- so we only find out about failures mod.postLog itself detects
+    -- up front (missing permission/log_url, empty body, body over
+    -- the engine's 512 KiB ceiling, or too many uploads already in
+    -- flight) -- never anything about what the server did with it.
     local function flushLogBuffer()
       if #logBuffer == 0 then return end
       if not mod.options:get("dev_log_upload") then
@@ -286,52 +231,33 @@ function voice.init(mod)
     -- ---- Playback core ----
     local duckUntil = 0
 
-    --- Purpose: current voice volume, options-driven with a safe
-    -- default if unset.
-    -- Inputs: none. Outputs: number, 0-7.
     local function voiceVolume()
       return mod.options:get("voice_vol") or 7
     end
 
-    --- Purpose: current music-ducking duration, options-driven.
-    -- Inputs: none. Outputs: number, seconds (0 disables ducking).
     local function duckSeconds()
       return mod.options:get("duck_seconds") or 2.5
     end
 
-    --- Purpose: whether voice lines should play at all right now.
-    -- Both the toggle AND volume > 0 have to hold, so muting never
-    -- clobbers the player's saved volume number.
-    -- Inputs: none. Outputs: boolean.
+    -- Both the toggle AND volume>0 have to hold, so muting never
+    -- clobbers your saved volume number.
     local function voiceLinesOn()
       return mod.options:get("voice_lines") and voiceVolume() > 0
     end
 
-    --- Purpose: resolves the CHARACTER option to an asset subpath.
-    -- Inputs: none.
-    -- Outputs: string -- "characters/<key>", so every call site that
-    --   builds "assets/" .. folder .. "/file.ogg" resolves correctly
-    --   without change if the option value changes.
+    -- Returns "characters/<key>", not just the key -- every path
+    -- built elsewhere as "assets/" .. folder .. "/file.ogg" resolves
+    -- correctly without needing any other changes.
     local function characterFolder()
       return "characters/" .. (mod.options:get("character") or characterDefault)
     end
 
-    --- Purpose: resolves the MILESTONE VOICE option to an asset
-    -- subpath. Same shape as characterFolder, independent option.
-    -- Inputs: none. Outputs: string -- "milestones/<key>".
     local function milestoneFolder()
       return "milestones/" .. (mod.options:get("milestone_voice") or milestoneDefault)
     end
 
-    --- Plays a single voice line if voice lines are currently on.
-    -- Purpose: the one place actual playback happens, so ducking,
-    --   volume, and dev logging are applied consistently everywhere
-    --   else in this file calls into it rather than touching
-    --   love.audio directly.
-    -- Inputs:
-    --   path (string) -- resolved asset path to an .ogg file.
-    -- Outputs: none. A missing/failed file stays silent (pcall)
-    --   rather than crashing the mod.
+    -- pcall so a missing file just stays silent instead of crashing
+    -- the whole mod
     local function playSound(path)
       if not voiceLinesOn() then
         devLog("playSound: SKIPPED (voice lines off) path=%s", path)
@@ -347,10 +273,6 @@ function voice.init(mod)
       end
     end
 
-    --- Purpose: picks one line at random from a pool and plays it --
-    -- the common case everywhere a category has multiple takes.
-    -- Inputs: paths (table) -- array of asset path strings.
-    -- Outputs: none (delegates to playSound).
     local function playRandom(paths)
       playSound(paths[math.random(#paths)])
     end
@@ -365,20 +287,10 @@ function voice.init(mod)
     end)
 
     -- ---- Frequency & chance ----
-    --- Purpose: a single dice roll every probability check in this
-    -- file shares, so the odds language ("chance(50 * ...)") stays
-    -- consistent throughout.
-    -- Inputs: percent (number) -- 0-100.
-    -- Outputs: boolean -- true with the given probability.
     local function chance(percent)
       return math.random(100) <= percent
     end
 
-    --- Purpose: reads a freq_* choice option as a multiplier, with a
-    -- safe 1x fallback if unset.
-    -- Inputs: key (string) -- an options key, e.g. "freq_reactions".
-    -- Outputs: number -- 0 (off), 0.5, 1, or 2 per the choice rows
-    --   defined above.
     local function frequencyMultiplier(key)
       return mod.options:get(key) or 1
     end
@@ -394,15 +306,6 @@ function voice.init(mod)
     local VOICE_LINE_GAP = 5
     local lastVoiceLineAt = -math.huge
 
-    --- Plays one line from a pool immediately, unless the universal
-    -- gap hasn't cleared since the last voice line from ANY category.
-    -- Purpose: the synchronous half of the bark system -- for
-    --   reactions that don't need the queued delay scheduleBark
-    --   provides (crit/miss/catch/run already fire after their own
-    --   animation, so no extra beat is needed).
-    -- Inputs: pool (table) -- array of candidate asset paths.
-    -- Outputs: none. Drops the line (does not queue it) if the gap
-    --   hasn't cleared -- see scheduleBark for the queued version.
     local function attemptBark(pool)
       local now = love.timer.getTime()
       if now - lastVoiceLineAt < VOICE_LINE_GAP then
@@ -418,16 +321,6 @@ function voice.init(mod)
     -- the bark and let it go off a beat later instead of talking over
     -- the animation.
     local pendingBarks = {}
-
-    --- Queues a bark to fire after a fixed delay (checked in the
-    -- input.step hook below) rather than immediately.
-    -- Purpose: lets a bark wait out its own animation/text (e.g. a
-    --   hit landing) before speaking, instead of talking over it the
-    --   way an immediate attemptBark would.
-    -- Inputs:
-    --   pool (table) -- array of candidate asset paths.
-    --   delay (number) -- seconds to wait before attempting to play.
-    -- Outputs: none.
     local function scheduleBark(pool, delay)
       devLog("scheduleBark: QUEUED, fires in %.1fs", delay)
       table.insert(pendingBarks, { at = love.timer.getTime() + delay, pool = pool })
@@ -441,16 +334,6 @@ function voice.init(mod)
     -- yet, it keeps waiting rather than firing on top of whatever
     -- just played.
     local pendingMoments = {}
-
-    --- Queues a single, specific voice line (not a random pool) to
-    -- fire after a fixed delay.
-    -- Purpose: for one-off "moments" (evolutions, milestone outros,
-    --   blackouts) that need their own pacing distinct from the
-    --   bark system's shared timing.
-    -- Inputs:
-    --   path (string) -- resolved asset path to play.
-    --   delay (number) -- seconds to wait before attempting to play.
-    -- Outputs: none.
     local function scheduleMoment(path, delay)
       devLog("scheduleMoment: QUEUED path=%s, own delay %.1fs", path, delay)
       table.insert(pendingMoments, { at = love.timer.getTime() + delay, path = path })
@@ -514,86 +397,33 @@ function voice.init(mod)
       })
     end)
 
-    --- Determines whether a battler/mon belongs to the player.
-    -- Purpose: Gen 1's user/target/battler objects carry an explicit
-    --   isPlayer flag, but Gen 2's engine works on the raw party-mon
-    --   table directly, which has none -- every .isPlayer check in
-    --   this file would silently read nil (falsy) for BOTH sides on
-    --   Gen 2 without this fallback. Confirmed against real source
-    --   (src/battle/gen2/Battle.lua's own header comment); Gen 2's
-    --   equivalent is Battle:sideRecord, an identity check against
-    --   the battle's own .player table.
-    -- Inputs:
-    --   mon (table|nil) -- a battler/target/user object from an
-    --     event or hook payload.
-    --   battle (table) -- the event/hook's battle field, required for
-    --     the Gen 2 fallback. Every call site here is confirmed to
-    --     carry one.
-    -- Outputs: boolean.
+    -- Confirmed against real engine source (src/battle/gen2/Battle.lua's
+    -- own header comment): Gen 1's user/target/battler fields are
+    -- wrapper objects with an explicit isPlayer flag, but Gen 2's
+    -- engine works on the raw party-mon table directly, which has no
+    -- such field at all -- every .isPlayer check in this file would
+    -- silently read nil (falsy) for BOTH sides on Gen 2 without this.
+    -- Gen 2's own confirmed equivalent (Battle:sideRecord) is an
+    -- identity comparison against the battle's own .player table, so
+    -- that's the fallback here once the Gen 1 shape comes back empty.
+    -- Every event this gets used with confirmed to carry a `battle`
+    -- field, so the fallback always has what it needs.
+    --
+    -- Gen 3 (FireRed/LeafGreen) is a third shape again -- confirmed
+    -- against the real emit call in src/core/game3/battle/adapter.lua:
+    -- battle.fainted's payload is built as
+    -- `sideName = battler.side`, meaning the battler object ITSELF
+    -- carries a .side string field ("player" or not). No call-site
+    -- changes needed elsewhere in this file -- every existing call
+    -- already passes the right object as `mon`, this just adds
+    -- somewhere further to check on it.
     local function isPlayerSide(mon, battle)
       if mon == nil then return false end
       if mon.isPlayer ~= nil then return mon.isPlayer end
+      if mon.side ~= nil then return mon.side == "player" end
       if battle and battle.player ~= nil then return mon == battle.player end
       return false
     end
-
-    -- ---- General diagnostics (not Trainer Talk's own triggers) ----
-    -- Broader engine/game-state events, subscribed here purely so a
-    -- bug report's surrounding context (what screen, what kind of
-    -- battle, was this a link session) shows up next to Trainer
-    -- Talk's own lines without the tester having to describe what
-    -- they were doing by hand.
-    --
-    -- Deliberately NOT logged, even though the engine hands it to
-    -- every listener: save contents (save.created/loading/loaded's
-    -- `save` payload -- trainer name, party, badges) and a link
-    -- partner's own display name (link.connected's `remote.name`,
-    -- confirmed against src/link/LinkState.lua). Both are player-
-    -- authored, personally identifying, and add nothing a tester
-    -- would need over just knowing the event fired -- logging them
-    -- would cut against the "as anonymous as possible" goal these
-    -- logs exist under. Only structural fields (screen ids, battle
-    -- kind, link role/fatal-ness) get logged below.
-    mod.events:on("game.ready", function()
-      devLog("game.ready: trainer_talk v%s", tostring(mod.version))
-    end)
-
-    mod.events:on("save.created", function() devLog("save.created") end)
-    mod.events:on("save.loading", function() devLog("save.loading") end)
-    mod.events:on("save.loaded", function() devLog("save.loaded") end)
-
-    -- Same screenId-only pattern already used for Hall of Fame
-    -- detection further down -- never the raw `state` object.
-    mod.events:on("screen.pushed", function(ev)
-      devLog("screen.pushed: screenId=%s", tostring(ev.state and ev.state.screenId))
-    end)
-    mod.events:on("screen.popped", function(ev)
-      devLog("screen.popped: screenId=%s", tostring(ev.state and ev.state.screenId))
-    end)
-
-    mod.events:on("battle.started", function(ev)
-      devLog("battle.started: kind=%s trainerId=%s species=%s",
-        tostring(ev.kind), tostring(ev.trainerId), tostring(ev.species))
-    end)
-
-    mod.events:on("checkpoint.restored", function(ev)
-      devLog("checkpoint.restored: kind=%s", tostring(ev.kind))
-    end)
-
-    -- role/mode/fingerprint are connection metadata, not identity --
-    -- remote.name (the peer's own display name) is intentionally
-    -- excluded, see the block comment above.
-    mod.events:on("link.connected", function(ev)
-      devLog("link.connected: role=%s mode=%s", tostring(ev.role),
-        tostring(ev.remote and ev.remote.mode))
-    end)
-    mod.events:on("link.desync", function(ev)
-      devLog("link.desync: turn=%s component=%s fatal=%s",
-        tostring(ev.turn), tostring(ev.component), tostring(ev.fatal))
-    end)
-    mod.events:on("link.ended", function(ev)
-      devLog("link.ended: reason=%s", tostring(ev.reason))
-    end)
 
     -- ---- Battle barks (hit / status) ----
     mod.events:on("battle.damage_dealt", function(ev)
@@ -732,22 +562,19 @@ function voice.init(mod)
     -- own dial (freq_faint), not freq_reactions -- a faint is a
     -- bigger deal than a miss or a failed catch, defaults to firing
     -- every time rather than sharing the others' baseline.
-    -- scheduleBark (not attemptBark) -- 1.5s delay so the line lands
-    -- after the faint animation/sound plays out, same reasoning as
-    -- the damage_dealt hit bark above rather than talking over it.
     mod.events:on("battle.fainted", function(ev)
       if not chance(mod.options:get("freq_faint") or 100) then return end
       local folder = characterFolder()
       if isPlayerSide(ev.battler, ev.battle) then
-        scheduleBark({
+        attemptBark({
           mod.assets:path("assets/" .. folder .. "/faint_player.ogg"),
           mod.assets:path("assets/" .. folder .. "/faint_player2.ogg"),
-        }, 1.5)
+        })
       else
-        scheduleBark({
+        attemptBark({
           mod.assets:path("assets/" .. folder .. "/faint_enemy.ogg"),
           mod.assets:path("assets/" .. folder .. "/faint_enemy2.ogg"),
-        }, 1.5)
+        })
       end
     end)
 
@@ -851,6 +678,28 @@ function voice.init(mod)
       [26] = "janine",
       [64] = "blue",
     }
+
+    -- Gen 3 FireRed/LeafGreen -- a genuinely different lookup field,
+    -- not just more entries in the table above. Confirmed against the
+    -- real extracted trainer data: FRLG's gym leaders all share ONE
+    -- generic trainerClass per role (every leader is className
+    -- "LEADER", every E4 member is "ELITE FOUR") -- there is no
+    -- individual class to key off the way Gen 1's OPP_BROCK/OPP_MISTY
+    -- or Gen 2's per-leader numbers were. The real disambiguator is
+    -- trainerId, a specific trainer-record index, which world.
+    -- trainer_engaged already carries alongside trainerClass. FireRed
+    -- and LeafGreen share byte-identical trainer data in this engine
+    -- (confirmed: identical line counts and identical indices in both
+    -- ROMs' extracted tables), so one shared table covers both.
+    local GEN3_GYM_LEADERS = {
+      [414] = "brock", [415] = "misty", [416] = "surge", [417] = "erika",
+      [418] = "koga", [419] = "blaine", [420] = "sabrina",
+      -- Giovanni's gym battle specifically -- he also appears at
+      -- trainer ids 348/349 as the earlier Team Rocket boss fights
+      -- (Rocket Hideout / Silph Co.), deliberately excluded here since
+      -- those aren't the gym milestone.
+      [350] = "giovanni",
+    }
     local ELITE_FOUR = {
       OPP_LORELEI = "lorelei",
       OPP_BRUNO = "bruno",
@@ -865,6 +714,14 @@ function voice.init(mod)
       [13] = "bruno",
       [14] = "karen",
       [15] = "koga",
+    }
+    -- Gen 3 FireRed/LeafGreen, same trainerId reasoning as
+    -- GEN3_GYM_LEADERS above. Includes both the first playthrough
+    -- (410-413) and the Sevii Islands post-game rematch (735-738) --
+    -- same four characters, same milestone audio either way.
+    local GEN3_ELITE_FOUR = {
+      [410] = "lorelei", [411] = "bruno", [412] = "agatha", [413] = "lance",
+      [735] = "lorelei", [736] = "bruno", [737] = "agatha", [738] = "lance",
     }
 
     -- Map IDs, for map.entered below -- a different identifier space
@@ -897,6 +754,16 @@ function voice.init(mod)
       -- Gen 1's blaine_intro.ogg/blaine_outro.ogg, since it's still
       -- the same character) being completely fine.
       SEAFOAM_GYM = true,
+      -- Gen 3 FireRed/LeafGreen -- confirmed against real decoded map
+      -- data (warps.lua): genuinely different strings from Gen 1, not
+      -- just a prefix away. Cinnabar in particular isn't
+      -- FR_CINNABAR_GYM, it's FR_CINNABAR_ISLAND_GYM -- checked each
+      -- one directly rather than assuming the FR_ prefix was the only
+      -- difference.
+      FR_PEWTER_CITY_GYM = true, FR_CERULEAN_CITY_GYM = true,
+      FR_VERMILION_CITY_GYM = true, FR_CELADON_CITY_GYM = true,
+      FR_FUCHSIA_CITY_GYM = true, FR_SAFFRON_CITY_GYM = true,
+      FR_CINNABAR_ISLAND_GYM = true, FR_VIRIDIAN_CITY_GYM = true,
     }
     local E4_MAPS = {
       LORELEIS_ROOM = true, BRUNOS_ROOM = true,
@@ -905,6 +772,12 @@ function voice.init(mod)
       -- (confirmed identical string), only Will/Koga/Karen's rooms
       -- are new
       WILLS_ROOM = true, KOGAS_ROOM = true, KARENS_ROOM = true,
+      -- Gen 3 FireRed/LeafGreen, same real-data confirmation as
+      -- GYM_MAPS above
+      FR_POKEMON_LEAGUE_LORELEIS_ROOM = true,
+      FR_POKEMON_LEAGUE_BRUNOS_ROOM = true,
+      FR_POKEMON_LEAGUE_AGATHAS_ROOM = true,
+      FR_POKEMON_LEAGUE_LANCES_ROOM = true,
     }
 
     -- Confirmed against real source (data/scripts/story.lua): the
@@ -923,6 +796,16 @@ function voice.init(mod)
     -- CHAMPIONS_ROOM.
     local CHAMPION_TRAINER = "OPP_RIVAL3"
     local CHAMPION_TRAINER_GEN2 = 16
+    -- Gen 3 FireRed/LeafGreen -- confirmed against real trainer data:
+    -- trainer id 38, class "CHAMPION". Its name field is genuinely
+    -- empty ("") in the extracted data, not a gap in this lookup --
+    -- the rival is player-named in FRLG (unlike the original Red/
+    -- Blue), so the real rival name was never baked into the ROM's
+    -- trainer table at all. Deliberately not the same as trainer ids
+    -- 438/439, a separate "TERRY"-named CHAMPION-class trainer at a
+    -- much higher level (63) -- that's a distinct optional rematch
+    -- opponent, not the story Champion battle this milestone means.
+    local CHAMPION_TRAINER_GEN3 = 38
 
     -- Just the character's own reaction to the room -- fires every
     -- time it's entered, not suppressed after the first visit, since
@@ -933,7 +816,8 @@ function voice.init(mod)
       devLog("map.entered: mapId=%s -> gym=%s e4=%s champion=%s",
         tostring(ev.mapId), tostring(GYM_MAPS[ev.mapId] or false),
         tostring(E4_MAPS[ev.mapId] or false),
-        tostring(ev.mapId == "CHAMPIONS_ROOM" or ev.mapId == "LANCES_ROOM"))
+        tostring(ev.mapId == "CHAMPIONS_ROOM" or ev.mapId == "LANCES_ROOM"
+          or ev.mapId == "FR_POKEMON_LEAGUE_CHAMPIONS_ROOM"))
       if GYM_MAPS[ev.mapId] then
         if not mod.options:get("cat_gym_badges") then return end
         local charFolder = characterFolder()
@@ -949,7 +833,8 @@ function voice.init(mod)
           mod.assets:path("assets/" .. charFolder .. "/e4_enter.ogg"),
           mod.assets:path("assets/" .. charFolder .. "/e4_enter2.ogg"),
         })
-      elseif ev.mapId == "CHAMPIONS_ROOM" or ev.mapId == "LANCES_ROOM" then
+      elseif ev.mapId == "CHAMPIONS_ROOM" or ev.mapId == "LANCES_ROOM"
+          or ev.mapId == "FR_POKEMON_LEAGUE_CHAMPIONS_ROOM" then
         if not mod.options:get("cat_champion") then return end
         local charFolder = characterFolder()
         playRandom({
@@ -962,16 +847,30 @@ function voice.init(mod)
     -- Tracks who's about to be fought (for the outcome below) AND
     -- plays that specific leader's own challenge line right now, e.g.
     -- brock_intro.ogg. Same pattern for the Champion (CHAMPION_TRAINER
-    -- / CHAMPION_TRAINER_GEN2) as for a gym leader or E4 member, just
-    -- a single trainer instead of a lookup table.
+    -- / CHAMPION_TRAINER_GEN2 / CHAMPION_TRAINER_GEN3) as for a gym
+    -- leader or E4 member, just a single trainer instead of a lookup
+    -- table.
+    --
+    -- Gen 3 FireRed/LeafGreen checks ev.trainerId against its own
+    -- tables ALONGSIDE the existing ev.trainerClass checks, not
+    -- instead of them -- confirmed the event carries both fields
+    -- (src/core/game3/trainer_sight.lua's real emit call), and
+    -- trainerClass alone can't disambiguate FRLG's gym leaders from
+    -- each other (they all share one generic "LEADER" class), so this
+    -- needs the second, independently-tracked field rather than more
+    -- entries in the existing trainerClass tables.
     local pendingTrainerClass = nil
+    local pendingTrainerId = nil
     mod.events:on("world.trainer_engaged", function(ev)
       pendingTrainerClass = ev.trainerClass
-      local gymBase = GYM_LEADERS[ev.trainerClass]
-      local e4Base = ELITE_FOUR[ev.trainerClass]
-      local isChampion = (ev.trainerClass == CHAMPION_TRAINER or ev.trainerClass == CHAMPION_TRAINER_GEN2)
-      devLog("world.trainer_engaged: trainerClass=%s (%s) -> gym=%s e4=%s champion=%s",
-        tostring(ev.trainerClass), type(ev.trainerClass),
+      pendingTrainerId = ev.trainerId
+      local gymBase = GYM_LEADERS[ev.trainerClass] or GEN3_GYM_LEADERS[ev.trainerId]
+      local e4Base = ELITE_FOUR[ev.trainerClass] or GEN3_ELITE_FOUR[ev.trainerId]
+      local isChampion = (ev.trainerClass == CHAMPION_TRAINER
+        or ev.trainerClass == CHAMPION_TRAINER_GEN2
+        or ev.trainerId == CHAMPION_TRAINER_GEN3)
+      devLog("world.trainer_engaged: trainerClass=%s (%s) trainerId=%s -> gym=%s e4=%s champion=%s",
+        tostring(ev.trainerClass), type(ev.trainerClass), tostring(ev.trainerId),
         tostring(gymBase), tostring(e4Base), tostring(isChampion))
       if gymBase and mod.options:get("cat_gym_badges") then
         local folder = milestoneFolder()
@@ -994,10 +893,12 @@ function voice.init(mod)
 
     mod.events:on("battle.ended", function(ev)
       local trainerClass = pendingTrainerClass
+      local trainerId = pendingTrainerId
       pendingTrainerClass = nil
+      pendingTrainerId = nil
       if ev.result == "win" then
-        local gymBase = GYM_LEADERS[trainerClass]
-        local e4Base = ELITE_FOUR[trainerClass]
+        local gymBase = GYM_LEADERS[trainerClass] or GEN3_GYM_LEADERS[trainerId]
+        local e4Base = ELITE_FOUR[trainerClass] or GEN3_ELITE_FOUR[trainerId]
         if gymBase then
           if not mod.options:get("cat_gym_badges") then return end
           local folder = milestoneFolder()
@@ -1006,6 +907,25 @@ function voice.init(mod)
           if not mod.options:get("cat_elite_four") then return end
           local folder = milestoneFolder()
           scheduleMoment(mod.assets:path("assets/" .. folder .. "/" .. e4Base .. "_outro.ogg"), OUTCOME_DELAY)
+        elseif trainerId == CHAMPION_TRAINER_GEN3 then
+          -- Gen 3 only, deliberately handled differently from Gen 1/2
+          -- below: FireRed/LeafGreen's own screen stack
+          -- (src/ui/game3/stack.lua) never fires a screen.pushed-style
+          -- event at all -- confirmed directly, not assumed, by
+          -- reading Stack.push/Stack.pop and hall_of_fame.lua, neither
+          -- of which emits anything through the mod event system. The
+          -- Hall-of-Fame-screen signal Gen 1/2 wait for below simply
+          -- doesn't exist here, so this plays straight off
+          -- battle.ended instead, the same way gym/E4 outros already
+          -- do. Trade-off, not a bug: if FireRed's champion battle has
+          -- its own post-battle scripted sequence before Hall of Fame
+          -- actually shows (unconfirmed either way), this line will
+          -- land earlier relative to it than the Gen 1/2 approach
+          -- would have. Chosen deliberately -- simple and working now
+          -- over holding out for a closer signal that may not exist.
+          if not mod.options:get("cat_champion") then return end
+          local folder = milestoneFolder()
+          scheduleMoment(mod.assets:path("assets/" .. folder .. "/champion_outro.ogg"), OUTCOME_DELAY)
         else
           -- Champion is deliberately excluded here, not just falling
           -- through to the generic case -- its real outro plays via
@@ -1014,6 +934,10 @@ function voice.init(mod)
           -- CHAMPION_TRAINER existed to tell the two apart. Gen 2's
           -- CHAMPION_TRAINER_GEN2 excluded the same way, for the same
           -- reason -- its real outro plays via screen.pushed below too.
+          -- Gen 3's CHAMPION_TRAINER_GEN3 is NOT listed here -- it's
+          -- handled in its own branch above instead, since screen.
+          -- pushed never fires for it at all (see that branch's
+          -- comment for why).
           if trainerClass == CHAMPION_TRAINER or trainerClass == CHAMPION_TRAINER_GEN2 then return end
           if not mod.options:get("cat_moments") then return end
           local folder = characterFolder()

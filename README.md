@@ -21,7 +21,7 @@ A growing roster of voices is included — see the full list and status of each 
 
 Everything above is live and fully voiced, including the personalized moment when you beat a Gym Leader or Elite Four member, they give you their own congratulations. Champion is complete too, on both ends of the fight.
 
-Gen 2 (Gold & Silver) is still catching up on that specific piece — see Installation below for the details on what does and doesn't carry over yet.
+This now carries all the way through Gen 2 (Gold, Silver, Crystal) — the Johto gym leaders, their own Elite Four, and Kanto's returning leaders in the post-game all have their own milestone lines, not just Gen 1. Gen 3 (FireRed/LeafGreen) support is in progress; see Installation below for exactly what that currently covers.
 
 ## Voices
  
@@ -73,7 +73,7 @@ Not sure where to start? The defaults are tuned to feel natural without being ch
 3. Restart the game.
 4. Open the **MODS** panel, select **Trainer Talk**, and make sure it shows as `ENABLED`. All the settings above live on that same screen.
 
-Works on Gen 1 (Red/Blue/Yellow) and Gen 2 (Gold) — on Gold, everything works except Gym Badges, Elite Four, and Champion specifically, which are Gen 1-only for now.
+Works on Gen 1 (Red/Blue/Yellow), Gen 2 (Gold/Silver/Crystal), and — new, still being tested — Gen 3 (FireRed/LeafGreen). Everything carries through on all three. FireRed/LeafGreen support is newer than the rest of this mod, so treat it as the least battle-tested of the three for now. Emerald (Hoenn) isn't supported yet — it needs its own milestone data, which is the next piece of work.
 
 ## Credits
 
@@ -82,7 +82,9 @@ Works on Gen 1 (Red/Blue/Yellow) and Gen 2 (Gold) — on Gold, everything works 
 
 ## Want to build your own voice pack?
 
-Trainer Talk is designed so anyone can add a new voice — your own character, a favorite performer, whatever you'd like to hear in your playthrough. No coding required, just audio files in a folder. See `BUILD_YOUR_OWN_VOICE_PACK.txt` for a plain-English guide to what to record/source and where it goes.
+Trainer Talk is designed so anyone can add a new voice — your own character, a favorite performer, whatever you'd like to hear in your playthrough. No coding required, just audio files in a folder. See `BUILD_YOUR_OWN_VOICE_PACK.txt` for a plain-English guide to what to record/source and where it goes, or use the [Trainer Talk Packager](https://github.com/ElvieBlooms/trainer_talk_packager) to do it the easy way — feed it a zip of audio clips and it transcribes, matches, and exports a ready-to-drop-in pack for you.
+
+**Starting with the Hoenn release, this mod will ship without bundled voice packs** — building your own (by hand or with the packager) will be the way to get one. `BUILD_YOUR_OWN_VOICE_PACK.txt` has a pointer to where people commonly source raw game audio for this kind of thing.
 
 If you're a fellow mod author looking to understand how this one's actually built, the full technical documentation (every event, every design decision, and why) lives alongside this README in the repo. *(Work in progress — being kept current, not a finished reference yet.)*
 
