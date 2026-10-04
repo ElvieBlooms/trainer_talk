@@ -1,0 +1,323 @@
+{
+  "generator": "Trainer Talk Packager",
+  "created": "2026-10-03T19:39:15.083Z",
+  "pack_type": "milestone",
+  "label": "STADIUM",
+  "sources": [
+    {
+      "label": "Nintendo 64 - Pokemon Stadium - Voices - Announcer (English)",
+      "zip_md5": "85b52c8c18d0526b7e4761218d6554cf"
+    },
+    {
+      "label": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "zip_md5": "3abbfcc9012ac19e8ebbc1398c38dbc4"
+    },
+    {
+      "label": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "zip_md5": "7fed2195003c28e518f3e2ada712a75a"
+    }
+  ],
+  "slots": {
+    "brock_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs brock.wav",
+      "crc32": "385bb6a7",
+      "state": "confident"
+    },
+    "brock_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "misty_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs misty.wav",
+      "crc32": "b8a9c48d",
+      "state": "confident"
+    },
+    "misty_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "surge_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs lt surge.wav",
+      "crc32": "bc50ec5c",
+      "state": "confident"
+    },
+    "surge_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "erika_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs erika.wav",
+      "crc32": "fb8b4ee6",
+      "state": "confident"
+    },
+    "erika_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "koga_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs koga.wav",
+      "crc32": "493dbbb2",
+      "state": "confident"
+    },
+    "koga_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "sabrina_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs sabrina.wav",
+      "crc32": "fc9d0e85",
+      "state": "confident"
+    },
+    "sabrina_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "blaine_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs blaine.wav",
+      "crc32": "bdcb579a",
+      "state": "confident"
+    },
+    "blaine_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "giovanni_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium - Voices - Announcer (English)",
+      "file": "BANK_E6_INSTR_0000_SND_0000.wav",
+      "crc32": "fa135387",
+      "state": "confident"
+    },
+    "giovanni_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "lorelei_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium - Voices - Announcer (English)",
+      "file": "BANK_E7_INSTR_0000_SND_0000.wav",
+      "crc32": "d85d15b0",
+      "state": "confident"
+    },
+    "lorelei_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "bruno_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium - Voices - Announcer (English)",
+      "file": "BANK_E8_INSTR_0000_SND_0000.wav",
+      "crc32": "1d41f5f0",
+      "state": "confident"
+    },
+    "bruno_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "agatha_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium - Voices - Announcer (English)",
+      "file": "BANK_E9_INSTR_0000_SND_0000.wav",
+      "crc32": "6e8a9ac6",
+      "state": "confident"
+    },
+    "agatha_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "lance_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs lance.wav",
+      "crc32": "fc15bc1e",
+      "state": "confident"
+    },
+    "lance_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "champion_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium - Voices - Announcer (English)",
+      "file": "BANK_EB_INSTR_0000_SND_0000.wav",
+      "crc32": "bc7374e2",
+      "state": "confident"
+    },
+    "champion_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EB_INSTR_0000_SND_0000.wav",
+      "crc32": "3d39f53b",
+      "state": "confident"
+    },
+    "falkner_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs falkner.wav",
+      "crc32": "605bbb6c",
+      "state": "confident"
+    },
+    "falkner_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "bugsy_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs bugsy.wav",
+      "crc32": "4b65f4fb",
+      "state": "confident"
+    },
+    "bugsy_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "whitney_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs whitney.wav",
+      "crc32": "c91eeee6",
+      "state": "confident"
+    },
+    "whitney_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "morty_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs morty.wav",
+      "crc32": "5088d7f2",
+      "state": "confident"
+    },
+    "morty_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "chuck_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs chuck.wav",
+      "crc32": "ca4f57d2",
+      "state": "confident"
+    },
+    "chuck_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "jasmine_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs jasmine.wav",
+      "crc32": "33b25ef0",
+      "state": "confident"
+    },
+    "jasmine_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "pryce_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs pryce.wav",
+      "crc32": "ec930b43",
+      "state": "confident"
+    },
+    "pryce_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "clair_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs clair.wav",
+      "crc32": "911e8cf0",
+      "state": "confident"
+    },
+    "clair_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "will_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs will.wav",
+      "crc32": "4c330ec4",
+      "state": "confident"
+    },
+    "will_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "karen_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs karen.wav",
+      "crc32": "cd832c47",
+      "state": "confident"
+    },
+    "karen_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "janine_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs janine.wav",
+      "crc32": "2a1a8f48",
+      "state": "confident"
+    },
+    "janine_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    },
+    "blue_intro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Introductions",
+      "file": "vs blue.wav",
+      "crc32": "1f370903",
+      "state": "confident"
+    },
+    "blue_outro": {
+      "source": "Nintendo 64 - Pokemon Stadium 2 - Voices - Announcer - Battle Commentary",
+      "file": "BANK_3EA_INSTR_0000_SND_0000.wav",
+      "crc32": "ae73085e",
+      "state": "confident"
+    }
+  },
+  "confirmed_empty": []
+}
