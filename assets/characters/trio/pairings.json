@@ -1,0 +1,311 @@
+{
+  "generator": "Trainer Talk Packager",
+  "created": "2026-10-03T03:25:42.623Z",
+  "pack_type": "trainer",
+  "label": "ROCKET TRIO",
+  "sources": [
+    {
+      "label": "James (English)",
+      "zip_md5": "40130272515be68403bba7866565070b"
+    },
+    {
+      "label": "Jessie (English)",
+      "zip_md5": "d1a719f87c3cd17d4d15e70eec62bbeb"
+    },
+    {
+      "label": "Meowth (English)",
+      "zip_md5": "8ef62ed8947e1b411c7f42d210520aa7"
+    }
+  ],
+  "slots": {
+    "new_game": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0074_en.ogg",
+      "crc32": "c801ff38",
+      "state": "confident"
+    },
+    "continue1": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0010_en.ogg",
+      "crc32": "405e2524",
+      "state": "confident"
+    },
+    "continue2": {
+      "source": "Meowth (English)",
+      "file": "ch0258_00_meowth_0013_en.ogg",
+      "crc32": "9e19c330",
+      "state": "confident"
+    },
+    "continue3": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0023_en.ogg",
+      "crc32": "4a54a247",
+      "state": "confident"
+    },
+    "continue4": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0071_en.ogg",
+      "crc32": "d17fc76e",
+      "state": "confident"
+    },
+    "continue5": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_1005_en.ogg",
+      "crc32": "9edc6d95",
+      "state": "confident"
+    },
+    "hit1": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0014_en.ogg",
+      "crc32": "9e86fe1d",
+      "state": "confident"
+    },
+    "hit2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0013_en.ogg",
+      "crc32": "60a92913",
+      "state": "confident"
+    },
+    "hit3": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0014_en.ogg",
+      "crc32": "fbee7a5d",
+      "state": "confident"
+    },
+    "status_enemy": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0039_en.ogg",
+      "crc32": "7d3421d3",
+      "state": "confident"
+    },
+    "status_enemy2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0039_uni_en.ogg",
+      "crc32": "b7f646c4",
+      "state": "confident"
+    },
+    "status_player": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0048_en.ogg",
+      "crc32": "72286ff6",
+      "state": "confident"
+    },
+    "status_player2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0052_en.ogg",
+      "crc32": "4a55e7e4",
+      "state": "confident"
+    },
+    "hit_crit": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0068_en.ogg",
+      "crc32": "7732dd81",
+      "state": "confident"
+    },
+    "hit_crit2": {
+      "source": "Meowth (English)",
+      "file": "ch0258_00_meowth_0074_en.ogg",
+      "crc32": "fb02efbe",
+      "state": "confident"
+    },
+    "move_miss": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0048_en.ogg",
+      "crc32": "acb7f452",
+      "state": "confident"
+    },
+    "move_miss2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0047_en.ogg",
+      "crc32": "7d973e35",
+      "state": "confident"
+    },
+    "catch_fail": {
+      "source": "Meowth (English)",
+      "file": "ch0258_00_meowth_0058_en.ogg",
+      "crc32": "ea8fc25b",
+      "state": "confident"
+    },
+    "catch_fail2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0058_en.ogg",
+      "crc32": "c48cceeb",
+      "state": "confident"
+    },
+    "run_success": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0011_en.ogg",
+      "crc32": "3a62493d",
+      "state": "confident"
+    },
+    "run_success2": {
+      "source": "Meowth (English)",
+      "file": "ch0258_00_meowth_0070_en.ogg",
+      "crc32": "c07d8dba",
+      "state": "confident"
+    },
+    "run_fail": {
+      "source": "Meowth (English)",
+      "file": "ch0258_00_meowth_0048_en.ogg",
+      "crc32": "40d02712",
+      "state": "confident"
+    },
+    "run_fail2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0041_en.ogg",
+      "crc32": "e1080e11",
+      "state": "confident"
+    },
+    "faint_enemy": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0012_en.ogg",
+      "crc32": "2254d697",
+      "state": "confident"
+    },
+    "faint_enemy2": {
+      "source": "Meowth (English)",
+      "file": "ch0258_00_meowth_0044_en.ogg",
+      "crc32": "29de1018",
+      "state": "confident"
+    },
+    "faint_player": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0051_en.ogg",
+      "crc32": "a07bd133",
+      "state": "confident"
+    },
+    "faint_player2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0052_en.ogg",
+      "crc32": "62b0fa5b",
+      "state": "confident"
+    },
+    "evolved": {
+      "source": "Meowth (English)",
+      "file": "ch0258_00_meowth_0007_en.ogg",
+      "crc32": "9d9ab80a",
+      "state": "confident"
+    },
+    "new_catch": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0044_en.ogg",
+      "crc32": "dec2fdc0",
+      "state": "confident"
+    },
+    "new_catch2": {
+      "source": "Meowth (English)",
+      "file": "ch0258_00_meowth_0068_en.ogg",
+      "crc32": "eaaa40fc",
+      "state": "confident"
+    },
+    "blackout": {
+      "source": "Meowth (English)",
+      "file": "ch0258_00_meowth_0022_uni_en.ogg",
+      "crc32": "a9de68b2",
+      "state": "confident"
+    },
+    "blackout2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0022_en.ogg",
+      "crc32": "8c5b1c78",
+      "state": "confident"
+    },
+    "battle_win": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0021_en.ogg",
+      "crc32": "27347533",
+      "state": "confident"
+    },
+    "battle_win2": {
+      "source": "Meowth (English)",
+      "file": "ch0258_00_meowth_0012_en.ogg",
+      "crc32": "dd3c0217",
+      "state": "confident"
+    },
+    "battle_loss": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0028_en.ogg",
+      "crc32": "4e8014ae",
+      "state": "confident"
+    },
+    "battle_loss2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0028_en.ogg",
+      "crc32": "86d9570f",
+      "state": "confident"
+    },
+    "gym_enter": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0074_uni_en.ogg",
+      "crc32": "22b8f0ca",
+      "state": "confident"
+    },
+    "gym_enter2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0072_en.ogg",
+      "crc32": "b9b67cbb",
+      "state": "confident"
+    },
+    "gym_enter3": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0034_en.ogg",
+      "crc32": "e7c2f23b",
+      "state": "confident"
+    },
+    "e4_enter": {
+      "source": "Meowth (English)",
+      "file": "ch0258_00_meowth_1011_en.ogg",
+      "crc32": "2aef18e6",
+      "state": "confident"
+    },
+    "e4_enter2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_1002_en.ogg",
+      "crc32": "a328a3fd",
+      "state": "confident"
+    },
+    "champion_enter": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_1005_en.ogg",
+      "crc32": "4dd9e7a1",
+      "state": "confident"
+    },
+    "champion_enter2": {
+      "source": "Meowth (English)",
+      "file": "ch0258_00_meowth_1005_en.ogg",
+      "crc32": "4d674aec",
+      "state": "confident"
+    },
+    "night1": {
+      "source": "Meowth (English)",
+      "file": "ch0258_00_meowth_0031_en.ogg",
+      "crc32": "b08eeb28",
+      "state": "confident"
+    },
+    "night2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0034_en.ogg",
+      "crc32": "705db511",
+      "state": "confident"
+    },
+    "night3": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0031_en.ogg",
+      "crc32": "5ad01d5a",
+      "state": "confident"
+    },
+    "morning1": {
+      "source": "Meowth (English)",
+      "file": "ch0258_00_meowth_0029_en.ogg",
+      "crc32": "c78cbb94",
+      "state": "confident"
+    },
+    "morning2": {
+      "source": "Jessie (English)",
+      "file": "ch0240_00_musashi_0029_en.ogg",
+      "crc32": "70bf7bd6",
+      "state": "confident"
+    }
+  },
+  "confirmed_empty": []
+}
