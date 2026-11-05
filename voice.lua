@@ -350,10 +350,62 @@ function voice.init(mod)
 
     -- battle.damage_dealt fires before the hit animation, so the bark is
     -- queued and goes off a beat later.
+    --
+    -- A bark can also name text to wait for. The hooks and events fire when
+    -- the game decides an outcome, well before the player reads it, so a
+    -- line tied to result text waits until mod.battle:snapshot() shows that
+    -- text on screen. The timed delay is only the fallback. It is used when
+    -- there is no snapshot, and a hard cap stops a line waiting forever if
+    -- the text never matches, for example on a translated ROM.
+    local TEXT_POLL_INTERVAL = 0.1
+    local TEXT_CAP_EXTRA = 4
+    local lastTextPollAt = -math.huge
+    local lastText = nil
+
+    -- Returns the lowercased text now in the battle box, "" when the box is
+    -- empty, or nil when there is no battle snapshot to read. The snapshot is
+    -- copied, so this is polled and shared by every waiting line.
+    local function shownText(force)
+      local now = love.timer.getTime()
+      if force or now - lastTextPollAt >= TEXT_POLL_INTERVAL then
+        lastTextPollAt = now
+        local ok, snap = pcall(function()
+          return mod.battle and mod.battle:snapshot() or nil
+        end)
+        if ok and type(snap) == "table" then
+          lastText = type(snap.message) == "table"
+            and table.concat(snap.message, " "):lower() or ""
+        else
+          lastText = nil
+        end
+      end
+      return lastText
+    end
+
+    local function textMatches(text, patterns)
+      for _, pattern in ipairs(patterns) do
+        if text:find(pattern, 1, true) then return true end
+      end
+      return false
+    end
+
+    -- Result text in all three generations. Lowercase and accent-free.
+    local FAINT_TEXT = { "fainted" }
+    local CATCH_FAIL_TEXT = {
+      "broke free", "appeared to be caught", "almost had it",
+      "so close", "missed the",
+    }
+
     local pendingBarks = {}
-    local function scheduleBark(pool, delay)
-      devLog("scheduleBark: QUEUED, fires in %.1fs", delay)
-      table.insert(pendingBarks, { at = love.timer.getTime() + delay, pool = pool })
+    local function scheduleBark(pool, delay, patterns)
+      devLog("scheduleBark: QUEUED, fires in %.1fs%s", delay,
+        patterns and " (or when its text shows)" or "")
+      local entry = { at = love.timer.getTime() + delay, pool = pool }
+      if patterns then
+        entry.patterns = patterns
+        entry.baseline = shownText(true)
+      end
+      table.insert(pendingBarks, entry)
     end
 
     -- A moment waits for its own delay and then for the shared gap. If
@@ -373,8 +425,21 @@ function voice.init(mod)
         flushLogBuffer()
       end
       for i = #pendingBarks, 1, -1 do
-        if now >= pendingBarks[i].at then
-          local entry = table.remove(pendingBarks, i)
+        local entry = pendingBarks[i]
+        local ready
+        if entry.patterns then
+          local text = shownText()
+          if text == nil then
+            ready = now >= entry.at
+          else
+            ready = (text ~= entry.baseline and textMatches(text, entry.patterns))
+              or now >= entry.at + TEXT_CAP_EXTRA
+          end
+        else
+          ready = now >= entry.at
+        end
+        if ready then
+          table.remove(pendingBarks, i)
           attemptBark(entry.pool)
         end
       end
@@ -525,8 +590,8 @@ function voice.init(mod)
 
     -- pokemon.caught only fires on success, so a failed catch is read
     -- from the catch.rate hook. The hook runs at the throw, so the line
-    -- waits out the toss and one stretch per shake, which the hook also
-    -- returns.
+    -- waits for the result text to show. The toss and one stretch per
+    -- shake, which the hook also returns, are the fallback delay.
     mod.hooks:wrap("catch.rate", function(next, ball, mon, def, opts)
       local caught, shakes = next(ball, mon, def, opts)
       if not caught and chance(25 * frequencyMultiplier("freq_reactions")) then
@@ -535,7 +600,7 @@ function voice.init(mod)
         scheduleBark({
           mod.assets:path("assets/" .. folder .. "/catch_fail.ogg"),
           mod.assets:path("assets/" .. folder .. "/catch_fail2.ogg"),
-        }, wait * delayScale())
+        }, wait * delayScale(), CATCH_FAIL_TEXT)
       end
       return caught, shakes
     end)
@@ -560,7 +625,7 @@ function voice.init(mod)
     end)
 
     -- Faints have their own dial (freq_faint) and default to every time.
-    -- FAINT_DELAY keeps the line off the faint animation and text.
+    -- The line waits for the fainted text. FAINT_DELAY is the fallback.
     mod.events:on("battle.fainted", function(ev)
       if not chance(mod.options:get("freq_faint") or 100) then return end
       local folder = characterFolder()
@@ -568,12 +633,12 @@ function voice.init(mod)
         scheduleBark({
           mod.assets:path("assets/" .. folder .. "/faint_player.ogg"),
           mod.assets:path("assets/" .. folder .. "/faint_player2.ogg"),
-        }, FAINT_DELAY * delayScale())
+        }, FAINT_DELAY * delayScale(), FAINT_TEXT)
       else
         scheduleBark({
           mod.assets:path("assets/" .. folder .. "/faint_enemy.ogg"),
           mod.assets:path("assets/" .. folder .. "/faint_enemy2.ogg"),
-        }, FAINT_DELAY * delayScale())
+        }, FAINT_DELAY * delayScale(), FAINT_TEXT)
       end
     end)
 
