@@ -141,6 +141,18 @@ function voice.init(mod)
           { "ALWAYS", 100 },
         },
         default = 100 },
+      -- How long faint, failed-catch and win/loss lines wait for the game
+      -- to show the result first. The battle animations run on their own
+      -- frame counts, so no single delay suits every setup. Raise it if a
+      -- line still gives away the result.
+      { key = "voice_delay", type = "choice", label = "VOICE DELAY",
+        choices = {
+          { "SHORTER", 0.6 },
+          { "NORMAL", 1 },
+          { "LONGER", 1.5 },
+          { "LONGEST", 2.2 },
+        },
+        default = 1 },
       { key = "cat_moments", type = "toggle", label = "MOMENTS", default = true },
       { key = "cat_gym_badges", type = "toggle", label = "GYM BADGES", default = true },
       { key = "cat_elite_four", type = "toggle", label = "ELITE FOUR", default = true },
@@ -293,6 +305,29 @@ function voice.init(mod)
 
     local function frequencyMultiplier(key)
       return mod.options:get(key) or 1
+    end
+
+    -- Base waits before a line that would give away a result, scaled by
+    -- the VOICE DELAY row. The events fire when the move or throw is
+    -- decided, before the game plays any of it:
+    --   faint: battle.fainted fires before the HP bar drains and the
+    --          faint animation and text.
+    --   catch: the catch.rate hook runs at the throw, before the ball
+    --          toss, the shakes and the result text.
+    --   outcome: battle.ended fires as the battle screen closes.
+    -- These are estimates from the engine's animation order. They have not
+    -- been timed in game yet.
+    local FAINT_DELAY = 2.5
+    local CATCH_FAIL_BASE = 1.8
+    local CATCH_FAIL_PER_SHAKE = 0.8
+    local OUTCOME_DELAY = 0.8
+
+    local function delayScale()
+      return mod.options:get("voice_delay") or 1
+    end
+
+    local function outcomeDelay()
+      return OUTCOME_DELAY * delayScale()
     end
 
     -- ---- Voice line gap and delay queues ----
@@ -489,15 +524,18 @@ function voice.init(mod)
     end)
 
     -- pokemon.caught only fires on success, so a failed catch is read
-    -- from the catch.rate hook.
+    -- from the catch.rate hook. The hook runs at the throw, so the line
+    -- waits out the toss and one stretch per shake, which the hook also
+    -- returns.
     mod.hooks:wrap("catch.rate", function(next, ball, mon, def, opts)
       local caught, shakes = next(ball, mon, def, opts)
       if not caught and chance(25 * frequencyMultiplier("freq_reactions")) then
         local folder = characterFolder()
-        attemptBark({
+        local wait = CATCH_FAIL_BASE + CATCH_FAIL_PER_SHAKE * (tonumber(shakes) or 0)
+        scheduleBark({
           mod.assets:path("assets/" .. folder .. "/catch_fail.ogg"),
           mod.assets:path("assets/" .. folder .. "/catch_fail2.ogg"),
-        })
+        }, wait * delayScale())
       end
       return caught, shakes
     end)
@@ -522,7 +560,7 @@ function voice.init(mod)
     end)
 
     -- Faints have their own dial (freq_faint) and default to every time.
-    -- The 1.5s delay keeps the line off the faint animation.
+    -- FAINT_DELAY keeps the line off the faint animation and text.
     mod.events:on("battle.fainted", function(ev)
       if not chance(mod.options:get("freq_faint") or 100) then return end
       local folder = characterFolder()
@@ -530,12 +568,12 @@ function voice.init(mod)
         scheduleBark({
           mod.assets:path("assets/" .. folder .. "/faint_player.ogg"),
           mod.assets:path("assets/" .. folder .. "/faint_player2.ogg"),
-        }, 1.5)
+        }, FAINT_DELAY * delayScale())
       else
         scheduleBark({
           mod.assets:path("assets/" .. folder .. "/faint_enemy.ogg"),
           mod.assets:path("assets/" .. folder .. "/faint_enemy2.ogg"),
-        }, 1.5)
+        }, FAINT_DELAY * delayScale())
       end
     end)
 
@@ -768,11 +806,6 @@ function voice.init(mod)
       end
     end)
 
-    -- Keeps the win line off the finishing blow's faint bark. It was 1.5s
-    -- until a playtest showed the battle ends and the map comes back
-    -- faster than that, which left a gap of silence.
-    local OUTCOME_DELAY = 0.8
-
     mod.events:on("battle.ended", function(ev)
       local trainerClass = pendingTrainerClass
       local trainerId = pendingTrainerId
@@ -784,11 +817,11 @@ function voice.init(mod)
         if gymBase then
           if not mod.options:get("cat_gym_badges") then return end
           local folder = milestoneFolder()
-          scheduleMoment(mod.assets:path("assets/" .. folder .. "/" .. gymBase .. "_outro.ogg"), OUTCOME_DELAY)
+          scheduleMoment(mod.assets:path("assets/" .. folder .. "/" .. gymBase .. "_outro.ogg"), outcomeDelay())
         elseif e4Base then
           if not mod.options:get("cat_elite_four") then return end
           local folder = milestoneFolder()
-          scheduleMoment(mod.assets:path("assets/" .. folder .. "/" .. e4Base .. "_outro.ogg"), OUTCOME_DELAY)
+          scheduleMoment(mod.assets:path("assets/" .. folder .. "/" .. e4Base .. "_outro.ogg"), outcomeDelay())
         elseif trainerId == CHAMPION_TRAINER_GEN3 then
           -- FireRed and LeafGreen play the Champion outro straight off
           -- battle.ended. Their screen stack (src/ui/game3/stack.lua)
@@ -799,7 +832,7 @@ function voice.init(mod)
           -- timing was a deliberate choice.
           if not mod.options:get("cat_champion") then return end
           local folder = milestoneFolder()
-          scheduleMoment(mod.assets:path("assets/" .. folder .. "/champion_outro.ogg"), OUTCOME_DELAY)
+          scheduleMoment(mod.assets:path("assets/" .. folder .. "/champion_outro.ogg"), outcomeDelay())
         else
           -- Gen 1 and 2 Champion wins are skipped here because their real
           -- outro plays from screen.pushed below. Without this check the
@@ -811,7 +844,7 @@ function voice.init(mod)
             mod.assets:path("assets/" .. folder .. "/battle_win.ogg"),
             mod.assets:path("assets/" .. folder .. "/battle_win2.ogg"),
           }
-          scheduleMoment(winPaths[math.random(#winPaths)], OUTCOME_DELAY)
+          scheduleMoment(winPaths[math.random(#winPaths)], outcomeDelay())
         end
       elseif ev.result == "lose" then
         if not mod.options:get("cat_moments") then return end
@@ -820,7 +853,7 @@ function voice.init(mod)
           mod.assets:path("assets/" .. folder .. "/battle_loss.ogg"),
           mod.assets:path("assets/" .. folder .. "/battle_loss2.ogg"),
         }
-        scheduleMoment(lossPaths[math.random(#lossPaths)], OUTCOME_DELAY)
+        scheduleMoment(lossPaths[math.random(#lossPaths)], outcomeDelay())
       end
     end)
 
@@ -834,7 +867,7 @@ function voice.init(mod)
       if not mod.options:get("cat_champion") then return end
       if not (ev.state and (ev.state.screenId == "HallOfFame" or ev.state.screenId == "Gen2HallOfFame")) then return end
       local folder = milestoneFolder()
-      scheduleMoment(mod.assets:path("assets/" .. folder .. "/champion_outro.ogg"), OUTCOME_DELAY)
+      scheduleMoment(mod.assets:path("assets/" .. folder .. "/champion_outro.ogg"), outcomeDelay())
     end)
 
 end

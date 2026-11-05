@@ -56,6 +56,7 @@ Everything below lives in the in-game **Mods** menu — no files to edit, no dig
 | **MILESTONE VOICE** | Choose who voices the big Gym/Elite Four/Champion moments — a Gym Leader's own voice, or a stadium announcer |
 | **BATTLE BARKS** / **DAY-NIGHT** / **REACTIONS** | How often those specific reactions happen — off, rare, normal, or frequent, whatever feels right to you |
 | **FAINT REACTIONS** | How often she reacts to a Pokémon fainting specifically, on its own dial — off, sometimes, often, or always. Timed to land just after the KO plays out, not on top of it. |
+| **VOICE DELAY** | How long faint, failed-catch and win/loss lines wait so they don't give away the result before the game shows it — shorter, normal, longer, or longest. The battle animations run at their own pace, so raise it if a line still lands too early. |
 | **GAME START**, **MOMENTS**, **GYM BADGES**, **ELITE FOUR**, **CHAMPION** | Turn any single category on or off, if you'd rather hear some moments and not others |
 | **DEV LOGGING** | Off by default. Turns on detailed diagnostic messages, useful if something sounds wrong and you want to help track down why. Most players will never need this. |
 | **SEND LOGS** | Only shows up once DEV LOGGING is on. A separate, explicit opt-in — turning on DEV LOGGING alone keeps everything on your device; this additionally uploads diagnostic logs to help troubleshoot an issue you're reporting. Off by default even while debugging. |
