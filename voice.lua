@@ -319,6 +319,8 @@ function voice.init(mod)
     -- been timed in game yet.
     local FAINT_DELAY = 2.5
     local CAUGHT_FALLBACK_DELAY = 3
+    local STATUS_FALLBACK_DELAY = 1.5
+    local RUN_FALLBACK_DELAY = 1
     local CATCH_FAIL_BASE = 1.8
     local CATCH_FAIL_PER_SHAKE = 0.8
     local OUTCOME_DELAY = 0.8
@@ -365,6 +367,7 @@ function voice.init(mod)
     local TEXT_TAIL = 0.25
     local lastTextPollAt = -math.huge
     local lastText = nil
+    local lastTracedText = nil
 
     -- Returns the lowercased text now in the battle box, "" when the box is
     -- empty, or nil when there is no battle snapshot to read. The snapshot is
@@ -382,6 +385,13 @@ function voice.init(mod)
         else
           lastText = nil
         end
+        -- With DEV LOGGING on, each new battle message goes in the log, so
+        -- a playtest shows the real wording for every game. It is the
+        -- lowercased text the patterns below are matched against.
+        if lastText and lastText ~= "" and lastText ~= lastTracedText then
+          devLog("battle text: %s", lastText)
+        end
+        lastTracedText = lastText
       end
       return lastText
     end
@@ -395,6 +405,14 @@ function voice.init(mod)
 
     -- Result text in all three generations. Lowercase and accent-free.
     local FAINT_TEXT = { "fainted" }
+    local CRIT_TEXT = { "critical hit" }
+    local MISS_TEXT = { "attack missed" }
+    local STATUS_TEXT = {
+      "was poisoned", "badly poisoned", "fell asleep", "paralyzed",
+      "was burned", "was frozen",
+    }
+    local RUN_SUCCESS_TEXT = { "got away safely" }
+    local RUN_FAIL_TEXT = { "can't escape" }
     local CAUGHT_TEXT = { "was caught" }
     local CATCH_FAIL_TEXT = {
       "broke free", "appeared to be caught", "almost had it",
@@ -432,6 +450,7 @@ function voice.init(mod)
         reapUploads()
         flushLogBuffer()
       end
+      if mod.options:get("dev_logging") then shownText() end
       for i = #pendingBarks, 1, -1 do
         local entry = pendingBarks[i]
         local ready
@@ -539,15 +558,15 @@ function voice.init(mod)
       -- A status can land on either side, so the lines are split by who
       -- got it.
       if isPlayerSide(ev.target, ev.battle) then
-        attemptBark({
+        scheduleBark({
           mod.assets:path("assets/" .. folder .. "/status_player.ogg"),
           mod.assets:path("assets/" .. folder .. "/status_player2.ogg"),
-        })
+        }, STATUS_FALLBACK_DELAY * delayScale(), STATUS_TEXT)
       else
-        attemptBark({
+        scheduleBark({
           mod.assets:path("assets/" .. folder .. "/status_enemy.ogg"),
           mod.assets:path("assets/" .. folder .. "/status_enemy2.ogg"),
-        })
+        }, STATUS_FALLBACK_DELAY * delayScale(), STATUS_TEXT)
       end
     end)
 
@@ -582,11 +601,12 @@ function voice.init(mod)
       if not isPlayerSide(ev.user, ev.battle) then return end
       if not chance(50 * frequencyMultiplier("freq_reactions")) then return end
       local folder = characterFolder()
-      -- Same 1.5s delay as the hit pool, so it lands after the hit text.
+      -- Waits for the critical hit text. 1.5s, as in the hit pool, is the
+      -- fallback.
       scheduleBark({
         mod.assets:path("assets/" .. folder .. "/hit_crit.ogg"),
         mod.assets:path("assets/" .. folder .. "/hit_crit2.ogg"),
-      }, 1.5)
+      }, 1.5, CRIT_TEXT)
     end)
 
     -- A miss has no event, so this wraps the battle.accuracy hook. It
@@ -596,11 +616,11 @@ function voice.init(mod)
       local isPlayerMove = isPlayerSide(ctx.user, ctx.battle)
       if not hit and isPlayerMove and chance(20 * frequencyMultiplier("freq_reactions")) then
         local folder = characterFolder()
-        -- Delayed like the hit pool, so it lands after the miss text.
+        -- Waits for the miss text. 1.5s is the fallback.
         scheduleBark({
           mod.assets:path("assets/" .. folder .. "/move_miss.ogg"),
           mod.assets:path("assets/" .. folder .. "/move_miss2.ogg"),
-        }, 1.5)
+        }, 1.5, MISS_TEXT)
       end
       return hit
     end)
@@ -629,15 +649,15 @@ function voice.init(mod)
       if chance(25 * frequencyMultiplier("freq_reactions")) then
         local folder = characterFolder()
         if escaped then
-          attemptBark({
+          scheduleBark({
             mod.assets:path("assets/" .. folder .. "/run_success.ogg"),
             mod.assets:path("assets/" .. folder .. "/run_success2.ogg"),
-          })
+          }, RUN_FALLBACK_DELAY * delayScale(), RUN_SUCCESS_TEXT)
         else
-          attemptBark({
+          scheduleBark({
             mod.assets:path("assets/" .. folder .. "/run_fail.ogg"),
             mod.assets:path("assets/" .. folder .. "/run_fail2.ogg"),
-          })
+          }, RUN_FALLBACK_DELAY * delayScale(), RUN_FAIL_TEXT)
         end
       end
       return escaped
