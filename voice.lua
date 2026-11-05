@@ -188,12 +188,18 @@ function voice.init(mod)
     local logBuffer = {}
     local lastLogFlushAt = -math.huge
 
+    -- Beta builds log to the same place as releases, so their lines carry
+    -- a [B] after the session code. It follows the manifest version, so it
+    -- drops out on its own when the version loses its "beta" suffix.
+    local BUILD_TAG = tostring(mod.version or ""):lower():find("beta", 1, true)
+      and "[B]" or ""
+
     -- Every dev log line goes through here, so the mod manager's log view
     -- and the upload carry the same lines. Only SEND LOGS buffers for
     -- upload. DEV LOGGING alone stays on the device.
     local function devLog(fmt, ...)
       if not mod.options:get("dev_logging") then return end
-      local line = string.format("[%s] " .. fmt, SESSION_ID, ...)
+      local line = string.format("[%s]%s " .. fmt, SESSION_ID, BUILD_TAG, ...)
       mod.log:info(line)
       if mod.options:get("dev_log_upload") then
         table.insert(logBuffer, os.date("%H:%M:%S") .. "  " .. line)
