@@ -157,9 +157,11 @@ function voice.init(mod)
       { key = "cat_gym_badges", type = "toggle", label = "GYM BADGES", default = true },
       { key = "cat_elite_four", type = "toggle", label = "ELITE FOUR", default = true },
       { key = "cat_champion", type = "toggle", label = "CHAMPION", default = true },
-      -- Off by default. Logs through mod.log, since the sandbox has no
-      -- os.getenv to read a debug flag from.
-      { key = "dev_logging", type = "toggle", label = "DEV LOGGING", default = false },
+      -- On by default in the beta builds only, so playtesters' logs carry
+      -- the battle text. Set it back to false for a full release. Logs
+      -- through mod.log, since the sandbox has no os.getenv to read a debug
+      -- flag from.
+      { key = "dev_logging", type = "toggle", label = "DEV LOGGING", default = true },
       -- Shown only while DEV LOGGING is on (visible_if). Its own opt-in
       -- because this is the one setting that sends anything off the
       -- device. Off by default even while debugging.

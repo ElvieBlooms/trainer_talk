@@ -1,5 +1,7 @@
 # Trainer Talk
 
+> **Beta build (0.5.6-beta.1).** DEV LOGGING is on by default in this build so playtests record what the battle text says. Logs stay on your device unless you turn on SEND LOGS. This build tests voice lines that now wait for the battle text before they play (faints, catches, crits, misses, status effects and running away). If a line plays too early, too late or not at all, please tell me which game, what happened and your SESSION ID.
+
 A companion who actually talks to you.
 
 Trainer Talk adds a voice to your Pokémon adventure — someone in your corner who reacts to what's actually happening as you play. She gets excited when you start a new save. She cheers when you land a good hit. She's there when you win, and she's there when you lose. Small moments, but they add up to a game that feels a little less like you're playing alone.
@@ -58,7 +60,7 @@ Everything below lives in the in-game **Mods** menu — no files to edit, no dig
 | **FAINT REACTIONS** | How often she reacts to a Pokémon fainting specifically, on its own dial — off, sometimes, often, or always. Timed to land just after the KO plays out, not on top of it. |
 | **VOICE DELAY** | How long faint, failed-catch and win/loss lines wait so they don't give away the result before the game shows it — shorter, normal, longer, or longest. The battle animations run at their own pace, so raise it if a line still lands too early. |
 | **GAME START**, **MOMENTS**, **GYM BADGES**, **ELITE FOUR**, **CHAMPION** | Turn any single category on or off, if you'd rather hear some moments and not others |
-| **DEV LOGGING** | Off by default. Turns on detailed diagnostic messages, useful if something sounds wrong and you want to help track down why. Most players will never need this. |
+| **DEV LOGGING** | Off by default in full releases, and on in beta builds like this one. Turns on detailed diagnostic messages, useful if something sounds wrong and you want to help track down why. Most players will never need this. |
 | **SEND LOGS** | Only shows up once DEV LOGGING is on. A separate, explicit opt-in — turning on DEV LOGGING alone keeps everything on your device; this additionally uploads diagnostic logs to help troubleshoot an issue you're reporting. Off by default even while debugging. |
 | **SESSION ID** | Only shows up once DEV LOGGING is on. A short code (e.g. `K7XPQR`) unique to your current play session — share it when reporting an issue so your logs can be found without digging through timestamps. Just a display; the value itself doesn't do anything if changed. |
 
