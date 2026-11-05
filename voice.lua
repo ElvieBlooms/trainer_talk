@@ -162,11 +162,14 @@ function voice.init(mod)
       -- through mod.log, since the sandbox has no os.getenv to read a debug
       -- flag from.
       { key = "dev_logging", type = "toggle", label = "DEV LOGGING", default = true },
-      -- Shown only while DEV LOGGING is on (visible_if). Its own opt-in
+      -- Shown only while DEV LOGGING is on (visible_if). Its own setting
       -- because this is the one setting that sends anything off the
-      -- device. Off by default even while debugging.
+      -- device. Off by default in full releases, even while debugging. On
+      -- by default in the beta builds only, which say so in their name,
+      -- manifest description and README. Set it back to false for a full
+      -- release.
       { key = "dev_log_upload", type = "toggle", label = "SEND LOGS",
-        default = false,
+        default = true,
         visible_if = { key = "dev_logging", equals = true } },
       -- A "choice" with a single entry, so the ID can be read but not
       -- changed: ManagerState clamps stepping to that one entry, and a

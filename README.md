@@ -1,6 +1,14 @@
 # Trainer Talk
 
-> **Beta build (0.5.6-beta.1).** This build is a playtest of two things: voice lines that now wait for the battle text before they play (faints, catches, crits, misses, status effects and running away), and the first Ruby, Sapphire and Emerald support. DEV LOGGING is on by default so the playtest records what the battle text says. Logs stay on your device unless you turn on SEND LOGS. If a line plays too early, too late or not at all, please tell me which game, what happened and your SESSION ID.
+> **Beta build (0.5.6-beta.1). This build sends logs by default.**
+>
+> This is a playtest of two things: voice lines that now wait for the battle text before they play (faints, catches, crits, misses, status effects and running away), and the first Ruby, Sapphire and Emerald support.
+>
+> **DEV LOGGING and SEND LOGS are both ON by default in this build.** While you play, it records diagnostic lines and uploads them to my log collector every 30 seconds or so. The lines cover which maps you enter, which voice lines play and when, trainer ids, and the battle text on screen, which can include your Pokémon's nicknames and your trainer name. They are tagged with your SESSION ID and nothing else.
+>
+> To stop the uploads, open the **MODS** panel, select **Trainer Talk** and turn **SEND LOGS** off. Turn **DEV LOGGING** off as well to stop logging altogether.
+>
+> If a line plays too early, too late or not at all, please tell me which game, what happened and your SESSION ID.
 
 A companion who actually talks to you.
 
@@ -61,7 +69,7 @@ Everything below lives in the in-game **Mods** menu — no files to edit, no dig
 | **VOICE DELAY** | How long faint, failed-catch and win/loss lines wait so they don't give away the result before the game shows it — shorter, normal, longer, or longest. The battle animations run at their own pace, so raise it if a line still lands too early. |
 | **GAME START**, **MOMENTS**, **GYM BADGES**, **ELITE FOUR**, **CHAMPION** | Turn any single category on or off, if you'd rather hear some moments and not others |
 | **DEV LOGGING** | Off by default in full releases, and on in beta builds like this one. Turns on detailed diagnostic messages, useful if something sounds wrong and you want to help track down why. Most players will never need this. |
-| **SEND LOGS** | Only shows up once DEV LOGGING is on. A separate, explicit opt-in — turning on DEV LOGGING alone keeps everything on your device; this additionally uploads diagnostic logs to help troubleshoot an issue you're reporting. Off by default even while debugging. |
+| **SEND LOGS** | Only shows up once DEV LOGGING is on. A separate setting — turning on DEV LOGGING alone keeps everything on your device; this additionally uploads diagnostic logs to help troubleshoot an issue you're reporting. Off by default in full releases, even while debugging. On by default in beta builds like this one. |
 | **SESSION ID** | Only shows up once DEV LOGGING is on. A short code (e.g. `K7XPQR`) unique to your current play session — share it when reporting an issue so your logs can be found without digging through timestamps. Just a display; the value itself doesn't do anything if changed. |
 
 Not sure where to start? The defaults are tuned to feel natural without being chatty — try it as-is for a while before you go tweaking.
