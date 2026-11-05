@@ -1,0 +1,299 @@
+{
+  "generator": "Trainer Talk Packager",
+  "created": "2026-10-20T00:43:22.964Z",
+  "pack_type": "trainer",
+  "label": "JAMES",
+  "sources": [
+    {
+      "label": "James (English)",
+      "zip_md5": "40130272515be68403bba7866565070b"
+    }
+  ],
+  "slots": {
+    "new_game": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0000_en.ogg",
+      "crc32": "4de60a2b",
+      "state": "confident"
+    },
+    "continue1": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0074_en.ogg",
+      "crc32": "db543953",
+      "state": "confident"
+    },
+    "continue2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_1004_en.ogg",
+      "crc32": "48594b96",
+      "state": "confident"
+    },
+    "continue3": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0071_en.ogg",
+      "crc32": "d17fc76e",
+      "state": "confident"
+    },
+    "continue4": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0010_en.ogg",
+      "crc32": "405e2524",
+      "state": "confident"
+    },
+    "continue5": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0020_en.ogg",
+      "crc32": "5c9d9586",
+      "state": "confident"
+    },
+    "hit1": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0014_en.ogg",
+      "crc32": "9e86fe1d",
+      "state": "confident"
+    },
+    "hit2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0016_en.ogg",
+      "crc32": "a1138ff4",
+      "state": "confident"
+    },
+    "hit3": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0013_en.ogg",
+      "crc32": "8104b56b",
+      "state": "confident"
+    },
+    "status_enemy": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0044_en.ogg",
+      "crc32": "09d79f7f",
+      "state": "confident"
+    },
+    "status_enemy2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0039_en.ogg",
+      "crc32": "f1b386ce",
+      "state": "confident"
+    },
+    "status_player": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0057_en.ogg",
+      "crc32": "741cc52d",
+      "state": "confident"
+    },
+    "status_player2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0050_en.ogg",
+      "crc32": "c5d2d48a",
+      "state": "confident"
+    },
+    "hit_crit": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0068_en.ogg",
+      "crc32": "7732dd81",
+      "state": "confident"
+    },
+    "hit_crit2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0017_en.ogg",
+      "crc32": "e9113f5b",
+      "state": "confident"
+    },
+    "move_miss": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0048_en.ogg",
+      "crc32": "acb7f452",
+      "state": "confident"
+    },
+    "move_miss2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0058_en.ogg",
+      "crc32": "c48cceeb",
+      "state": "confident"
+    },
+    "catch_fail": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0052_en.ogg",
+      "crc32": "4a55e7e4",
+      "state": "confident"
+    },
+    "catch_fail2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0019_en.ogg",
+      "crc32": "b36c7a87",
+      "state": "confident"
+    },
+    "run_success": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0011_en.ogg",
+      "crc32": "3a62493d",
+      "state": "confident"
+    },
+    "run_success2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0070_en.ogg",
+      "crc32": "db3c8ea1",
+      "state": "confident"
+    },
+    "run_fail": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0054_en.ogg",
+      "crc32": "955e5fe5",
+      "state": "confident"
+    },
+    "run_fail2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0055_en.ogg",
+      "crc32": "6a02491c",
+      "state": "confident"
+    },
+    "faint_enemy": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0043_en.ogg",
+      "crc32": "20044cad",
+      "state": "confident"
+    },
+    "faint_enemy2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0018_en.ogg",
+      "crc32": "90b3edb9",
+      "state": "confident"
+    },
+    "faint_player": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0051_en.ogg",
+      "crc32": "a07bd133",
+      "state": "confident"
+    },
+    "faint_player2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0053_en.ogg",
+      "crc32": "25044ef5",
+      "state": "confident"
+    },
+    "evolved": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0009_en.ogg",
+      "crc32": "e92bb50d",
+      "state": "confident"
+    },
+    "new_catch": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0006_en.ogg",
+      "crc32": "3e217a1d",
+      "state": "confident"
+    },
+    "new_catch2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0023_en.ogg",
+      "crc32": "05c73b71",
+      "state": "confident"
+    },
+    "blackout": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0022_en.ogg",
+      "crc32": "eebb0166",
+      "state": "confident"
+    },
+    "blackout2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0062_en.ogg",
+      "crc32": "75849d92",
+      "state": "confident"
+    },
+    "battle_win": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0021_en.ogg",
+      "crc32": "27347533",
+      "state": "confident"
+    },
+    "battle_win2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0012_en.ogg",
+      "crc32": "6984b9ee",
+      "state": "confident"
+    },
+    "battle_loss": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0028_en.ogg",
+      "crc32": "4e8014ae",
+      "state": "confident"
+    },
+    "battle_loss2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0065_en.ogg",
+      "crc32": "b3a45829",
+      "state": "confident"
+    },
+    "gym_enter": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0015_en.ogg",
+      "crc32": "e3587686",
+      "state": "confident"
+    },
+    "gym_enter2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0072_en.ogg",
+      "crc32": "b9b67cbb",
+      "state": "confident"
+    },
+    "gym_enter3": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0027_en.ogg",
+      "crc32": "43b53036",
+      "state": "confident"
+    },
+    "e4_enter": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0024_en.ogg",
+      "crc32": "0fb68dc1",
+      "state": "confident"
+    },
+    "e4_enter2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0073_en.ogg",
+      "crc32": "02fd87f7",
+      "state": "confident"
+    },
+    "champion_enter": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_1005_en.ogg",
+      "crc32": "4dd9e7a1",
+      "state": "confident"
+    },
+    "champion_enter2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_1002_en.ogg",
+      "crc32": "35026dea",
+      "state": "confident"
+    },
+    "night1": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0031_en.ogg",
+      "crc32": "150efaae",
+      "state": "confident"
+    },
+    "night2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0034_en.ogg",
+      "crc32": "705db511",
+      "state": "confident"
+    },
+    "morning1": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0029_en.ogg",
+      "crc32": "d3db0d07",
+      "state": "confident"
+    },
+    "morning2": {
+      "source": "James (English)",
+      "file": "ch0241_00_kojiro_0033_en.ogg",
+      "crc32": "9226c0e5",
+      "state": "confident"
+    }
+  },
+  "confirmed_empty": [
+    "night3"
+  ]
+}

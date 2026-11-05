@@ -1,0 +1,315 @@
+{
+  "generator": "Trainer Talk Packager",
+  "created": "2026-10-20T01:11:47.561Z",
+  "pack_type": "trainer",
+  "label": "DAWN",
+  "sources": [
+    {
+      "label": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "zip_md5": "2f4e81dd34799a49fcfd92465f6f1524"
+    },
+    {
+      "label": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (New Year) (English)",
+      "zip_md5": "a51c3b9fb349132b8d250b1836feba27"
+    },
+    {
+      "label": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Palentine) (English)",
+      "zip_md5": "f14b862b3ab4d7888c31ddc1f9b9ba76"
+    },
+    {
+      "label": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Sygna Suit) (English)",
+      "zip_md5": "d13b909107244c5d0c9770f54789ea1f"
+    }
+  ],
+  "slots": {
+    "new_game": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0000_en.ogg",
+      "crc32": "5078433a",
+      "state": "confident"
+    },
+    "continue1": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (New Year) (English)",
+      "file": "ch0116_41_hikari_0010_en.ogg",
+      "crc32": "b88b1203",
+      "state": "confident"
+    },
+    "continue2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0011_en.ogg",
+      "crc32": "1e0b4d94",
+      "state": "confident"
+    },
+    "continue3": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Palentine) (English)",
+      "file": "ch0116_40_hikari_0011_en.ogg",
+      "crc32": "7054da11",
+      "state": "confident"
+    },
+    "continue4": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Sygna Suit) (English)",
+      "file": "ch0116_10_hikari_0011_en.ogg",
+      "crc32": "b14a1e11",
+      "state": "confident"
+    },
+    "continue5": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (New Year) (English)",
+      "file": "ch0116_41_hikari_0072_en.ogg",
+      "crc32": "61e0481d",
+      "state": "confident"
+    },
+    "hit1": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Sygna Suit) (English)",
+      "file": "ch0116_10_hikari_0015_en.ogg",
+      "crc32": "31a4ebb8",
+      "state": "confident"
+    },
+    "hit2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (New Year) (English)",
+      "file": "ch0116_41_hikari_0015_en.ogg",
+      "crc32": "ce7019f2",
+      "state": "confident"
+    },
+    "hit3": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0014_en.ogg",
+      "crc32": "c28a71cb",
+      "state": "confident"
+    },
+    "status_enemy": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Palentine) (English)",
+      "file": "ch0116_40_hikari_0017_en.ogg",
+      "crc32": "7eaefd39",
+      "state": "confident"
+    },
+    "status_enemy2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0039_en.ogg",
+      "crc32": "11090dde",
+      "state": "confident"
+    },
+    "status_player": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Sygna Suit) (English)",
+      "file": "ch0116_10_hikari_0051_en.ogg",
+      "crc32": "a45939ca",
+      "state": "confident"
+    },
+    "status_player2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0052_en.ogg",
+      "crc32": "c6a41771",
+      "state": "confident"
+    },
+    "hit_crit": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Sygna Suit) (English)",
+      "file": "ch0116_10_hikari_0068_en.ogg",
+      "crc32": "5f9f06e6",
+      "state": "confident"
+    },
+    "hit_crit2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (New Year) (English)",
+      "file": "ch0116_41_hikari_0018_en.ogg",
+      "crc32": "a7dee74b",
+      "state": "confident"
+    },
+    "move_miss": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (New Year) (English)",
+      "file": "ch0116_41_hikari_0022_en.ogg",
+      "crc32": "7c5849d8",
+      "state": "confident"
+    },
+    "move_miss2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Sygna Suit) (English)",
+      "file": "ch0116_10_hikari_0041_en.ogg",
+      "crc32": "7b227ccb",
+      "state": "confident"
+    },
+    "catch_fail": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (New Year) (English)",
+      "file": "ch0116_41_hikari_0052_en.ogg",
+      "crc32": "84a0f137",
+      "state": "confident"
+    },
+    "catch_fail2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (New Year) (English)",
+      "file": "ch0116_41_hikari_0066_en.ogg",
+      "crc32": "48b9c28e",
+      "state": "confident"
+    },
+    "run_success": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0070_en.ogg",
+      "crc32": "11deebc0",
+      "state": "confident"
+    },
+    "run_success2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Sygna Suit) (English)",
+      "file": "ch0116_10_hikari_0070_en.ogg",
+      "crc32": "e64eca65",
+      "state": "confident"
+    },
+    "run_fail": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Palentine) (English)",
+      "file": "ch0116_40_hikari_0022_en.ogg",
+      "crc32": "04390b8e",
+      "state": "confident"
+    },
+    "run_fail2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (New Year) (English)",
+      "file": "ch0116_41_hikari_0065_en.ogg",
+      "crc32": "164f701d",
+      "state": "confident"
+    },
+    "faint_enemy": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (New Year) (English)",
+      "file": "ch0116_41_hikari_0021_en.ogg",
+      "crc32": "c437c0a1",
+      "state": "confident"
+    },
+    "faint_enemy2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Sygna Suit) (English)",
+      "file": "ch0116_10_hikari_0013_en.ogg",
+      "crc32": "37ea5736",
+      "state": "confident"
+    },
+    "faint_player": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Sygna Suit) (English)",
+      "file": "ch0116_10_hikari_0022_en.ogg",
+      "crc32": "d8a55311",
+      "state": "confident"
+    },
+    "faint_player2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (New Year) (English)",
+      "file": "ch0116_41_hikari_0062_en.ogg",
+      "crc32": "0bf2a070",
+      "state": "confident"
+    },
+    "evolved": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0009_en.ogg",
+      "crc32": "b721d79e",
+      "state": "confident"
+    },
+    "new_catch": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0018_en.ogg",
+      "crc32": "32ca7f42",
+      "state": "confident"
+    },
+    "new_catch2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0044_en.ogg",
+      "crc32": "dc822a8d",
+      "state": "confident"
+    },
+    "blackout": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Sygna Suit) (English)",
+      "file": "ch0116_10_hikari_0028_en.ogg",
+      "crc32": "fbf1b087",
+      "state": "confident"
+    },
+    "blackout2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Palentine) (English)",
+      "file": "ch0116_40_hikari_0028_en.ogg",
+      "crc32": "3b687ae8",
+      "state": "confident"
+    },
+    "battle_win": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0007_en.ogg",
+      "crc32": "ad23410e",
+      "state": "confident"
+    },
+    "battle_win2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Palentine) (English)",
+      "file": "ch0116_40_hikari_0021_en.ogg",
+      "crc32": "fc36a053",
+      "state": "confident"
+    },
+    "battle_loss": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0048_en.ogg",
+      "crc32": "37ed1c9a",
+      "state": "confident"
+    },
+    "battle_loss2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Sygna Suit) (English)",
+      "file": "ch0116_10_hikari_0062_en.ogg",
+      "crc32": "b0a2129b",
+      "state": "confident"
+    },
+    "gym_enter": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0008_en.ogg",
+      "crc32": "45d76c24",
+      "state": "confident"
+    },
+    "gym_enter2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0013_en.ogg",
+      "crc32": "98732787",
+      "state": "confident"
+    },
+    "gym_enter3": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Palentine) (English)",
+      "file": "ch0116_40_hikari_0072_en.ogg",
+      "crc32": "00edae24",
+      "state": "confident"
+    },
+    "e4_enter": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Sygna Suit) (English)",
+      "file": "ch0116_10_hikari_0012_en.ogg",
+      "crc32": "347480c1",
+      "state": "confident"
+    },
+    "e4_enter2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (New Year) (English)",
+      "file": "ch0116_41_hikari_0017_en.ogg",
+      "crc32": "73e1c903",
+      "state": "confident"
+    },
+    "champion_enter": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0074_en.ogg",
+      "crc32": "ae6104b0",
+      "state": "confident"
+    },
+    "champion_enter2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Sygna Suit) (English)",
+      "file": "ch0116_10_hikari_0074_en.ogg",
+      "crc32": "4f0c0d68",
+      "state": "confident"
+    },
+    "night1": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0031_en.ogg",
+      "crc32": "a0f79a66",
+      "state": "confident"
+    },
+    "night2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0034_en.ogg",
+      "crc32": "c9df350a",
+      "state": "confident"
+    },
+    "night3": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (Sygna Suit) (English)",
+      "file": "ch0116_10_hikari_0031_en.ogg",
+      "crc32": "11cc12a1",
+      "state": "confident"
+    },
+    "morning1": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (English)",
+      "file": "ch0116_00_hikari_0029_en.ogg",
+      "crc32": "3caeddb7",
+      "state": "confident"
+    },
+    "morning2": {
+      "source": "Mobile - Pokemon Masters - Sinnoh Character Voices (English) - Dawn (New Year) (English)",
+      "file": "ch0116_41_hikari_0029_en.ogg",
+      "crc32": "6028f8bf",
+      "state": "confident"
+    }
+  },
+  "confirmed_empty": []
+}
