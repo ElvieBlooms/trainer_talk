@@ -8,6 +8,8 @@
 >
 > To stop the uploads, open the **MODS** panel, select **Trainer Talk** and turn **SEND LOGS** off. Turn **DEV LOGGING** off as well to stop logging altogether.
 >
+> **Installing the beta:** delete your old Trainer Talk mod first, then install the beta zip as a brand new mod. Don't copy it over the old folder.
+>
 > If a line plays too early, too late or not at all, please tell me which game, what happened and your SESSION ID.
 
 A companion who actually talks to you.
