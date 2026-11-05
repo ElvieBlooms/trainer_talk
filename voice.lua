@@ -318,6 +318,7 @@ function voice.init(mod)
     -- These are estimates from the engine's animation order. They have not
     -- been timed in game yet.
     local FAINT_DELAY = 2.5
+    local CAUGHT_FALLBACK_DELAY = 3
     local CATCH_FAIL_BASE = 1.8
     local CATCH_FAIL_PER_SHAKE = 0.8
     local OUTCOME_DELAY = 0.8
@@ -359,6 +360,9 @@ function voice.init(mod)
     -- the text never matches, for example on a translated ROM.
     local TEXT_POLL_INTERVAL = 0.1
     local TEXT_CAP_EXTRA = 4
+    -- A beat after the text shows, so the voice lands with the reader and
+    -- not on the first letter.
+    local TEXT_TAIL = 0.25
     local lastTextPollAt = -math.huge
     local lastText = nil
 
@@ -391,16 +395,20 @@ function voice.init(mod)
 
     -- Result text in all three generations. Lowercase and accent-free.
     local FAINT_TEXT = { "fainted" }
+    local CAUGHT_TEXT = { "was caught" }
     local CATCH_FAIL_TEXT = {
       "broke free", "appeared to be caught", "almost had it",
       "so close", "missed the",
     }
 
     local pendingBarks = {}
-    local function scheduleBark(pool, delay, patterns)
+    -- opts.direct plays the line without the shared gap, as the catch line
+    -- always has. opts.allowStale lets text that is already showing count,
+    -- for events that fire after their text.
+    local function scheduleBark(pool, delay, patterns, opts)
       devLog("scheduleBark: QUEUED, fires in %.1fs%s", delay,
         patterns and " (or when its text shows)" or "")
-      local entry = { at = love.timer.getTime() + delay, pool = pool }
+      local entry = { at = love.timer.getTime() + delay, pool = pool, opts = opts or {} }
       if patterns then
         entry.patterns = patterns
         entry.baseline = shownText(true)
@@ -432,7 +440,12 @@ function voice.init(mod)
           if text == nil then
             ready = now >= entry.at
           else
-            ready = (text ~= entry.baseline and textMatches(text, entry.patterns))
+            if not entry.releaseAt
+                and (text ~= entry.baseline or entry.opts.allowStale)
+                and textMatches(text, entry.patterns) then
+              entry.releaseAt = now + TEXT_TAIL
+            end
+            ready = (entry.releaseAt and now >= entry.releaseAt)
               or now >= entry.at + TEXT_CAP_EXTRA
           end
         else
@@ -440,7 +453,11 @@ function voice.init(mod)
         end
         if ready then
           table.remove(pendingBarks, i)
-          attemptBark(entry.pool)
+          if entry.opts.direct then
+            playRandom(entry.pool)
+          else
+            attemptBark(entry.pool)
+          end
         end
       end
       for i = #pendingMoments, 1, -1 do
@@ -596,7 +613,9 @@ function voice.init(mod)
       local caught, shakes = next(ball, mon, def, opts)
       if not caught and chance(25 * frequencyMultiplier("freq_reactions")) then
         local folder = characterFolder()
-        local wait = CATCH_FAIL_BASE + CATCH_FAIL_PER_SHAKE * (tonumber(shakes) or 0)
+        -- Gen 2 can hand back a value far above three, so clamp it.
+        local wait = CATCH_FAIL_BASE
+          + CATCH_FAIL_PER_SHAKE * math.min(tonumber(shakes) or 0, 3)
         scheduleBark({
           mod.assets:path("assets/" .. folder .. "/catch_fail.ogg"),
           mod.assets:path("assets/" .. folder .. "/catch_fail2.ogg"),
@@ -653,14 +672,18 @@ function voice.init(mod)
       playSound(mod.assets:path("assets/" .. folder .. "/evolved.ogg"))
     end)
 
+    -- Gen 2 fires pokemon.caught at the throw, Gen 1 and 3 after the caught
+    -- text. The line waits for "was caught" either way. The text can already
+    -- be showing by then, so stale text counts.
     mod.events:on("pokemon.caught", function(ev)
       if not mod.options:get("cat_moments") then return end
       if not ev.isNew then return end
       local folder = characterFolder()
-      playRandom({
+      scheduleBark({
         mod.assets:path("assets/" .. folder .. "/new_catch.ogg"),
         mod.assets:path("assets/" .. folder .. "/new_catch2.ogg"),
-      })
+      }, CAUGHT_FALLBACK_DELAY * delayScale(), CAUGHT_TEXT,
+      { direct = true, allowStale = true })
     end)
 
     -- 3s delay, so it lands after the loss line and the warp back to the
