@@ -1,6 +1,6 @@
 # Trainer Talk
 
-> **Beta build (0.5.6-beta.2).** This build is a playtest of two things: voice lines that now wait for the battle text before they play (faints, catches, crits, misses, status effects and running away), and the first Ruby, Sapphire and Emerald support. DEV LOGGING is on by default so the playtest records what the battle text says. Logs stay on your device unless you turn on SEND LOGS. If a line plays too early, too late or not at all, please tell me which game, what happened and your SESSION ID.
+> **Beta build (0.5.6-beta.1).** This build is a playtest of two things: voice lines that now wait for the battle text before they play (faints, catches, crits, misses, status effects and running away), and the first Ruby, Sapphire and Emerald support. DEV LOGGING is on by default so the playtest records what the battle text says. Logs stay on your device unless you turn on SEND LOGS. If a line plays too early, too late or not at all, please tell me which game, what happened and your SESSION ID.
 
 A companion who actually talks to you.
 
