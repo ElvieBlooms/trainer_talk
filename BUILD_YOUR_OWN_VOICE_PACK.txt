@@ -162,6 +162,14 @@ regardless of which character voice you've picked for everything else.
 There's already a toggle for choosing between packs there, in the
 Mods manager.
 
+Each person gets two files, named after them: brock_intro.ogg and
+brock_outro.ogg, for example. The Hoenn names are roxanne, brawly,
+wattson, flannery, norman, winona, tate_and_liza, juan and wallace for
+the gyms, sidney, phoebe, glacia and drake for the Elite Four, and
+wallace (Emerald) or steven (Ruby and Sapphire) for the Champion.
+Wallace leads the Sootopolis gym in Ruby and Sapphire and is the
+Champion in Emerald, so one pair of files covers both.
+
 These are separate, static events from a character pack's everyday
 lines -- but they follow the exact same drop-a-folder rule as
 CHARACTER above, entirely independently of building a character pack

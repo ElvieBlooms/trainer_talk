@@ -4,7 +4,7 @@
   "version": "0.5.6-beta.1",
   "api": 2,
   "entry": "main.lua",
-  "games": ["gen1", "gen2", "frlg"],
+  "games": ["gen1", "gen2", "frlg", "rse"],
   "category": "AUDIO",
   "description": "BETA with dev logging on by default. Plays a voice line when the player triggers an event such as a New Game or Continues an existing save, with the music briefly ducking underneath each line.",
   "github": "ElvieBlooms/Trainer_Talk",

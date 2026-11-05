@@ -23,7 +23,7 @@ A growing roster of voices is included — see the full list and status of each 
 
 Everything above is live and fully voiced, including the personalized moment when you beat a Gym Leader or Elite Four member, they give you their own congratulations. Champion is complete too, on both ends of the fight.
 
-This now carries all the way through Gen 2 (Gold, Silver, Crystal) — the Johto gym leaders, their own Elite Four, and Kanto's returning leaders in the post-game all have their own milestone lines, not just Gen 1. Gen 3 (FireRed/LeafGreen) support is in progress; see Installation below for exactly what that currently covers.
+This now carries all the way through Gen 2 (Gold, Silver, Crystal) — the Johto gym leaders, their own Elite Four, and Kanto's returning leaders in the post-game all have their own milestone lines, not just Gen 1. Gen 3 support is in progress: FireRed and LeafGreen are in, and Hoenn (Ruby, Sapphire and Emerald) is being added. See Installation below for exactly what that currently covers.
 
 ## Voices
  
@@ -76,7 +76,7 @@ Not sure where to start? The defaults are tuned to feel natural without being ch
 3. Restart the game.
 4. Open the **MODS** panel, select **Trainer Talk**, and make sure it shows as `ENABLED`. All the settings above live on that same screen.
 
-Works on Gen 1 (Red/Blue/Yellow), Gen 2 (Gold/Silver/Crystal), and — new, still being tested — Gen 3 (FireRed/LeafGreen). Everything carries through on all three. FireRed/LeafGreen support is newer than the rest of this mod, so treat it as the least battle-tested of the three for now. Emerald (Hoenn) isn't supported yet — it needs its own milestone data, which is the next piece of work.
+Works on Gen 1 (Red/Blue/Yellow), Gen 2 (Gold/Silver/Crystal), and — new, still being tested — Gen 3 (FireRed/LeafGreen). Everything carries through on all three. FireRed/LeafGreen support is newer than the rest of this mod, so treat it as the least battle-tested of the three for now. Hoenn (Ruby, Sapphire and Emerald) is wired in but has not been played through yet, and its gym leaders, Elite Four and Champions have no milestone audio so far. Everyday lines work from any voice pack, and a milestone with no audio file stays silent.
 
 ## Credits
 

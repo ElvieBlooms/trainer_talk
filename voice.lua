@@ -768,17 +768,39 @@ function voice.init(mod)
       [64] = "blue",
     }
 
-    -- FireRed and LeafGreen key on trainerId, not trainerClass. Every
-    -- leader there shares the one "LEADER" class, so the class can't say
-    -- which leader it is. world.trainer_engaged carries both fields. Both
-    -- games have identical trainer tables in this engine, so one table
-    -- covers them.
+    -- Gen 3 keys on trainerId, not trainerClass. Every leader shares the
+    -- one "LEADER" class, so the class can't say which leader it is.
+    -- world.trainer_engaged carries both fields.
+    --
+    -- The ids are not shared between games: id 272 is Juan in Emerald and
+    -- Wallace in Ruby and Sapphire, and a Kanto id such as 414 is some
+    -- other trainer in Hoenn. So every Gen 3 table is split by game, and
+    -- gen3Game (set from the map id below) picks the half to read.
+    --   frlg    FireRed and LeafGreen, identical trainer tables
+    --   emerald Emerald
+    --   rs      Ruby and Sapphire, identical trainer tables
     local GEN3_GYM_LEADERS = {
-      [414] = "brock", [415] = "misty", [416] = "surge", [417] = "erika",
-      [418] = "koga", [419] = "blaine", [420] = "sabrina",
-      -- Giovanni's gym fight only. Ids 348 and 349 are his Rocket Hideout
-      -- and Silph Co. fights, which are not the gym milestone.
-      [350] = "giovanni",
+      frlg = {
+        [414] = "brock", [415] = "misty", [416] = "surge", [417] = "erika",
+        [418] = "koga", [419] = "blaine", [420] = "sabrina",
+        -- Giovanni's gym fight only. Ids 348 and 349 are his Rocket
+        -- Hideout and Silph Co. fights, which are not the gym milestone.
+        [350] = "giovanni",
+      },
+      -- Roxanne, Brawly, Wattson, Flannery, Norman, Winona, then Tate and
+      -- Liza as one double battle. Only each leader's first fight is here.
+      -- Ids 770 to 801 are the Pokenav rematches, left out the way the
+      -- Kanto rematches are.
+      emerald = {
+        [265] = "roxanne", [266] = "brawly", [267] = "wattson",
+        [268] = "flannery", [269] = "norman", [270] = "winona",
+        [271] = "tate_and_liza", [272] = "juan",
+      },
+      rs = {
+        [265] = "roxanne", [266] = "brawly", [267] = "wattson",
+        [268] = "flannery", [269] = "norman", [270] = "winona",
+        [271] = "tate_and_liza", [272] = "wallace",
+      },
     }
     local ELITE_FOUR = {
       OPP_LORELEI = "lorelei",
@@ -792,13 +814,44 @@ function voice.init(mod)
       [14] = "karen",
       [15] = "koga",
     }
-    -- FireRed and LeafGreen Elite Four, keyed on trainerId like the gym
-    -- table. 410-413 is the first run and 735-738 the Sevii Islands
-    -- rematch. Same four people, same audio.
+    -- Gen 3 Elite Four, keyed on trainerId like the gym table.
+    -- FireRed and LeafGreen: 410-413 is the first run and 735-738 the
+    -- Sevii Islands rematch. Same four people, same audio.
     local GEN3_ELITE_FOUR = {
-      [410] = "lorelei", [411] = "bruno", [412] = "agatha", [413] = "lance",
-      [735] = "lorelei", [736] = "bruno", [737] = "agatha", [738] = "lance",
+      frlg = {
+        [410] = "lorelei", [411] = "bruno", [412] = "agatha", [413] = "lance",
+        [735] = "lorelei", [736] = "bruno", [737] = "agatha", [738] = "lance",
+      },
+      -- Hoenn has the same four in all three games.
+      emerald = {
+        [261] = "sidney", [262] = "phoebe", [263] = "glacia", [264] = "drake",
+      },
+      rs = {
+        [261] = "sidney", [262] = "phoebe", [263] = "glacia", [264] = "drake",
+      },
     }
+
+    -- Which Gen 3 table to read. Map ids carry a prefix per game (the
+    -- engine's enginePrefix in src/core/game3/profiles), and the player
+    -- always enters a map before any trainer fight, so the last prefix
+    -- seen names the game. Gen 1 and 2 map ids have none, so this stays
+    -- nil there and every Gen 3 lookup returns nothing.
+    local GEN3_MAP_PREFIX = {
+      FR_ = "frlg", SEVII_ = "frlg",
+      EM_ = "emerald", RU_ = "rs", SA_ = "rs",
+    }
+    local gen3Game = nil
+    local function gen3GameFromMap(mapId)
+      local id = tostring(mapId or "")
+      for prefix, game in pairs(GEN3_MAP_PREFIX) do
+        if id:sub(1, #prefix) == prefix then return game end
+      end
+      return nil
+    end
+    local function gen3Lookup(tbl, trainerId)
+      local half = gen3Game and tbl[gen3Game]
+      return half and half[trainerId] or nil
+    end
 
     -- Map ids for map.entered. These are strings in every generation, and
     -- Gen 2's Kanto post-game uses Gen 1's exact strings for the same
@@ -825,6 +878,24 @@ function voice.init(mod)
       FR_FUCHSIA_CITY_GYM = true, FR_SAFFRON_CITY_GYM = true,
       FR_CINNABAR_ISLAND_GYM = true, FR_VIRIDIAN_CITY_GYM = true,
     }
+    -- Hoenn, in Emerald (EM_), Ruby (RU_) and Sapphire (SA_). Lavaridge and
+    -- Sootopolis have a 1F and a B1F. Only the 1F is listed, as with
+    -- Clair's gym, so the line doesn't repeat on the way back down.
+    -- Names come from the engine's map constants. They are untested in
+    -- game, so check the map.entered lines in a DEV LOGGING run.
+    local HOENN_GYM_MAPS = {
+      "RUSTBORO_CITY_GYM", "DEWFORD_TOWN_GYM", "MAUVILLE_CITY_GYM",
+      "LAVARIDGE_TOWN_GYM_1F", "PETALBURG_CITY_GYM", "FORTREE_CITY_GYM",
+      "MOSSDEEP_CITY_GYM", "SOOTOPOLIS_CITY_GYM_1F",
+    }
+    local HOENN_E4_MAPS = {
+      "EVER_GRANDE_CITY_SIDNEYS_ROOM", "EVER_GRANDE_CITY_PHOEBES_ROOM",
+      "EVER_GRANDE_CITY_GLACIAS_ROOM", "EVER_GRANDE_CITY_DRAKES_ROOM",
+    }
+    local CHAMPION_MAPS = {
+      CHAMPIONS_ROOM = true, LANCES_ROOM = true,
+      FR_POKEMON_LEAGUE_CHAMPIONS_ROOM = true,
+    }
     local E4_MAPS = {
       LORELEIS_ROOM = true, BRUNOS_ROOM = true,
       AGATHAS_ROOM = true, LANCES_ROOM = true,
@@ -837,28 +908,44 @@ function voice.init(mod)
       FR_POKEMON_LEAGUE_AGATHAS_ROOM = true,
       FR_POKEMON_LEAGUE_LANCES_ROOM = true,
     }
+    for _, prefix in ipairs({ "EM_", "RU_", "SA_" }) do
+      for _, name in ipairs(HOENN_GYM_MAPS) do GYM_MAPS[prefix .. name] = true end
+      for _, name in ipairs(HOENN_E4_MAPS) do E4_MAPS[prefix .. name] = true end
+      CHAMPION_MAPS[prefix .. "EVER_GRANDE_CITY_CHAMPIONS_ROOM"] = true
+    end
 
     -- The Champion, per generation:
     --   Gen 1: the rival's third fight, OPP_RIVAL3 (RIVAL1 and RIVAL2 are
     --          the earlier fights), in CHAMPIONS_ROOM.
     --   Gen 2: Lance has his own CHAMPION class, index 16, separate from
     --          the rival classes (9 and 42). The room is LANCES_ROOM.
-    --   Gen 3: trainer id 38, class CHAMPION. Its name is empty in the
-    --          trainer table because the rival is named by the player.
-    --          Ids 438 and 439 are a different, optional level 63 rematch.
+    --   Gen 3 FireRed and LeafGreen: trainer id 38, class CHAMPION. Its
+    --          name is empty in the trainer table because the rival is
+    --          named by the player. Ids 438 and 439 are a different,
+    --          optional level 63 rematch.
+    --   Gen 3 Hoenn: see GEN3_CHAMPION below.
     local CHAMPION_TRAINER = "OPP_RIVAL3"
     local CHAMPION_TRAINER_GEN2 = 16
-    local CHAMPION_TRAINER_GEN3 = 38
+    -- Gen 3 champions are keyed by game, and unlike the rival they have
+    -- names, so each gets its own speaker files (steven_intro.ogg) instead
+    -- of the shared champion_intro.ogg. Emerald's Champion is Wallace and
+    -- Ruby and Sapphire's is Steven. Emerald also has a Steven fight (id
+    -- 804). It is an optional post-game fight, not the Champion.
+    local GEN3_CHAMPION = {
+      frlg = { [38] = "champion" },
+      emerald = { [335] = "wallace" },
+      rs = { [335] = "steven" },
+    }
 
     -- CHARACTER's reaction to the room itself. Plays on every entry, since
     -- re-entering is rare. The leader's own challenge line waits for
     -- world.trainer_engaged below.
     mod.events:on("map.entered", function(ev)
+      gen3Game = gen3GameFromMap(ev.mapId) or gen3Game
       devLog("map.entered: mapId=%s -> gym=%s e4=%s champion=%s",
         tostring(ev.mapId), tostring(GYM_MAPS[ev.mapId] or false),
         tostring(E4_MAPS[ev.mapId] or false),
-        tostring(ev.mapId == "CHAMPIONS_ROOM" or ev.mapId == "LANCES_ROOM"
-          or ev.mapId == "FR_POKEMON_LEAGUE_CHAMPIONS_ROOM"))
+        tostring(CHAMPION_MAPS[ev.mapId] or false))
       if GYM_MAPS[ev.mapId] then
         if not mod.options:get("cat_gym_badges") then return end
         local charFolder = characterFolder()
@@ -874,8 +961,7 @@ function voice.init(mod)
           mod.assets:path("assets/" .. charFolder .. "/e4_enter.ogg"),
           mod.assets:path("assets/" .. charFolder .. "/e4_enter2.ogg"),
         })
-      elseif ev.mapId == "CHAMPIONS_ROOM" or ev.mapId == "LANCES_ROOM"
-          or ev.mapId == "FR_POKEMON_LEAGUE_CHAMPIONS_ROOM" then
+      elseif CHAMPION_MAPS[ev.mapId] then
         if not mod.options:get("cat_champion") then return end
         local charFolder = characterFolder()
         playRandom({
@@ -896,11 +982,12 @@ function voice.init(mod)
     mod.events:on("world.trainer_engaged", function(ev)
       pendingTrainerClass = ev.trainerClass
       pendingTrainerId = ev.trainerId
-      local gymBase = GYM_LEADERS[ev.trainerClass] or GEN3_GYM_LEADERS[ev.trainerId]
-      local e4Base = ELITE_FOUR[ev.trainerClass] or GEN3_ELITE_FOUR[ev.trainerId]
+      local gymBase = GYM_LEADERS[ev.trainerClass] or gen3Lookup(GEN3_GYM_LEADERS, ev.trainerId)
+      local e4Base = ELITE_FOUR[ev.trainerClass] or gen3Lookup(GEN3_ELITE_FOUR, ev.trainerId)
+      local gen3Champion = gen3Lookup(GEN3_CHAMPION, ev.trainerId)
       local isChampion = (ev.trainerClass == CHAMPION_TRAINER
         or ev.trainerClass == CHAMPION_TRAINER_GEN2
-        or ev.trainerId == CHAMPION_TRAINER_GEN3)
+        or gen3Champion ~= nil)
       devLog("world.trainer_engaged: trainerClass=%s (%s) trainerId=%s -> gym=%s e4=%s champion=%s",
         tostring(ev.trainerClass), type(ev.trainerClass), tostring(ev.trainerId),
         tostring(gymBase), tostring(e4Base), tostring(isChampion))
@@ -912,7 +999,7 @@ function voice.init(mod)
         playSound(mod.assets:path("assets/" .. folder .. "/" .. e4Base .. "_intro.ogg"))
       elseif isChampion and mod.options:get("cat_champion") then
         local folder = milestoneFolder()
-        playSound(mod.assets:path("assets/" .. folder .. "/champion_intro.ogg"))
+        playSound(mod.assets:path("assets/" .. folder .. "/" .. (gen3Champion or "champion") .. "_intro.ogg"))
       end
     end)
 
@@ -922,8 +1009,9 @@ function voice.init(mod)
       pendingTrainerClass = nil
       pendingTrainerId = nil
       if ev.result == "win" then
-        local gymBase = GYM_LEADERS[trainerClass] or GEN3_GYM_LEADERS[trainerId]
-        local e4Base = ELITE_FOUR[trainerClass] or GEN3_ELITE_FOUR[trainerId]
+        local gymBase = GYM_LEADERS[trainerClass] or gen3Lookup(GEN3_GYM_LEADERS, trainerId)
+        local e4Base = ELITE_FOUR[trainerClass] or gen3Lookup(GEN3_ELITE_FOUR, trainerId)
+        local gen3Champion = gen3Lookup(GEN3_CHAMPION, trainerId)
         if gymBase then
           if not mod.options:get("cat_gym_badges") then return end
           local folder = milestoneFolder()
@@ -932,8 +1020,8 @@ function voice.init(mod)
           if not mod.options:get("cat_elite_four") then return end
           local folder = milestoneFolder()
           scheduleMoment(mod.assets:path("assets/" .. folder .. "/" .. e4Base .. "_outro.ogg"), outcomeDelay())
-        elseif trainerId == CHAMPION_TRAINER_GEN3 then
-          -- FireRed and LeafGreen play the Champion outro straight off
+        elseif gen3Champion then
+          -- Gen 3 plays the Champion outro straight off
           -- battle.ended. Their screen stack (src/ui/game3/stack.lua)
           -- never emits screen.pushed, so the Hall of Fame signal that
           -- Gen 1 and 2 wait for below doesn't exist here. If the game
@@ -942,7 +1030,7 @@ function voice.init(mod)
           -- timing was a deliberate choice.
           if not mod.options:get("cat_champion") then return end
           local folder = milestoneFolder()
-          scheduleMoment(mod.assets:path("assets/" .. folder .. "/champion_outro.ogg"), outcomeDelay())
+          scheduleMoment(mod.assets:path("assets/" .. folder .. "/" .. gen3Champion .. "_outro.ogg"), outcomeDelay())
         else
           -- Gen 1 and 2 Champion wins are skipped here because their real
           -- outro plays from screen.pushed below. Without this check the
