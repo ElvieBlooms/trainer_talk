@@ -29,14 +29,14 @@ This now carries all the way through Gen 2 (Gold, Silver, Crystal) — the Johto
 |---|---|
 | Kris | Live, Updated with Packager Recipe |
 | Jessie | Live, Updated with Packager Recipe |
-| James | Live |
+| James | Live, Updated with Packager Recipe |
 | Rocket Trio (James, Jessie & Meowth combined) | Live, Updated with Packager Recipe |
 | Leaf | Live, Updated with Packager Recipe |
 | Ash | Live, Updated with Packager Recipe |
 | Giovanni | Live, under review |
 | Rocket Grunt (Male) | Live, under review |
 | Rocket Grunt (Female) | Live, under review |
-| Dawn | Live, under review |
+| Dawn | Live, Updated with Packager Recipe |
 | Blue | Live, under review |
  
 More on the way: Red, Misty, May, and more to come after that.
