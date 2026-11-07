@@ -372,7 +372,7 @@ function voice.init(mod)
     -- there is no snapshot, and a hard cap stops a line waiting forever if
     -- the text never matches, for example on a translated ROM.
     local TEXT_POLL_INTERVAL = 0.1
-    local TEXT_CAP_EXTRA = 4
+    local TEXT_CAP_EXTRA = 2.5
     -- A beat after the text shows, so the voice lands with the reader and
     -- not on the first letter.
     local TEXT_TAIL = 0.25
@@ -415,14 +415,18 @@ function voice.init(mod)
     end
 
     -- Result text in all three generations. Lowercase and accent-free.
+    -- string.lower leaves accented capitals alone ("canÇÃo"), so patterns
+    -- stop before any accented letter. The Portuguese lines are from a
+    -- playtest log. The faint text is built by the engine and is English
+    -- even in a translated game.
     local FAINT_TEXT = { "fainted" }
     local CRIT_TEXT = { "critical hit" }
-    local MISS_TEXT = { "attack missed" }
+    local MISS_TEXT = { "attack missed", "errou o ataque" }
     local STATUS_TEXT = {
       "was poisoned", "badly poisoned", "fell asleep", "paralyzed",
       "was burned", "was frozen",
     }
-    local RUN_SUCCESS_TEXT = { "got away safely" }
+    local RUN_SUCCESS_TEXT = { "got away safely", "fugiu em seguran" }
     local RUN_FAIL_TEXT = { "can't escape" }
     local CAUGHT_TEXT = { "was caught" }
     local CATCH_FAIL_TEXT = {
@@ -477,6 +481,10 @@ function voice.init(mod)
             end
             ready = (entry.releaseAt and now >= entry.releaseAt)
               or now >= entry.at + TEXT_CAP_EXTRA
+            if ready and not entry.releaseAt then
+              devLog("scheduleBark: no text matched, played on the cap (last text: %s)",
+                text ~= "" and text or "none")
+            end
           end
         else
           ready = now >= entry.at
@@ -697,10 +705,13 @@ function voice.init(mod)
     -- rare, so no chance roll. Ordinary trainer win and loss lines use the
     -- same MOMENTS toggle but live with the battle.ended handler below.
 
+    -- The evolution screen follows the battle, so this lands right after
+    -- the win line. It goes through scheduleMoment so it waits out the
+    -- shared gap instead of playing over it.
     mod.events:on("pokemon.evolved", function(ev)
       if not mod.options:get("cat_moments") then return end
       local folder = characterFolder()
-      playSound(mod.assets:path("assets/" .. folder .. "/evolved.ogg"))
+      scheduleMoment(mod.assets:path("assets/" .. folder .. "/evolved.ogg"), 0.5)
     end)
 
     -- Gen 2 fires pokemon.caught at the throw, Gen 1 and 3 after the caught
@@ -1013,6 +1024,20 @@ function voice.init(mod)
     end)
 
     mod.events:on("battle.ended", function(ev)
+      -- Gen 2 raises battle.ended twice. Battle:endBattle
+      -- (src/battle/gen2/Battle.lua) emits it the moment the fight is
+      -- decided, before the faint text and the EXP messages, and the
+      -- screen emits it again when it closes (BattleState:completeBattle
+      -- in src/ui/gen2). Only the screen's one is wanted. The first
+      -- carries the logic Battle, which has an endBattle method. Gen 1's
+      -- screen and Gen 3's battle state do not, so they are never skipped
+      -- here. Acting on the first one played the win or loss line before
+      -- the player could read the result, and then again at the end.
+      local b = ev.battle
+      if type(b) == "table" and type(b.endBattle) == "function" then
+        devLog("battle.ended: skipped, this is the decision-time emit and the screen raises it again")
+        return
+      end
       local trainerClass = pendingTrainerClass
       local trainerId = pendingTrainerId
       pendingTrainerClass = nil

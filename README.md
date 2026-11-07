@@ -1,6 +1,6 @@
 # Trainer Talk
 
-> **Beta build (0.5.6-beta.1). This build sends logs by default.**
+> **Beta build (0.5.6-beta.2). This build sends logs by default.**
 >
 > This is a playtest of two things: voice lines that now wait for the battle text before they play (faints, catches, crits, misses, status effects and running away), and the first Ruby, Sapphire and Emerald support.
 >
